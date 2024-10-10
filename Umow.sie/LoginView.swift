@@ -62,7 +62,7 @@ struct LoginView: View {
                 }
                 .background(Color(.systemBlue))
                 .cornerRadius(10)
-                .padding(.top, 20)
+                .padding(.top, 21)
                 
                 
                 Spacer()
