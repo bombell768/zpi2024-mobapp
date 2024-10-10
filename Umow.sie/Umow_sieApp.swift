@@ -11,7 +11,8 @@ import SwiftUI
 struct Umow_sieApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
+                .preferredColorScheme(.light)
         }
     }
 }
