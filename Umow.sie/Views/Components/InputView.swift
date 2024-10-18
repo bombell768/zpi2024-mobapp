@@ -23,16 +23,26 @@ struct InputView: View {
             if isSecureField {
                 SecureField(placeholder, text: $text)
                     .font(.system(size: 14))
+                    .padding(10)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(8)
+                    .frame(maxWidth: .infinity)
             } else {
                 TextField(placeholder, text: $text)
                     .font(.system(size: 14))
+                    .padding(10)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(8)
+                    .frame(maxWidth: .infinity)
             }
             
-            Divider()
+ 
         }
+        .frame(maxWidth: .infinity)
     }
 }
 
 #Preview {
     InputView(text: .constant(""), title: "Adres e-mail", placeholder: "name@gmail.com")
 }
+

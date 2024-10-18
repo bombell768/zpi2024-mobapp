@@ -12,72 +12,76 @@ struct LoginView: View {
     @State private var password = ""
 
     var body: some View {
-        NavigationStack {
-            VStack {
-                Image("rainbowlake")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .padding(.vertical, 32)
-                  
-                Spacer()
-                
-                VStack(spacing: 24){
-                    InputView(text: $email,
-                              title: "Adres e-mail",
-                              placeholder: "jan.nowak23@gmail.com")
-                    .autocapitalization(.none)
+        if #available(iOS 16.0, *) {
+            NavigationStack {
+                VStack {
+                    Image("rainbowlake")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .padding(.vertical, 32)
                     
-                    InputView(text: $password,
-                              title: "Hasło",
-                              placeholder: "Wpisz swoje hasło",
-                              isSecureField: true)
-                }
-                .padding(.horizontal)
-                
-                HStack {
                     Spacer()
-                    NavigationLink{
+                    
+                    VStack(spacing: 24){
+                        InputView(text: $email,
+                                  title: "Adres e-mail",
+                                  placeholder: "jan.nowak23@gmail.com")
+                        .autocapitalization(.none)
                         
-                    } label: {
-                        Text("Nie pamiętam hasła")
-                            .fontWeight(.bold)
+                        InputView(text: $password,
+                                  title: "Hasło",
+                                  placeholder: "Wpisz swoje hasło",
+                                  isSecureField: true)
                     }
-                    .font(.system(size: 14))
-                }
-                .padding(.horizontal)
-                .padding(.top, 10)
-                
-                
-                Button {
-                    print("Log user in...")
-                } label: {
+                    .padding(.horizontal)
+                    
                     HStack {
-                        Text("Zaloguj się")
-                            .fontWeight(.bold)
-                        Image(systemName: "arrow.right")
+                        Spacer()
+                        NavigationLink{
+                            ForgotPasswordView()
+                        } label: {
+                            Text("Nie pamiętam hasła")
+                                .fontWeight(.bold)
+                        }
+                        .font(.system(size: 14))
                     }
-                    .foregroundColor(.white)
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 48)
-                }
-                .background(Color(.systemBlue))
-                .cornerRadius(10)
-                .padding(.top, 20)
-                
-                Spacer()
-                
-                NavigationLink{
-                    RegistrationView()
-                        .navigationBarBackButtonHidden(true)
-                } label: {
-                    HStack(spacing: 3) {
-                        Text("Nie masz jeszcze konta?")
-                        Text("Zarejestruj się")
-                            .fontWeight(.bold)
+                    .padding(.horizontal)
+                    .padding(.top, 10)
+                    
+                    
+                    Button {
+                        print("Log user in...")
+                    } label: {
+                        HStack {
+                            Text("Zaloguj się")
+                                .fontWeight(.bold)
+                            Image(systemName: "arrow.right")
+                        }
+                        .foregroundColor(.white)
+                        .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                     }
-                    .font(.system(size: 14))
+                    .background(Color(.systemBlue))
+                    .cornerRadius(10)
+                    .padding(.top, 20)
+                    
+                    Spacer()
+                    
+                    NavigationLink{
+                        RegistrationView()
+                            .navigationBarBackButtonHidden(true)
+                    } label: {
+                        HStack(spacing: 3) {
+                            Text("Nie masz jeszcze konta?")
+                            Text("Zarejestruj się")
+                                .fontWeight(.bold)
+                        }
+                        .font(.system(size: 14))
+                    }
                 }
             }
+        } else {
+            // Fallback on earlier versions
         }
     }
 }

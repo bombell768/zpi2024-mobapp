@@ -6,6 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A77D46DC2CBE812E005FC0D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */; };
+		A77D46DD2CBE812E005FC0D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46D92CBE812E005FC0D5 /* Assets.xcassets */; };
+		A77D46DE2CBE812E005FC0D5 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46D42CBE812E005FC0D5 /* InputView.swift */; };
+		A77D46DF2CBE812E005FC0D5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46D62CBE812E005FC0D5 /* LoginView.swift */; };
+		A77D46E02CBE812E005FC0D5 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46D72CBE812E005FC0D5 /* RegistrationView.swift */; };
+		A77D46E12CBE812E005FC0D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46DA2CBE812E005FC0D5 /* ContentView.swift */; };
+		A77D46E22CBE812E005FC0D5 /* Umow_sieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46DB2CBE812E005FC0D5 /* Umow_sieApp.swift */; };
+		A77D46F52CBE8ACD005FC0D5 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46F42CBE8ACD005FC0D5 /* ForgotPasswordView.swift */; };
+		A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46F82CBE8F57005FC0D5 /* KeyboardHelper.swift */; };
+		A77D46FB2CBE8FA8005FC0D5 /* HideKeyboardOnGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46FA2CBE8F9B005FC0D5 /* HideKeyboardOnGesture.swift */; };
+		A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46FC2CBE91E7005FC0D5 /* KeyboardManager.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A785E5512CB5361A00C1F087 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,17 +38,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A77D46D42CBE812E005FC0D5 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		A77D46D62CBE812E005FC0D5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A77D46D72CBE812E005FC0D5 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		A77D46D92CBE812E005FC0D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A77D46DA2CBE812E005FC0D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A77D46DB2CBE812E005FC0D5 /* Umow_sieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Umow_sieApp.swift; sourceTree = "<group>"; };
+		A77D46F42CBE8ACD005FC0D5 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		A77D46F82CBE8F57005FC0D5 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
+		A77D46FA2CBE8F9B005FC0D5 /* HideKeyboardOnGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardOnGesture.swift; sourceTree = "<group>"; };
+		A77D46FC2CBE91E7005FC0D5 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		A785E5402CB5361900C1F087 /* Umow.sie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umow.sie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A785E5502CB5361A00C1F087 /* Umow.sieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Umow.sieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A785E55A2CB5361A00C1F087 /* Umow.sieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Umow.sieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A785E5422CB5361900C1F087 /* Umow.sie */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Umow.sie;
-			sourceTree = "<group>";
-		};
 		A785E5532CB5361A00C1F087 /* Umow.sieTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Umow.sieTests;
@@ -72,10 +92,116 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A77D46E92CBE820E005FC0D5 /* Umow.sie */ = {
+			isa = PBXGroup;
+			children = (
+				A77D46F12CBE8274005FC0D5 /* App */,
+				A77D46F02CBE8271005FC0D5 /* Models */,
+				A77D46EF2CBE826F005FC0D5 /* Views */,
+				A77D46EE2CBE826C005FC0D5 /* ViewModels */,
+				A77D46ED2CBE826A005FC0D5 /* Services */,
+				A77D46EC2CBE8267005FC0D5 /* Utils */,
+				A77D46EB2CBE8264005FC0D5 /* Resources */,
+				A77D46F32CBE8331005FC0D5 /* Preview Content */,
+				A77D46D92CBE812E005FC0D5 /* Assets.xcassets */,
+				A77D46DA2CBE812E005FC0D5 /* ContentView.swift */,
+			);
+			path = Umow.sie;
+			sourceTree = "<group>";
+		};
+		A77D46EB2CBE8264005FC0D5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A77D46EC2CBE8267005FC0D5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A77D46F62CBE8F3D005FC0D5 /* Extensions */,
+				A77D46F72CBE8F45005FC0D5 /* Helpers */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A77D46ED2CBE826A005FC0D5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A77D46EE2CBE826C005FC0D5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A77D46EF2CBE826F005FC0D5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A77D46F22CBE82F4005FC0D5 /* Components */,
+				A77D46D62CBE812E005FC0D5 /* LoginView.swift */,
+				A77D46D72CBE812E005FC0D5 /* RegistrationView.swift */,
+				A77D46F42CBE8ACD005FC0D5 /* ForgotPasswordView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A77D46F02CBE8271005FC0D5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A77D46F12CBE8274005FC0D5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A77D46DB2CBE812E005FC0D5 /* Umow_sieApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A77D46F22CBE82F4005FC0D5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A77D46D42CBE812E005FC0D5 /* InputView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A77D46F32CBE8331005FC0D5 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A77D46F62CBE8F3D005FC0D5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A77D46F72CBE8F45005FC0D5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A77D46FC2CBE91E7005FC0D5 /* KeyboardManager.swift */,
+				A77D46FA2CBE8F9B005FC0D5 /* HideKeyboardOnGesture.swift */,
+				A77D46F82CBE8F57005FC0D5 /* KeyboardHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		A785E5372CB5361900C1F087 = {
 			isa = PBXGroup;
 			children = (
-				A785E5422CB5361900C1F087 /* Umow.sie */,
+				A77D46E92CBE820E005FC0D5 /* Umow.sie */,
 				A785E5532CB5361A00C1F087 /* Umow.sieTests */,
 				A785E55D2CB5361A00C1F087 /* Umow.sieUITests */,
 				A785E5412CB5361900C1F087 /* Products */,
@@ -106,9 +232,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				A785E5422CB5361900C1F087 /* Umow.sie */,
 			);
 			name = Umow.sie;
 			packageProductDependencies = (
@@ -212,6 +335,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77D46DC2CBE812E005FC0D5 /* Preview Assets.xcassets in Resources */,
+				A77D46DD2CBE812E005FC0D5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +361,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77D46DE2CBE812E005FC0D5 /* InputView.swift in Sources */,
+				A77D46DF2CBE812E005FC0D5 /* LoginView.swift in Sources */,
+				A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */,
+				A77D46E02CBE812E005FC0D5 /* RegistrationView.swift in Sources */,
+				A77D46FB2CBE8FA8005FC0D5 /* HideKeyboardOnGesture.swift in Sources */,
+				A77D46E12CBE812E005FC0D5 /* ContentView.swift in Sources */,
+				A77D46F52CBE8ACD005FC0D5 /* ForgotPasswordView.swift in Sources */,
+				A77D46E22CBE812E005FC0D5 /* Umow_sieApp.swift in Sources */,
+				A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +538,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -433,6 +568,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -13,7 +13,7 @@ struct HideKeyboardOnGesture: ViewModifier {
     func body(content: Content) -> some View {
         content
             // Dodaj gest przeciągnięcia (swipe down)
-            .gesture(
+            .simultaneousGesture(
                 DragGesture(minimumDistance: 10, coordinateSpace: .local)
                     .onEnded { value in
                         if value.translation.height > 0 {
@@ -22,11 +22,14 @@ struct HideKeyboardOnGesture: ViewModifier {
                     }
             )
             // Dodaj gest tapnięcia tylko, gdy klawiatura jest widoczna
-            .onTapGesture {
-                if keyboardManager.isKeyboardVisible {
-                    UIApplication.shared.hideKeyboard()
-                }
-            }
+            .simultaneousGesture(
+                TapGesture()
+                    .onEnded {
+                        if keyboardManager.isKeyboardVisible {
+                            UIApplication.shared.hideKeyboard()
+                        }
+                    }
+            )
     }
 }
 

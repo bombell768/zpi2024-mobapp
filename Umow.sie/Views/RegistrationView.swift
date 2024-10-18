@@ -14,7 +14,9 @@ struct RegistrationView: View {
     @State private var phoneNumber = ""
     @State private var password = ""
     @State private var confirmPassword = ""
+    @State private var serviceSelection: String = "Wszystkie"
     @Environment(\.dismiss) var dismiss
+    
     
     var body: some View {
         VStack{
@@ -25,7 +27,7 @@ struct RegistrationView: View {
             
             
             VStack{
-                VStack(spacing: 24){
+                VStack(spacing: 15){
                     InputView(text: $firstName,
                               title: "Imię",
                               placeholder: "Jan")
@@ -53,13 +55,29 @@ struct RegistrationView: View {
                               placeholder: "Wpisz swoje hasło ponownie",
                               isSecureField: true)
                     
-                    // TODO: preferowane uslugi
+                    HStack {
+                        Text("Wybierz preferencje usług")
+                            .font(.footnote)
+                            .foregroundColor(Color(.darkGray))
+                            .fontWeight(.semibold)
+                        Spacer()
+                    }
+                        
+                    
+                    Picker("Preferencje usług", selection: $serviceSelection) {
+                        Text("Mężczyna").tag("Mężczyzna")
+                        Text("Kobieta").tag("Kobieta")
+                        Text("Wszystkie").tag("Wszystkie")
+                    }
+                    .pickerStyle(.segmented)
                     
                     
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)
+
             }
+            
             
             Button {
                 print("Sign user up...")
@@ -74,7 +92,7 @@ struct RegistrationView: View {
             }
             .background(Color(.systemBlue))
             .cornerRadius(10)
-            .padding(.top, 20)
+            .padding(.top, 30)
             
             Spacer()
             
