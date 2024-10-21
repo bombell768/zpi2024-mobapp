@@ -8,28 +8,29 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email = ""
-    @State private var password = ""
-
+    
+    @State private var loginVM = LoginViewModel()
+    
     var body: some View {
         if #available(iOS 16.0, *) {
             NavigationStack {
                 VStack {
-                    Image("rainbowlake")
+                    Image("logoZPI-2")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 350, height: 350)
+                        .cornerRadius(20)
                         .padding(.vertical, 32)
                     
                     Spacer()
                     
                     VStack(spacing: 24){
-                        InputView(text: $email,
+                        InputView(text: $loginVM.username,
                                   title: "Adres e-mail",
                                   placeholder: "jan.nowak23@gmail.com")
                         .autocapitalization(.none)
                         
-                        InputView(text: $password,
+                        InputView(text: $loginVM.password,
                                   title: "Hasło",
                                   placeholder: "Wpisz swoje hasło",
                                   isSecureField: true)
@@ -48,9 +49,11 @@ struct LoginView: View {
                     }
                     .padding(.horizontal)
                     .padding(.top, 10)
+                    .foregroundColor(Color(hex: 0x0B68D40))
                     
                     
                     Button {
+                        loginVM.login()
                         print("Log user in...")
                     } label: {
                         HStack {
@@ -58,10 +61,10 @@ struct LoginView: View {
                                 .fontWeight(.bold)
                             Image(systemName: "arrow.right")
                         }
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(hex: 0x0DADADA))
                         .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                     }
-                    .background(Color(.systemBlue))
+                    .background(Color(hex: 0x0B68D40))
                     .cornerRadius(10)
                     .padding(.top, 20)
                     
@@ -77,6 +80,7 @@ struct LoginView: View {
                                 .fontWeight(.bold)
                         }
                         .font(.system(size: 14))
+                        .foregroundColor(Color(hex: 0x0B68D40))
                     }
                 }
             }

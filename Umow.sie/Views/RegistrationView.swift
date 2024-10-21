@@ -8,15 +8,9 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    @State private var firstName = ""
-    @State private var sureName = ""
-    @State private var email = ""
-    @State private var phoneNumber = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
-    @State private var serviceSelection: String = "Wszystkie"
-    @Environment(\.dismiss) var dismiss
     
+    @State private var vm = RegistrationViewModel()
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack{
@@ -28,29 +22,29 @@ struct RegistrationView: View {
             
             VStack{
                 VStack(spacing: 15){
-                    InputView(text: $firstName,
+                    InputView(text: $vm.firstName,
                               title: "Imię",
                               placeholder: "Jan")
                     
-                    InputView(text: $sureName,
+                    InputView(text: $vm.sureName,
                               title: "Nazwisko",
                               placeholder: "Nowak")
                     
-                    InputView(text: $email,
+                    InputView(text: $vm.email,
                               title: "Adres e-mail",
                               placeholder: "jan.nowak23@gmail.com")
                     .autocapitalization(.none)
                     
-                    InputView(text: $phoneNumber,
+                    InputView(text: $vm.phoneNumber,
                               title: "Numer telefonu",
                               placeholder: "528 123 456")
                     
-                    InputView(text: $password,
+                    InputView(text: $vm.password,
                               title: "Hasło",
                               placeholder: "Wpisz swoje hasło",
                               isSecureField: true)
                     
-                    InputView(text: $confirmPassword,
+                    InputView(text: $vm.confirmPassword,
                               title: "Potwierdź hasło",
                               placeholder: "Wpisz swoje hasło ponownie",
                               isSecureField: true)
@@ -64,10 +58,10 @@ struct RegistrationView: View {
                     }
                         
                     
-                    Picker("Preferencje usług", selection: $serviceSelection) {
-                        Text("Mężczyna").tag("Mężczyzna")
-                        Text("Kobieta").tag("Kobieta")
-                        Text("Wszystkie").tag("Wszystkie")
+                    Picker("Preferencje usług", selection: $vm.serviceSelection) {
+                        Text("Mężczyna").tag(0)
+                        Text("Kobieta").tag(1)
+                        Text("Wszystkie").tag(2)
                     }
                     .pickerStyle(.segmented)
                     
@@ -80,6 +74,7 @@ struct RegistrationView: View {
             
             
             Button {
+                vm.register()
                 print("Sign user up...")
             } label: {
                 HStack {
