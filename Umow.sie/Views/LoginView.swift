@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @State private var loginVM = LoginViewModel()
+    @State private var vm = LoginViewModel()
     
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -25,12 +25,12 @@ struct LoginView: View {
                     Spacer()
                     
                     VStack(spacing: 24){
-                        InputView(text: $loginVM.username,
+                        InputView(text: $vm.username,
                                   title: "Adres e-mail",
                                   placeholder: "jan.nowak23@gmail.com")
                         .autocapitalization(.none)
                         
-                        InputView(text: $loginVM.password,
+                        InputView(text: $vm.password,
                                   title: "Hasło",
                                   placeholder: "Wpisz swoje hasło",
                                   isSecureField: true)
@@ -53,8 +53,9 @@ struct LoginView: View {
                     
                     
                     Button {
-                        loginVM.login()
                         print("Log user in...")
+                        vm.login()
+                        
                     } label: {
                         HStack {
                             Text("Zaloguj się")
@@ -82,6 +83,10 @@ struct LoginView: View {
                         .font(.system(size: 14))
                         .foregroundColor(Color(hex: 0x0B68D40))
                     }
+                }
+                .navigationDestination(isPresented: $vm.isLoggedIn){
+                    HomeView()
+                        .navigationBarBackButtonHidden(true)
                 }
             }
         } else {

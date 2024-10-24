@@ -12,6 +12,7 @@ import SwiftUI
     
     var username: String = ""
     var password: String = ""
+    var isLoggedIn: Bool = false
     
     func login() {
         print("Logging in with username: \(username), password: \(password)")
@@ -20,6 +21,9 @@ import SwiftUI
             switch result {
             case .success(let token):
                 print("Logged in with token: \(token)")
+                DispatchQueue.main.async {
+                    self.isLoggedIn = true
+                }
             case .failure(let error):
                 print(error)
             }

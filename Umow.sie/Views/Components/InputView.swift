@@ -36,7 +36,6 @@ struct InputView: View {
                     .frame(maxWidth: .infinity)
             }
             
- 
         }
         .frame(maxWidth: .infinity)
     }

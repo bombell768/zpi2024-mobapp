@@ -13,7 +13,7 @@ struct Umow_sieApp: App {
         WindowGroup {
             LoginView()
                 .preferredColorScheme(.dark)
-                .hideKeyboardOnGesture()
+                //.hideKeyboardOnGesture()
         }
     }
 }
