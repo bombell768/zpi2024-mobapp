@@ -11,7 +11,7 @@ import SwiftUI
 struct Umow_sieApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            HomeView()
                 .preferredColorScheme(.dark)
                 //.hideKeyboardOnGesture()
         }

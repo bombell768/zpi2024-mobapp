@@ -7,26 +7,25 @@
 
 import SwiftUI
 
-struct SalonView: View {
-    var name: String
-    var address: String
-    var city: String
+struct SalonRowView: View {
+    @State var salon: Salon
+
     
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
-                Text(name)
+                Text(salon.name)
                     .font(.title2)
-                Text(address)
+                Text(salon.street + " " + salon.buildingNumber)
                     .font(.caption)
-                Text(city)
+                Text(salon.city)
                     .font(.caption)
             }
             
             Spacer()
             
-            Button {
-                
+            NavigationLink {
+                SalonDetailView(salon: salon)
             } label: {
                 HStack {
                     Text("Umów wizytę")
@@ -48,5 +47,5 @@ struct SalonView: View {
 }
 
 #Preview {
-    SalonView(name: "Atelier Paris", address: "ul. Kościuszki 1", city: "Wrocław")
+    SalonRowView(salon: Salon(ID: 0, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
 }

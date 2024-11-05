@@ -84,8 +84,9 @@ struct RegistrationView: View {
                 }
                 .foregroundColor(.white)
                 .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+                
             }
-            .background(Color(.systemBlue))
+            .background(Color(hex: 0x0B68D40))
             .cornerRadius(10)
             .padding(.top, 30)
             
@@ -100,6 +101,7 @@ struct RegistrationView: View {
                         .fontWeight(.bold)
                 }
                 .font(.system(size: 14))
+                .foregroundColor(Color(hex: 0x0B68D40))
             }
         }
     }

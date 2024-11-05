@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7165F952CDA2BE800DB73FA /* SalonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */; };
+		A7165F982CDA2D0100DB73FA /* Salon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F972CDA2CFC00DB73FA /* Salon.swift */; };
+		A7165F9A2CDA2F8800DB73FA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F992CDA2F8800DB73FA /* MapView.swift */; };
+		A7165F9C2CDA35F200DB73FA /* ServiceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F9B2CDA35F200DB73FA /* ServiceRowView.swift */; };
+		A7165F9E2CDA360C00DB73FA /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F9D2CDA360700DB73FA /* Service.swift */; };
+		A7165FA02CDA36EC00DB73FA /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */; };
+		A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72795A02CCBD75500E7DF7E /* HomeImageView.swift */; };
 		A75207C52CC51BB500520CD7 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75207C42CC51BB500520CD7 /* Client.swift */; };
 		A75207C72CC5650000520CD7 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75207C62CC564FB00520CD7 /* AuthService.swift */; };
 		A75207C92CC565EA00520CD7 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75207C82CC565DD00520CD7 /* APIEndpoints.swift */; };
@@ -24,7 +31,7 @@
 		A77D46FB2CBE8FA8005FC0D5 /* HideKeyboardOnGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46FA2CBE8F9B005FC0D5 /* HideKeyboardOnGesture.swift */; };
 		A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46FC2CBE91E7005FC0D5 /* KeyboardManager.swift */; };
 		A7A921F62CCA4E72006D8006 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A921F52CCA4E72006D8006 /* HomeView.swift */; };
-		A7A921F82CCA58AE006D8006 /* SalonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A921F72CCA58AE006D8006 /* SalonView.swift */; };
+		A7A921F82CCA58AE006D8006 /* SalonRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A921F72CCA58AE006D8006 /* SalonRowView.swift */; };
 		A7D9AD5A2CC6F1BA003CDD9A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonDetailView.swift; sourceTree = "<group>"; };
+		A7165F972CDA2CFC00DB73FA /* Salon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salon.swift; sourceTree = "<group>"; };
+		A7165F992CDA2F8800DB73FA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A7165F9B2CDA35F200DB73FA /* ServiceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRowView.swift; sourceTree = "<group>"; };
+		A7165F9D2CDA360700DB73FA /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
+		A72795A02CCBD75500E7DF7E /* HomeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImageView.swift; sourceTree = "<group>"; };
 		A75207C42CC51BB500520CD7 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		A75207C62CC564FB00520CD7 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A75207C82CC565DD00520CD7 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
@@ -66,7 +80,7 @@
 		A785E5502CB5361A00C1F087 /* Umow.sieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Umow.sieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A785E55A2CB5361A00C1F087 /* Umow.sieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Umow.sieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7A921F52CCA4E72006D8006 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		A7A921F72CCA58AE006D8006 /* SalonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonView.swift; sourceTree = "<group>"; };
+		A7A921F72CCA58AE006D8006 /* SalonRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonRowView.swift; sourceTree = "<group>"; };
 		A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +181,8 @@
 				A77D46D72CBE812E005FC0D5 /* RegistrationView.swift */,
 				A77D46F42CBE8ACD005FC0D5 /* ForgotPasswordView.swift */,
 				A7A921F52CCA4E72006D8006 /* HomeView.swift */,
+				A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */,
+				A7165F992CDA2F8800DB73FA /* MapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +190,9 @@
 		A77D46F02CBE8271005FC0D5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */,
+				A7165F9D2CDA360700DB73FA /* Service.swift */,
+				A7165F972CDA2CFC00DB73FA /* Salon.swift */,
 				A75207C42CC51BB500520CD7 /* Client.swift */,
 			);
 			path = Models;
@@ -191,7 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				A77D46D42CBE812E005FC0D5 /* InputView.swift */,
-				A7A921F72CCA58AE006D8006 /* SalonView.swift */,
+				A7A921F72CCA58AE006D8006 /* SalonRowView.swift */,
+				A72795A02CCBD75500E7DF7E /* HomeImageView.swift */,
+				A7165F9B2CDA35F200DB73FA /* ServiceRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -385,23 +406,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7A921F82CCA58AE006D8006 /* SalonView.swift in Sources */,
+				A7A921F82CCA58AE006D8006 /* SalonRowView.swift in Sources */,
+				A7165F9E2CDA360C00DB73FA /* Service.swift in Sources */,
 				A77D46DE2CBE812E005FC0D5 /* InputView.swift in Sources */,
 				A75207C92CC565EA00520CD7 /* APIEndpoints.swift in Sources */,
 				A77D46DF2CBE812E005FC0D5 /* LoginView.swift in Sources */,
 				A75207C52CC51BB500520CD7 /* Client.swift in Sources */,
+				A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */,
 				A7668F2C2CC2A49D007E1AAF /* HexColor.swift in Sources */,
+				A7165F9A2CDA2F8800DB73FA /* MapView.swift in Sources */,
 				A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */,
 				A77D46E02CBE812E005FC0D5 /* RegistrationView.swift in Sources */,
 				A75207C72CC5650000520CD7 /* AuthService.swift in Sources */,
 				A75207CB2CC56DAF00520CD7 /* LoginViewModel.swift in Sources */,
 				A77D46FB2CBE8FA8005FC0D5 /* HideKeyboardOnGesture.swift in Sources */,
 				A7D9AD5A2CC6F1BA003CDD9A /* RegistrationViewModel.swift in Sources */,
+				A7165FA02CDA36EC00DB73FA /* ServiceCategory.swift in Sources */,
+				A7165F952CDA2BE800DB73FA /* SalonDetailView.swift in Sources */,
+				A7165F9C2CDA35F200DB73FA /* ServiceRowView.swift in Sources */,
 				A77D46E12CBE812E005FC0D5 /* ContentView.swift in Sources */,
 				A77D46F52CBE8ACD005FC0D5 /* ForgotPasswordView.swift in Sources */,
 				A7A921F62CCA4E72006D8006 /* HomeView.swift in Sources */,
 				A77D46E22CBE812E005FC0D5 /* Umow_sieApp.swift in Sources */,
 				A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */,
+				A7165F982CDA2D0100DB73FA /* Salon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
