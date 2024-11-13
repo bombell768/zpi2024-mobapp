@@ -30,9 +30,13 @@
 		A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46F82CBE8F57005FC0D5 /* KeyboardHelper.swift */; };
 		A77D46FB2CBE8FA8005FC0D5 /* HideKeyboardOnGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46FA2CBE8F9B005FC0D5 /* HideKeyboardOnGesture.swift */; };
 		A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46FC2CBE91E7005FC0D5 /* KeyboardManager.swift */; };
+		A7A4D1AD2CE407030021D2DF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A4D1AC2CE407030021D2DF /* HomeViewModel.swift */; };
+		A7A4D1AF2CE409D60021D2DF /* SalonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A4D1AE2CE409CC0021D2DF /* SalonService.swift */; };
 		A7A921F62CCA4E72006D8006 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A921F52CCA4E72006D8006 /* HomeView.swift */; };
 		A7A921F82CCA58AE006D8006 /* SalonRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A921F72CCA58AE006D8006 /* SalonRowView.swift */; };
 		A7D9AD5A2CC6F1BA003CDD9A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */; };
+		A7DE60A52CE0E3EA001CB1E6 /* AppointmentBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */; };
+		A7DE60A92CE0ED11001CB1E6 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,9 +83,14 @@
 		A785E5402CB5361900C1F087 /* Umow.sie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umow.sie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A785E5502CB5361A00C1F087 /* Umow.sieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Umow.sieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A785E55A2CB5361A00C1F087 /* Umow.sieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Umow.sieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7A4D1AC2CE407030021D2DF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		A7A4D1AE2CE409CC0021D2DF /* SalonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonService.swift; sourceTree = "<group>"; };
+		A7A4D1B02CE414990021D2DF /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A7A921F52CCA4E72006D8006 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A7A921F72CCA58AE006D8006 /* SalonRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonRowView.swift; sourceTree = "<group>"; };
 		A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookingView.swift; sourceTree = "<group>"; };
+		A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -135,6 +144,7 @@
 				A77D46F32CBE8331005FC0D5 /* Preview Content */,
 				A77D46D92CBE812E005FC0D5 /* Assets.xcassets */,
 				A77D46DA2CBE812E005FC0D5 /* ContentView.swift */,
+				A7A4D1B02CE414990021D2DF /* MyPlayground.playground */,
 			);
 			path = Umow.sie;
 			sourceTree = "<group>";
@@ -158,6 +168,7 @@
 		A77D46ED2CBE826A005FC0D5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A7A4D1AE2CE409CC0021D2DF /* SalonService.swift */,
 				A75207C82CC565DD00520CD7 /* APIEndpoints.swift */,
 				A75207C62CC564FB00520CD7 /* AuthService.swift */,
 			);
@@ -169,6 +180,7 @@
 			children = (
 				A75207CA2CC56DA700520CD7 /* LoginViewModel.swift */,
 				A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */,
+				A7A4D1AC2CE407030021D2DF /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -182,7 +194,7 @@
 				A77D46F42CBE8ACD005FC0D5 /* ForgotPasswordView.swift */,
 				A7A921F52CCA4E72006D8006 /* HomeView.swift */,
 				A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */,
-				A7165F992CDA2F8800DB73FA /* MapView.swift */,
+				A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,10 +221,12 @@
 		A77D46F22CBE82F4005FC0D5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A7165F992CDA2F8800DB73FA /* MapView.swift */,
 				A77D46D42CBE812E005FC0D5 /* InputView.swift */,
 				A7A921F72CCA58AE006D8006 /* SalonRowView.swift */,
 				A72795A02CCBD75500E7DF7E /* HomeImageView.swift */,
 				A7165F9B2CDA35F200DB73FA /* ServiceRowView.swift */,
+				A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -355,11 +369,12 @@
 				};
 			};
 			buildConfigurationList = A785E53B2CB5361900C1F087 /* Build configuration list for PBXProject "Umow.sie" */;
-			developmentRegion = en;
+			developmentRegion = pl;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				pl,
 			);
 			mainGroup = A785E5372CB5361900C1F087;
 			minimizedProjectReferenceProxies = 1;
@@ -416,9 +431,12 @@
 				A7668F2C2CC2A49D007E1AAF /* HexColor.swift in Sources */,
 				A7165F9A2CDA2F8800DB73FA /* MapView.swift in Sources */,
 				A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */,
+				A7A4D1AD2CE407030021D2DF /* HomeViewModel.swift in Sources */,
+				A7DE60A52CE0E3EA001CB1E6 /* AppointmentBookingView.swift in Sources */,
 				A77D46E02CBE812E005FC0D5 /* RegistrationView.swift in Sources */,
 				A75207C72CC5650000520CD7 /* AuthService.swift in Sources */,
 				A75207CB2CC56DAF00520CD7 /* LoginViewModel.swift in Sources */,
+				A7A4D1AF2CE409D60021D2DF /* SalonService.swift in Sources */,
 				A77D46FB2CBE8FA8005FC0D5 /* HideKeyboardOnGesture.swift in Sources */,
 				A7D9AD5A2CC6F1BA003CDD9A /* RegistrationViewModel.swift in Sources */,
 				A7165FA02CDA36EC00DB73FA /* ServiceCategory.swift in Sources */,
@@ -430,6 +448,7 @@
 				A77D46E22CBE812E005FC0D5 /* Umow_sieApp.swift in Sources */,
 				A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */,
 				A7165F982CDA2D0100DB73FA /* Salon.swift in Sources */,
+				A7DE60A92CE0ED11001CB1E6 /* ChoiceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

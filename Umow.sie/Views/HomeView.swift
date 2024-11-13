@@ -15,14 +15,16 @@ enum HomeImages: String, CaseIterable {
 }
 
 struct HomeView: View {
-    @State var citySelection: String = "Wrocław"
+    
+    var viewModel = HomeViewModel()
+    
+    @State private var citySelection: String = "Wrocław"
     
     let cities: [String] = ["Wrocław", "Kraków", "Poznań", "Warszawa", "Szczecin", "Gdańsk", "Katowice"]
     
     
     var body: some View {
         NavigationStack {
-            
             ScrollView {
                 
                 Image("toolbarlogo")
@@ -74,7 +76,6 @@ struct HomeView: View {
                     .font(.system(size: 14))
                 }
                 .padding(.horizontal)
-
                 .foregroundColor(Color(hex: 0x0B68D40))
 
                 
@@ -101,50 +102,9 @@ struct HomeView: View {
                         
                     }
                     
-                    
-                    SalonRowView(salon: Salon(ID: 0, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
-                    
-                    SalonRowView(salon: Salon(ID: 0, name: "Atelier Lyon", phoneNumber: "654-231-908", city: "Warszawa", street: "ul. Koszykowa", buildingNumber: "56", postalCode: "00-076"))
-                    
-                    SalonRowView(salon: Salon(ID: 0, name: "Atelier Bordeaux", phoneNumber: "654-231-908", city: "Warszawa", street: "al. Jerozolimskie", buildingNumber: "30", postalCode: "00-076"))
-                    
-                    SalonRowView(salon: Salon(ID: 0, name: "Atelier Montpellier", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
-                    
-                    SalonRowView(salon: Salon(ID: 0, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
-                    
-                    SalonRowView(salon: Salon(ID: 0, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
-                    
-                    SalonRowView(salon: Salon(ID: 0, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
-                    
-//                    SalonRowView(name: "Atelier Lyon",
-//                              address: "ul. Buforowa 94",
-//                              city: "Wrocław")
-//                    
-//                    SalonRowView(name: "Atelier Bordeaux",
-//                              address: "al. Jerozolimskie 34",
-//                              city: "Warszawa")
-//                    
-//                    SalonRowView(name: "Atelier Bordeaux",
-//                              address: "al. Jerozolimskie 34",
-//                              city: "Warszawa")
-//                    
-//                    SalonRowView(name: "Atelier Bordeaux",
-//                              address: "al. Jerozolimskie 34",
-//                              city: "Warszawa")
-//                    
-//                    SalonRowView(name: "Atelier Bordeaux",
-//                              address: "al. Jerozolimskie 34",
-//                              city: "Warszawa")
-//                    
-//                    SalonRowView(name: "Atelier Bordeaux",
-//                              address: "al. Jerozolimskie 34",
-//                              city: "Warszawa")
-//                    
-//                    SalonRowView(name: "Atelier Bordeaux",
-//                              address: "al. Jerozolimskie 34",
-//                              city: "Warszawa")
-                    
-                    
+                    ForEach(viewModel.salons) {salon in
+                        SalonRowView(salon: salon)
+                    }
                     
                 }
                 .padding()
@@ -201,6 +161,10 @@ struct HomeView: View {
                 .toolbarBackground(.black, for: .bottomBar)
                 .toolbarBackground(.visible, for: .bottomBar)
             }
+            
+        }
+        .onAppear {
+            viewModel.fetchSalons()
         }
     }
 }

@@ -47,5 +47,5 @@ struct SalonRowView: View {
 }
 
 #Preview {
-    SalonRowView(salon: Salon(ID: 0, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
+    SalonRowView(salon: Salon(id: 0, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
 }

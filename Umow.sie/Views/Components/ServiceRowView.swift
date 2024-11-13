@@ -28,8 +28,8 @@ struct ServiceRowView: View {
                 .padding(.trailing, 5)
             
             
-            Button {
-                
+            NavigationLink {
+                AppointmentBookingView()
             } label: {
                 HStack {
                     Text("Wybierz")

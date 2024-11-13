@@ -151,5 +151,5 @@ struct SalonDetailView: View {
 }
 
 #Preview {
-    SalonDetailView(salon: Salon(ID: 0, name: "Atelier Test", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
+    SalonDetailView(salon: Salon(id: 0, name: "Atelier Test", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
 }
