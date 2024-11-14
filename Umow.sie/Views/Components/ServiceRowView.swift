@@ -51,5 +51,5 @@ struct ServiceRowView: View {
 }
 
 #Preview {
-    ServiceRowView(service: Service(ID: 0, name: "Strzyżenie męskie", description: "Podstawowe strzyżenie męskie", duration: 3 * 15, price:90, category: 1))
+    ServiceRowView(service: Service(id: 1, name: "Cięcie", duration: 30, price: 70, description: "Zwykłe cięcie"))
 }

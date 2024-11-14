@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A705CB702CE5528400D27EC5 /* SalonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705CB6F2CE5528400D27EC5 /* SalonDetailViewModel.swift */; };
 		A7165F952CDA2BE800DB73FA /* SalonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */; };
 		A7165F982CDA2D0100DB73FA /* Salon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F972CDA2CFC00DB73FA /* Salon.swift */; };
 		A7165F9A2CDA2F8800DB73FA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F992CDA2F8800DB73FA /* MapView.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A705CB6F2CE5528400D27EC5 /* SalonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonDetailViewModel.swift; sourceTree = "<group>"; };
 		A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonDetailView.swift; sourceTree = "<group>"; };
 		A7165F972CDA2CFC00DB73FA /* Salon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salon.swift; sourceTree = "<group>"; };
 		A7165F992CDA2F8800DB73FA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				A75207CA2CC56DA700520CD7 /* LoginViewModel.swift */,
 				A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */,
 				A7A4D1AC2CE407030021D2DF /* HomeViewModel.swift */,
+				A705CB6F2CE5528400D27EC5 /* SalonDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -202,10 +205,10 @@
 		A77D46F02CBE8271005FC0D5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A75207C42CC51BB500520CD7 /* Client.swift */,
+				A7165F972CDA2CFC00DB73FA /* Salon.swift */,
 				A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */,
 				A7165F9D2CDA360700DB73FA /* Service.swift */,
-				A7165F972CDA2CFC00DB73FA /* Salon.swift */,
-				A75207C42CC51BB500520CD7 /* Client.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 			files = (
 				A7A921F82CCA58AE006D8006 /* SalonRowView.swift in Sources */,
 				A7165F9E2CDA360C00DB73FA /* Service.swift in Sources */,
+				A705CB702CE5528400D27EC5 /* SalonDetailViewModel.swift in Sources */,
 				A77D46DE2CBE812E005FC0D5 /* InputView.swift in Sources */,
 				A75207C92CC565EA00520CD7 /* APIEndpoints.swift in Sources */,
 				A77D46DF2CBE812E005FC0D5 /* LoginView.swift in Sources */,

@@ -16,13 +16,8 @@ enum HomeImages: String, CaseIterable {
 
 struct HomeView: View {
     
-    var viewModel = HomeViewModel()
-    
-    @State private var citySelection: String = "Wrocław"
-    
-    let cities: [String] = ["Wrocław", "Kraków", "Poznań", "Warszawa", "Szczecin", "Gdańsk", "Katowice"]
-    
-    
+    @State private var viewModel = HomeViewModel()
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -89,8 +84,8 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        Picker("Miasto", selection: $citySelection) {
-                            ForEach(cities, id: \.self) { city in
+                        Picker("Miasto", selection: $viewModel.citySelection) {
+                            ForEach(viewModel.cities, id: \.self) { city in
                                 Text(city)
                                     .fontWeight(.bold)
                                     .tag(city)
@@ -102,9 +97,11 @@ struct HomeView: View {
                         
                     }
                     
-                    ForEach(viewModel.salons) {salon in
-                        SalonRowView(salon: salon)
-                    }
+                    ForEach(viewModel.salons.filter { salon in
+                            viewModel.citySelection == "Wszystkie" || salon.city == viewModel.citySelection
+                        }) { salon in
+                            SalonRowView(salon: salon)
+                        }
                     
                 }
                 .padding()

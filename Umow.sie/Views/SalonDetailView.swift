@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct SalonDetailView: View {
-    @State var salon: Salon
-
+    
+    var salon: Salon
+    var viewModel = SalonDetailViewModel()
     
     var body: some View {
         ScrollView {
@@ -70,25 +71,15 @@ struct SalonDetailView: View {
                     .padding(.top)
                 
                 VStack(alignment: .leading) {
-                    Text("Męskie")
-                        .font(.title3)
-                        .bold()
-                        .padding(.top)
-                    
-                    ServiceRowView(service: Service(ID: 0, name: "Strzyżenie męskie", description: "Podstawowe strzyżenie męskie", duration: 3 * 15, price:90, category: 1))
-                    
-                    ServiceRowView(service: Service(ID: 0, name: "Strzyżenie męskie", description: "Podstawowe strzyżenie męskie", duration: 3 * 15, price:90, category: 1))
-                    
-                    Text("Manicure")
-                        .font(.title3)
-                        .bold()
-                        .padding(.top)
-                    
-                    ServiceRowView(service: Service(ID: 0, name: "Strzyżenie męskie", description: "Podstawowe strzyżenie męskie", duration: 3 * 15, price:90, category: 1))
-                    
-                    ServiceRowView(service: Service(ID: 0, name: "Strzyżenie męskie", description: "Podstawowe strzyżenie męskie", duration: 3 * 15, price:90, category: 1))
-                    
-                    ServiceRowView(service: Service(ID: 0, name: "Strzyżenie męskie", description: "Podstawowe strzyżenie męskie", duration: 3 * 15, price:90, category: 1))
+                    ForEach(viewModel.serviceCategories) { category in
+                        Text("\(category.name)")
+                            .font(.title3)
+                            .bold()
+                            .padding(.top)
+                        ForEach(category.services) { service in
+                            ServiceRowView(service: service)
+                        }
+                    }
                     
                 }
                 .padding(.horizontal)
@@ -143,6 +134,9 @@ struct SalonDetailView: View {
                 }
                 .padding(.top, 10)
                 
+                .onAppear {
+                    viewModel.fetchServicesAndCategories(salonId: salon.id)
+                }
             }
         }
         .toolbarBackground(.black, for: .bottomBar)
@@ -151,5 +145,5 @@ struct SalonDetailView: View {
 }
 
 #Preview {
-    SalonDetailView(salon: Salon(id: 0, name: "Atelier Test", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"))
+    SalonDetailView(salon: Salon(id: 1, name: "Salon 1", phoneNumber: "22222", city: "warszawa", street: "Kasprowicza", buildingNumber: "1", postalCode: "22222"))
 }

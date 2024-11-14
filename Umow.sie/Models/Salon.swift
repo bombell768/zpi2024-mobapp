@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Salon: Identifiable, Codable, Hashable {
+struct Salon: Identifiable {
     var id: Int
     var name: String
     var phoneNumber: String
@@ -26,11 +26,24 @@ struct Salon: Identifiable, Codable, Hashable {
         self.postalCode = postalCode
     }
     
+    init () {
+        self.id = 0
+        self.name = ""
+        self.phoneNumber = ""
+        self.city = ""
+        self.street = ""
+        self.buildingNumber = ""
+        self.postalCode = ""
+    }
+    
     func getAddress() -> String {
         return self.street + self.buildingNumber + ", " + self.postalCode +
         self.city
     }
-    
+}
+
+
+extension Salon: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "salonID"
         case name = "salonName"

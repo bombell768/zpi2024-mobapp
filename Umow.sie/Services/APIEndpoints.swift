@@ -12,4 +12,5 @@ struct APIEndpoints {
     static let loginEmployee = baseURL + "employee/login"
     static let registerEmployee = baseURL + "employee/register"
     static let getAllSalons = baseURL + "crud/salons"
+    static let getServicesAndCategories = baseURL + "crud/appointment-making/services-and-categories/"
 }
