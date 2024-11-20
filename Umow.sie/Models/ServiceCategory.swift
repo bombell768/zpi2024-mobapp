@@ -8,7 +8,7 @@
 import Foundation
 
 struct ServiceCategory: Identifiable {
-    var id: Int
+    let id: Int
     var name: String
     var description: String
     var services: [Service]

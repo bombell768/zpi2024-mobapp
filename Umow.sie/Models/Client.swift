@@ -8,7 +8,7 @@
 import Foundation
 
 struct Client: Codable {
-    var ID: Int
+    let id: Int
     var name: String
     var surname: String
     var phoneNumber: String
@@ -17,7 +17,7 @@ struct Client: Codable {
     var preferredService: Int
     
     enum CodingKeys: String, CodingKey {
-        case ID = "customerID"
+        case id = "customerID"
         case name = "customerName"
         case surname = "customerSurname"
         case phoneNumber = "customerDialNumber"

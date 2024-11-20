@@ -19,7 +19,7 @@ import SwiftUI
     var serviceSelection = 2
     
     func register() {
-        let client = Client(ID: 0, name: firstName, surname: sureName, phoneNumber: phoneNumber, email: email, password: password, preferredService: serviceSelection)
+        let client = Client(id: 0, name: firstName, surname: sureName, phoneNumber: phoneNumber, email: email, password: password, preferredService: serviceSelection)
         
         if password == confirmPassword {
             print("Signing up with username: \(email), password: \(password)")

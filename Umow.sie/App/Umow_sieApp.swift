@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct Umow_sieApp: App {
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.black
+        UITabBar.appearance().unselectedItemTintColor = UIColor.white
+    }
+    
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            MainView()
                 .preferredColorScheme(.dark)
                 //.hideKeyboardOnGesture()
         }

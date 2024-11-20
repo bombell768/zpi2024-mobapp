@@ -88,61 +88,14 @@ struct SalonDetailView: View {
             }
         }
         .toolbarBackground(.hidden, for: .navigationBar)
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
-                HStack {
-                    VStack {
-                        Button {
-                            // action
-                        } label: {
-                            Image(systemName: "house")
-                                .foregroundColor(.white)
-                        }
-                        Text("Strona główna")
-                            .font(.system(size: 12))
-                            .frame(maxWidth: .infinity)
-                    }
-                    
-                    Spacer()
-                    
-                    VStack {
-                        Button {
-                            // action
-                        } label: {
-                            Image(systemName: "calendar")
-                                .foregroundColor(.white)
-                        }
-                        Text("Wizyty")
-                            .font(.system(size: 12))
-                            .frame(maxWidth: .infinity)
-                    }
-                    
-                    Spacer()
-                    
-                    VStack {
-                        Button {
-                            // action
-                        } label: {
-                            Image(systemName: "person")
-                                .foregroundColor(.white)
-                        }
-                        
-                        Text("Profil")
-                            .font(.system(size: 12))
-                            .frame(maxWidth: .infinity)
-                    }
-                }
-                .padding(.top, 10)
+        
                 
                 .onAppear {
                     viewModel.fetchServicesAndCategories(salonId: salon.id)
                 }
             }
         }
-        .toolbarBackground(.black, for: .bottomBar)
-        .toolbarBackground(.visible, for: .bottomBar)
-    }
-}
+
 
 #Preview {
     SalonDetailView(salon: Salon(id: 1, name: "Salon 1", phoneNumber: "22222", city: "warszawa", street: "Kasprowicza", buildingNumber: "1", postalCode: "22222"))

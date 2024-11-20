@@ -107,56 +107,7 @@ struct HomeView: View {
                 .padding()
                 
                 
-                .toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        HStack {
-                            VStack {
-                                Button {
-                                    // action
-                                } label: {
-                                    Image(systemName: "house")
-                                        .foregroundColor(.white)
-                                }
-                                Text("Strona główna")
-                                    .font(.system(size: 12))
-                                    .frame(maxWidth: .infinity)
-                            }
-                            
-                            Spacer()
-                            
-                            VStack {
-                                Button {
-                                    // action
-                                } label: {
-                                    Image(systemName: "calendar")
-                                        .foregroundColor(.white)
-                                }
-                                Text("Wizyty")
-                                    .font(.system(size: 12))
-                                    .frame(maxWidth: .infinity)
-                            }
-                            
-                            Spacer()
-                            
-                            VStack {
-                                Button {
-                                    // action
-                                } label: {
-                                    Image(systemName: "person")
-                                        .foregroundColor(.white)
-                                }
-                                
-                                Text("Profil")
-                                    .font(.system(size: 12))
-                                    .frame(maxWidth: .infinity)
-                            }
-                        }
-                        .padding(.top, 10)
-                        
-                    }
-                }
-                .toolbarBackground(.black, for: .bottomBar)
-                .toolbarBackground(.visible, for: .bottomBar)
+                
             }
             
         }

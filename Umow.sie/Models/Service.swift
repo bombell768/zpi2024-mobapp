@@ -8,7 +8,7 @@
 import Foundation
 
 struct Service: Identifiable {
-    var id: Int
+    let id: Int
     var name: String
     var duration: Int
     var price: Double

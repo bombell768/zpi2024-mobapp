@@ -186,3 +186,55 @@ SalonService().fetchServicesAndCategories(categoryId: 1) { result in
 //        print(error)
 //    }
 //}
+// Tworzenie instancji z liczb
+
+struct Time {
+    var hour: Int
+    var minute: Int
+    var second: Int
+
+    // Standardowy inicjalizator
+    init(hour: Int, minute: Int, second: Int) {
+        self.hour = hour
+        self.minute = minute
+        self.second = second
+    }
+
+    // Inicjalizator z ciągu znaków w formacie "hh:mm:ss"
+    init?(from string: String) {
+        let components = string.split(separator: ":").map { Int($0) }
+        
+        // Sprawdzamy, czy mamy 3 składniki i czy udało się zamienić na liczby
+        guard components.count == 3,
+              let hour = components[0], let minute = components[1], let second = components[2],
+              (0...23).contains(hour), (0...59).contains(minute), (0...59).contains(second) else {
+            return nil // Zwracamy nil, jeśli format jest nieprawidłowy
+        }
+        
+        self.hour = hour
+        self.minute = minute
+        self.second = second
+    }
+    
+    // Formatowanie czasu jako string
+    func formatted() -> String {
+        return String(format: "%02d:%02d:%02d", hour, minute, second)
+    }
+}
+
+let time1 = Time(hour: 14, minute: 30, second: 45)
+print(time1.formatted()) // 14:30:45
+
+// Tworzenie instancji z ciągu znaków
+if let time2 = Time(from: "08:15:30") {
+    print(time2.formatted()) // 08:15:30
+} else {
+    print("Nieprawidłowy format czasu!")
+}
+
+// Obsługa nieprawidłowego wejścia
+if let time3 = Time(from: "21:51:49") {
+    print(time3.formatted())
+} else {
+    print("Nieprawidłowy format czasu!") // Wyświetli to
+}

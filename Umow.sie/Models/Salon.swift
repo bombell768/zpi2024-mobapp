@@ -8,7 +8,7 @@
 import Foundation
 
 struct Salon: Identifiable {
-    var id: Int
+    let id: Int
     var name: String
     var phoneNumber: String
     var city: String
