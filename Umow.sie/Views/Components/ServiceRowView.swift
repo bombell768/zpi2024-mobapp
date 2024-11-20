@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ServiceRowView: View {
+    var salon: Salon
     @State var service: Service
     
     var body: some View {
@@ -17,7 +18,8 @@ struct ServiceRowView: View {
                     .font(.title2)
                 Text(service.description)
                     .font(.caption)
-
+                Text("\(service.duration * 15) min")
+ 
             }
             
             Spacer()
@@ -29,7 +31,7 @@ struct ServiceRowView: View {
             
             
             NavigationLink {
-                AppointmentBookingView()
+                AppointmentBookingView(salon: salon, service: service)
             } label: {
                 HStack {
                     Text("Wybierz")
@@ -51,5 +53,7 @@ struct ServiceRowView: View {
 }
 
 #Preview {
-    ServiceRowView(service: Service(id: 1, name: "Cięcie", duration: 30, price: 70, description: "Zwykłe cięcie"))
+    ServiceRowView(
+        salon: Salon(),
+        service: Service(id: 1, name: "Cięcie", duration: 2, price: 70, description: "Zwykłe cięcie"))
 }

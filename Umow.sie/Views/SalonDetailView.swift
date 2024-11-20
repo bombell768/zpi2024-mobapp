@@ -10,7 +10,7 @@ import SwiftUI
 struct SalonDetailView: View {
     
     var salon: Salon
-    var viewModel = SalonDetailViewModel()
+    @State var viewModel = SalonDetailViewModel()
     
     var body: some View {
         ScrollView {
@@ -77,7 +77,7 @@ struct SalonDetailView: View {
                             .bold()
                             .padding(.top)
                         ForEach(category.services) { service in
-                            ServiceRowView(service: service)
+                            ServiceRowView(salon: salon, service: service)
                         }
                     }
                     

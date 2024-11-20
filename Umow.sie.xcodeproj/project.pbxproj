@@ -18,6 +18,9 @@
 		A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72795A02CCBD75500E7DF7E /* HomeImageView.swift */; };
 		A74FA6072CEE1DDC0025BB6D /* AppointmentsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */; };
 		A74FA6092CEE241B0025BB6D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA6082CEE241B0025BB6D /* MainView.swift */; };
+		A74FA60B2CEE6C590025BB6D /* AppointmentBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA60A2CEE6C4B0025BB6D /* AppointmentBookingViewModel.swift */; };
+		A74FA60D2CEE6E270025BB6D /* AppointmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA60C2CEE6E1E0025BB6D /* AppointmentService.swift */; };
+		A74FA6112CEE84390025BB6D /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA6102CEE84300025BB6D /* JSONDecoder.swift */; };
 		A751DC282CECB6C80047B274 /* OpeningHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751DC272CECB6BC0047B274 /* OpeningHours.swift */; };
 		A751DC2A2CECB8F30047B274 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751DC292CECB8EC0047B274 /* Time.swift */; };
 		A751DC2C2CECBBEC0047B274 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751DC2B2CECBBE50047B274 /* TimeSlot.swift */; };
@@ -76,6 +79,9 @@
 		A72795A02CCBD75500E7DF7E /* HomeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImageView.swift; sourceTree = "<group>"; };
 		A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsHistoryView.swift; sourceTree = "<group>"; };
 		A74FA6082CEE241B0025BB6D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A74FA60A2CEE6C4B0025BB6D /* AppointmentBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookingViewModel.swift; sourceTree = "<group>"; };
+		A74FA60C2CEE6E1E0025BB6D /* AppointmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentService.swift; sourceTree = "<group>"; };
+		A74FA6102CEE84300025BB6D /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		A751DC272CECB6BC0047B274 /* OpeningHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHours.swift; sourceTree = "<group>"; };
 		A751DC292CECB8EC0047B274 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		A751DC2B2CECBBE50047B274 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
@@ -184,9 +190,10 @@
 		A77D46ED2CBE826A005FC0D5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A7A4D1AE2CE409CC0021D2DF /* SalonService.swift */,
 				A75207C82CC565DD00520CD7 /* APIEndpoints.swift */,
 				A75207C62CC564FB00520CD7 /* AuthService.swift */,
+				A7A4D1AE2CE409CC0021D2DF /* SalonService.swift */,
+				A74FA60C2CEE6E1E0025BB6D /* AppointmentService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -198,6 +205,7 @@
 				A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */,
 				A7A4D1AC2CE407030021D2DF /* HomeViewModel.swift */,
 				A705CB6F2CE5528400D27EC5 /* SalonDetailViewModel.swift */,
+				A74FA60A2CEE6C4B0025BB6D /* AppointmentBookingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -206,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				A77D46F22CBE82F4005FC0D5 /* Components */,
+				A74FA6082CEE241B0025BB6D /* MainView.swift */,
 				A77D46D62CBE812E005FC0D5 /* LoginView.swift */,
 				A77D46D72CBE812E005FC0D5 /* RegistrationView.swift */,
 				A77D46F42CBE8ACD005FC0D5 /* ForgotPasswordView.swift */,
@@ -213,7 +222,6 @@
 				A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */,
 				A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */,
 				A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */,
-				A74FA6082CEE241B0025BB6D /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +274,7 @@
 		A77D46F62CBE8F3D005FC0D5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A74FA6102CEE84300025BB6D /* JSONDecoder.swift */,
 				A7668F2B2CC2A491007E1AAF /* HexColor.swift */,
 			);
 			path = Extensions;
@@ -454,6 +463,7 @@
 				A751DC2E2CECC2F70047B274 /* AppointmentRowView.swift in Sources */,
 				A75207C92CC565EA00520CD7 /* APIEndpoints.swift in Sources */,
 				A77D46DF2CBE812E005FC0D5 /* LoginView.swift in Sources */,
+				A74FA60B2CEE6C590025BB6D /* AppointmentBookingViewModel.swift in Sources */,
 				A74FA6072CEE1DDC0025BB6D /* AppointmentsHistoryView.swift in Sources */,
 				A75207C52CC51BB500520CD7 /* Client.swift in Sources */,
 				A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */,
@@ -462,6 +472,7 @@
 				A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */,
 				A7A4D1AD2CE407030021D2DF /* HomeViewModel.swift in Sources */,
 				A7DE60A52CE0E3EA001CB1E6 /* AppointmentBookingView.swift in Sources */,
+				A74FA6112CEE84390025BB6D /* JSONDecoder.swift in Sources */,
 				A705CB722CE6BB8500D27EC5 /* Employee.swift in Sources */,
 				A77D46E02CBE812E005FC0D5 /* RegistrationView.swift in Sources */,
 				A75207C72CC5650000520CD7 /* AuthService.swift in Sources */,
@@ -471,6 +482,7 @@
 				A7D9AD5A2CC6F1BA003CDD9A /* RegistrationViewModel.swift in Sources */,
 				A751DC2A2CECB8F30047B274 /* Time.swift in Sources */,
 				A7165FA02CDA36EC00DB73FA /* ServiceCategory.swift in Sources */,
+				A74FA60D2CEE6E270025BB6D /* AppointmentService.swift in Sources */,
 				A7165F952CDA2BE800DB73FA /* SalonDetailView.swift in Sources */,
 				A7165F9C2CDA35F200DB73FA /* ServiceRowView.swift in Sources */,
 				A77D46E12CBE812E005FC0D5 /* ContentView.swift in Sources */,

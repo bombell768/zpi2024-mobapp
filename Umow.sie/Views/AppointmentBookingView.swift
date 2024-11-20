@@ -8,21 +8,20 @@
 import SwiftUI
 
 struct AppointmentBookingView: View {
-    @State var employeeSelection: String = "Kasia"
+    
+    var salon: Salon
+    var service: Service
+    
+    @State var viewModel = AppointmentBookingViewModel()
+    
+
     @State var dateSelection: Date = Date()
     @State var selectedTimeSlot: String = "9:15"
     
-    let dateRange: ClosedRange<Date> = {
-        let calendar = Calendar.current
-        let startComponents = DateComponents(year: 2024, month: 11, day: 4)
-        let endComponents = DateComponents(year: 2024, month: 11, day: 17, hour: 23, minute: 59, second: 59)
-        return calendar.date(from:startComponents)!
-            ...
-            calendar.date(from:endComponents)!
-    }()
+    
 
     
-    let employees: [String] = ["Kasia", "Jan", "Anastazja", "Patryk"]
+//    let employees: [String] = ["Kasia", "Jan", "Anastazja", "Patryk"]
     let timeSlots: [String] = ["9:15", "9:30", "9:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00"]
     
     var body: some View {
@@ -35,10 +34,12 @@ struct AppointmentBookingView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(employees, id: \.self) { employee in
-                                ChoiceView(text: employee, isSelected: employee == employeeSelection)
+                            ForEach(viewModel.employees, id: \.self) { employee in
+                                ChoiceView(text: employee.name, isSelected: employee.name == viewModel.employeeSelection)
                                     .onTapGesture {
-                                        employeeSelection = employee
+                                        viewModel.employeeSelection = employee.name
+                                        viewModel.getAvailabilityDates(salonId: salon.id, employeeId: employee.id)
+                                        
                                     }
                             }
                         }
@@ -81,9 +82,17 @@ struct AppointmentBookingView: View {
                         .font(.title2)
                         .bold()
                     
-                    DatePicker("Data wizyty", selection: $dateSelection, in: dateRange, displayedComponents: .date)
-                        .datePickerStyle(.graphical)
-                        .tint(.yellow)
+                    if !viewModel.dates.isEmpty {
+                        DatePicker("Data wizyty", selection: $dateSelection, in: viewModel.dateRange, displayedComponents: .date)
+                            .datePickerStyle(.graphical)
+                            .tint(.yellow)
+                    } else {
+                        DatePicker("Data wizyty", selection: $dateSelection, in: viewModel.dateRange, displayedComponents: .date)
+                            .datePickerStyle(.graphical)
+                            .tint(.yellow)
+                    }
+
+                        
                 }
                 
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -103,10 +112,11 @@ struct AppointmentBookingView: View {
                         .font(.title2)
                         .bold()
                     
-                    Text("Strzyżenie męskie")
+                    Text("Usługa: \(service.name)")
                     
-                    Text("Pracownik: \(employeeSelection)")
+                    Text("\(viewModel.dates)")
                     
+                    Text("Pracownik: \(viewModel.employeeSelection)")
                     Text("\(dateSelection.formatted(date: .complete, time: .omitted))  \(selectedTimeSlot) - \(selectedTimeSlot)")
                      
                 }
@@ -133,9 +143,15 @@ struct AppointmentBookingView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
         }
+        .onAppear {
+            let serviceIds = [service.id]
+            viewModel.getEmployees(salonId: salon.id, serviceIds: serviceIds)
+        }
     }
 }
 
 #Preview {
-    AppointmentBookingView()
+    AppointmentBookingView(
+        salon: Salon(),
+        service: Service(id: 1, name: "Koloryzacja", duration: 3, price: 70, description: "Na krótko"))
 }

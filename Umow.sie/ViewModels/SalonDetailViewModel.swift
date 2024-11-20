@@ -25,7 +25,7 @@ import Foundation
                 switch result {
                 case .success(let categories):
                     self.serviceCategories = categories
-                        print(self.serviceCategories)
+//                        print(self.serviceCategories)
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                 }

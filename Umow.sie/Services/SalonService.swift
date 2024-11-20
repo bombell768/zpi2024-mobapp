@@ -62,7 +62,7 @@ class SalonService: SalonServiceProtocol {
             do {
                 let root = try JSONDecoder().decode([String: [ServiceCategory]].self, from: data)
                 if let categories = root["listOfCategories"] {
-                    print(categories)
+//                    print(categories)
                 }
                 completion(.success(root["listOfCategories"]!))
 

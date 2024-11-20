@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Employee: Codable, Identifiable {
+struct Employee: Codable, Identifiable, Hashable {
     let id: Int
     var name: String
     var surname: String
@@ -23,6 +23,23 @@ struct Employee: Codable, Identifiable {
     var apartmentNumber: String
     var postalCode: String
     
+    init() {
+        id = 0
+        name = ""
+        surname = ""
+        phoneNumber = ""
+        email = ""
+        password = ""
+        birthDate = .distantPast
+        employmentDate = .distantPast
+        monthlySalary = 0.0
+        city = ""
+        street = ""
+        buildingNumber = ""
+        apartmentNumber = ""
+        postalCode = ""
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "employeeID"
         case name = "employeeName"
@@ -35,7 +52,7 @@ struct Employee: Codable, Identifiable {
         case monthlySalary = "employeeMonthlyPay"
         case city = "employeeCity"
         case street = "employeeStreet"
-        case buildingNumber = "employeeBuldingNumber"
+        case buildingNumber = "employeeBuildingNumber"
         case apartmentNumber = "employeeApartmentNumber"
         case postalCode = "employeePostalCode"
     }
