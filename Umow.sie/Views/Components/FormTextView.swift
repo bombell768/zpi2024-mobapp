@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct FormTextView: View {
+  
+    @Binding var value: String
+    
+    var height: CGFloat = 200.0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            TextEditor(text: $value)
+                .frame(maxWidth: .infinity)
+                .frame(height: height)
+                .padding(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color(.systemGray5), lineWidth: 1)
+                )
+                .padding(.top, 10)
+        }
     }
 }
 
 #Preview {
-    FormTextView()
+    FormTextView(value: .constant(""))
 }

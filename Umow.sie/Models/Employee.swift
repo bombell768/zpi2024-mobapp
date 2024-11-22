@@ -25,7 +25,7 @@ struct Employee: Codable, Identifiable, Hashable {
     
     init() {
         id = 0
-        name = ""
+        name = "Nie wybrano"
         surname = ""
         phoneNumber = ""
         email = ""

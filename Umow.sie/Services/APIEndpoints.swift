@@ -15,4 +15,6 @@ struct APIEndpoints {
     static let getServicesAndCategories = baseURL + "crud/appointment-making/services-and-categories/"
     static let getEmployees = baseURL + "crud/appointment-making/employees"
     static let getAvailabilityDates = baseURL + "crud/appointment-making/availability-dates/"
+    static let getOpeningHours = baseURL + "crud/appointment-making/opening-hours/"
+    static let getTimeSlots = baseURL + "crud/appointment-making/time-slots/"
 }

@@ -14,13 +14,7 @@ struct AppointmentBookingView: View {
     
     @State var viewModel = AppointmentBookingViewModel()
     
-
-    @State var dateSelection: Date = Date()
-    @State var selectedTimeSlot: String = "9:15"
-    
-    
-
-    
+ 
 //    let employees: [String] = ["Kasia", "Jan", "Anastazja", "Patryk"]
     let timeSlots: [String] = ["9:15", "9:30", "9:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00"]
     
@@ -35,10 +29,14 @@ struct AppointmentBookingView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(viewModel.employees, id: \.self) { employee in
-                                ChoiceView(text: employee.name, isSelected: employee.name == viewModel.employeeSelection)
+                                ChoiceView(text: employee.name, isSelected: employee == viewModel.employeeSelection)
                                     .onTapGesture {
-                                        viewModel.employeeSelection = employee.name
+                                        viewModel.employeeSelection = employee
                                         viewModel.getAvailabilityDates(salonId: salon.id, employeeId: employee.id)
+                                        viewModel.getOpeningHours(salonId: salon.id)
+                                        viewModel.getTimeSlots(employeeId: employee.id)
+                                        viewModel.currentEmployee = employee
+                                        
                                         
                                     }
                             }
@@ -83,24 +81,36 @@ struct AppointmentBookingView: View {
                         .bold()
                     
                     if !viewModel.dates.isEmpty {
-                        DatePicker("Data wizyty", selection: $dateSelection, in: viewModel.dateRange, displayedComponents: .date)
+                        DatePicker("Data wizyty", selection: $viewModel.dateSelection, in: viewModel.dateRange, displayedComponents: .date)
                             .datePickerStyle(.graphical)
                             .tint(.yellow)
                     } else {
-                        DatePicker("Data wizyty", selection: $dateSelection, in: viewModel.dateRange, displayedComponents: .date)
+                        DatePicker("Data wizyty", selection: $viewModel.dateSelection, in: viewModel.dateRange, displayedComponents: .date)
                             .datePickerStyle(.graphical)
                             .tint(.yellow)
+                            
                     }
 
                         
                 }
                 
                 ScrollView(.horizontal, showsIndicators: false) {
+//                    HStack {
+//                        ForEach(timeSlots, id: \.self) { timeSlot in
+//                            ChoiceView(text: timeSlot, isSelected: timeSlot == viewModel.selectedTimeSlot)
+//                                .onTapGesture {
+//                                    viewModel.selectedTimeSlot = timeSlot
+//                                }
+//                        }
+//                    }
+                    
                     HStack {
-                        ForEach(timeSlots, id: \.self) { timeSlot in
-                            ChoiceView(text: timeSlot, isSelected: timeSlot == selectedTimeSlot)
+                        ForEach(viewModel.employeeTimeSlots.filter { timeSlot in
+                            Calendar.current.isDate(timeSlot.date, inSameDayAs: viewModel.dateSelection)
+                        }, id: \.self) { timeSlot in
+                            ChoiceView(text: timeSlot.time.formatted(), isSelected: timeSlot == viewModel.selectedTimeSlot)
                                 .onTapGesture {
-                                    selectedTimeSlot = timeSlot
+                                    viewModel.selectedTimeSlot = timeSlot
                                 }
                         }
                     }
@@ -114,10 +124,9 @@ struct AppointmentBookingView: View {
                     
                     Text("Usługa: \(service.name)")
                     
-                    Text("\(viewModel.dates)")
+                    Text("Pracownik: \(viewModel.employeeSelection.name)")
                     
-                    Text("Pracownik: \(viewModel.employeeSelection)")
-                    Text("\(dateSelection.formatted(date: .complete, time: .omitted))  \(selectedTimeSlot) - \(selectedTimeSlot)")
+                    Text("\(viewModel.dateSelection.formatted(date: .complete, time: .omitted))  \(viewModel.selectedTimeSlot.time.formatted()) - \(viewModel.selectedTimeSlot.time.formatted())")
                      
                 }
                 
@@ -146,6 +155,13 @@ struct AppointmentBookingView: View {
         .onAppear {
             let serviceIds = [service.id]
             viewModel.getEmployees(salonId: salon.id, serviceIds: serviceIds)
+            
+        }
+        .onChange(of: viewModel.isLoadingDates) {
+            if !viewModel.isLoadingOpeningHours && !viewModel.isLoadingDates && !viewModel.isLoadingTimeSlots {
+                viewModel.generateTimeSlots(for: viewModel.currentEmployee!)
+            }
+            
         }
     }
 }

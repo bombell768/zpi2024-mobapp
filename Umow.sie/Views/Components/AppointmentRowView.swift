@@ -16,6 +16,8 @@ struct AppointmentRowView: View {
     let date: Date
     let time: Time
     
+    @Binding var isRating: Bool
+    
     var body: some View {
         HStack(alignment: .center) {
             
@@ -61,8 +63,8 @@ struct AppointmentRowView: View {
                 }
                 
                 HStack(spacing: 30) {
-                    NavigationLink {
-                        
+                    Button {
+                        isRating.toggle()
                     } label: {
                         HStack {
                             Text("Odwołaj")
@@ -104,5 +106,5 @@ struct AppointmentRowView: View {
 }
 
 #Preview {
-    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0))
+    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: .constant(false))
 }

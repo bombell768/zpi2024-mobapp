@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct AppointmentsHistoryView: View {
+    
+    @State var isRatingShown: Bool = false
+    
     var body: some View {
         
         NavigationStack {
@@ -52,7 +55,7 @@ struct AppointmentsHistoryView: View {
                         
                     } label: {
                         HStack {
-                            Text("Umówione")
+                            Text("Odwołane")
                                 .fontWeight(.semibold)
                         }
                         .foregroundColor(.white)
@@ -65,10 +68,10 @@ struct AppointmentsHistoryView: View {
                 
                 
                 VStack (spacing: 15) {
-                    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0))
-                    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0))
+                    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: $isRatingShown)
+                    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: $isRatingShown)
                     
-                    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0))
+                    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: $isRatingShown)
                     
                 }
                 .padding()
@@ -77,7 +80,9 @@ struct AppointmentsHistoryView: View {
             }
 
         }
-        
+        .sheet(isPresented: $isRatingShown) {
+            AddRatingView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0))
+        }
         
         
     }

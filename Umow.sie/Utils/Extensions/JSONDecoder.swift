@@ -12,6 +12,7 @@ extension JSONDecoder {
         let decoder = JSONDecoder()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone(abbreviation: "GMT")
         decoder.dateDecodingStrategy = .formatted(formatter)
         return decoder
     }

@@ -45,9 +45,13 @@
 		A7A4D1AF2CE409D60021D2DF /* SalonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A4D1AE2CE409CC0021D2DF /* SalonService.swift */; };
 		A7A921F62CCA4E72006D8006 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A921F52CCA4E72006D8006 /* HomeView.swift */; };
 		A7A921F82CCA58AE006D8006 /* SalonRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A921F72CCA58AE006D8006 /* SalonRowView.swift */; };
+		A7D1A55D2CEFE70D000025F5 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D1A55C2CEFE705000025F5 /* Appointment.swift */; };
 		A7D9AD5A2CC6F1BA003CDD9A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */; };
 		A7DE60A52CE0E3EA001CB1E6 /* AppointmentBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */; };
 		A7DE60A92CE0ED11001CB1E6 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */; };
+		A7F421DE2CF0BF300055EA96 /* AddRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */; };
+		A7F421E02CF0C2D30055EA96 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */; };
+		A7F83E992CF0D0D800D35CA6 /* FormTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F83E982CF0D0D800D35CA6 /* FormTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,9 +114,13 @@
 		A7A4D1B02CE414990021D2DF /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A7A921F52CCA4E72006D8006 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A7A921F72CCA58AE006D8006 /* SalonRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonRowView.swift; sourceTree = "<group>"; };
+		A7D1A55C2CEFE705000025F5 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookingView.swift; sourceTree = "<group>"; };
 		A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
+		A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingView.swift; sourceTree = "<group>"; };
+		A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		A7F83E982CF0D0D800D35CA6 /* FormTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -222,6 +230,7 @@
 				A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */,
 				A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */,
 				A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */,
+				A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -229,6 +238,7 @@
 		A77D46F02CBE8271005FC0D5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A7D1A55C2CEFE705000025F5 /* Appointment.swift */,
 				A751DC2B2CECBBE50047B274 /* TimeSlot.swift */,
 				A751DC292CECB8EC0047B274 /* Time.swift */,
 				A751DC272CECB6BC0047B274 /* OpeningHours.swift */,
@@ -259,6 +269,8 @@
 				A7165F9B2CDA35F200DB73FA /* ServiceRowView.swift */,
 				A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */,
 				A751DC2D2CECC2F70047B274 /* AppointmentRowView.swift */,
+				A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */,
+				A7F83E982CF0D0D800D35CA6 /* FormTextView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -466,13 +478,16 @@
 				A74FA60B2CEE6C590025BB6D /* AppointmentBookingViewModel.swift in Sources */,
 				A74FA6072CEE1DDC0025BB6D /* AppointmentsHistoryView.swift in Sources */,
 				A75207C52CC51BB500520CD7 /* Client.swift in Sources */,
+				A7F421DE2CF0BF300055EA96 /* AddRatingView.swift in Sources */,
 				A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */,
 				A7668F2C2CC2A49D007E1AAF /* HexColor.swift in Sources */,
 				A7165F9A2CDA2F8800DB73FA /* MapView.swift in Sources */,
 				A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */,
+				A7F83E992CF0D0D800D35CA6 /* FormTextView.swift in Sources */,
 				A7A4D1AD2CE407030021D2DF /* HomeViewModel.swift in Sources */,
 				A7DE60A52CE0E3EA001CB1E6 /* AppointmentBookingView.swift in Sources */,
 				A74FA6112CEE84390025BB6D /* JSONDecoder.swift in Sources */,
+				A7D1A55D2CEFE70D000025F5 /* Appointment.swift in Sources */,
 				A705CB722CE6BB8500D27EC5 /* Employee.swift in Sources */,
 				A77D46E02CBE812E005FC0D5 /* RegistrationView.swift in Sources */,
 				A75207C72CC5650000520CD7 /* AuthService.swift in Sources */,
@@ -487,6 +502,7 @@
 				A7165F9C2CDA35F200DB73FA /* ServiceRowView.swift in Sources */,
 				A77D46E12CBE812E005FC0D5 /* ContentView.swift in Sources */,
 				A77D46F52CBE8ACD005FC0D5 /* ForgotPasswordView.swift in Sources */,
+				A7F421E02CF0C2D30055EA96 /* StarRatingView.swift in Sources */,
 				A7A921F62CCA4E72006D8006 /* HomeView.swift in Sources */,
 				A77D46E22CBE812E005FC0D5 /* Umow_sieApp.swift in Sources */,
 				A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */,

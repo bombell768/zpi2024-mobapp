@@ -16,6 +16,8 @@ struct EmployeeRequestBody: Codable {
 protocol AppointmentServiceProtocol {
     func getEmployees(salonId: Int, serviceIds: [Int], completion: @escaping (Result<[Employee], Error>) -> Void)
     func getAvailabilityDates(salonId: Int, employeeID: Int, completion: @escaping (Result<[Date], Error>) -> Void)
+    func getOpeningHours(salonId: Int, completion: @escaping (Result<[OpeningHours], Error>) -> Void)
+    func getTimeSlots(employeeId: Int, completion: @escaping (Result<[TimeSlot], Error>) -> Void)
 }
 
 class AppointmentService: AppointmentServiceProtocol {
@@ -78,7 +80,7 @@ class AppointmentService: AppointmentServiceProtocol {
             do {
                 let decoder = JSONDecoder.withFormattedDates
                 let dates = try decoder.decode([Date].self, from: data)
-
+//                print("do zdekodowaniu: \(dates)")
                 completion(.success(dates))
                 
             } catch {
@@ -88,4 +90,72 @@ class AppointmentService: AppointmentServiceProtocol {
         
     }
     
+    func getOpeningHours(salonId: Int, completion: @escaping (Result<[OpeningHours], Error>) -> Void) {
+        
+        let urlString = APIEndpoints.getOpeningHours + String(salonId)
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let openingHours = try decoder.decode([OpeningHours].self, from: data)
+                
+                completion(.success(openingHours))
+                
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+        
+    }
+    
+    func getTimeSlots(employeeId: Int, completion: @escaping (Result<[TimeSlot], Error>) -> Void) {
+        
+        let urlString = APIEndpoints.getTimeSlots + String(employeeId)
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder.withFormattedDates
+                let timeSlots = try decoder.decode([TimeSlot].self, from: data)
+                print("time sloty: \(timeSlots)")
+                completion(.success(timeSlots))
+                
+            } catch {
+                print("klops")
+                completion(.failure(error))
+            }
+        }.resume()
+        
+    }
 }

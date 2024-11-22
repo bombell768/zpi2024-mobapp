@@ -5,7 +5,7 @@
 //  Created by Bartosz Strzecha on 19/11/2024.
 //
 
-struct Time: Codable {
+struct Time: Codable, Equatable, Hashable {
     var hour: Int
     var minute: Int
     var second: Int
@@ -15,6 +15,7 @@ struct Time: Codable {
         self.minute = minute
         self.second = second
     }
+    
 
     init?(from string: String) {
         let components = string.split(separator: ":").map { Int($0) }
@@ -31,7 +32,44 @@ struct Time: Codable {
     }
     
     func formatted() -> String {
-        return String(format: "%02d:%02d:%02d", hour, minute, second)
+        return String(format: "%02d:%02d", hour, minute)
     }
 }
 
+extension Time {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let timeString = try container.decode(String.self)
+        
+        guard let time = Time(from: timeString) else {
+            throw DecodingError.dataCorruptedError(
+                in: container,
+                debugDescription: "Invalid time format: \(timeString)"
+            )
+        }
+        
+        self = time
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.formatted())
+    }
+}
+
+
+extension Time {
+    func adding(minutes: Int) -> Time {
+        var totalMinutes = self.hour * 60 + self.minute + minutes
+        let newHour = totalMinutes / 60
+        totalMinutes %= 60
+        let newMinute = totalMinutes
+        return Time(hour: newHour % 24, minute: newMinute, second: self.second)
+    }
+    
+    static func <(lhs: Time, rhs: Time) -> Bool {
+        if lhs.hour != rhs.hour { return lhs.hour < rhs.hour }
+        if lhs.minute != rhs.minute { return lhs.minute < rhs.minute }
+        return lhs.second < rhs.second
+    }
+}
