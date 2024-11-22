@@ -20,7 +20,7 @@
 		A74FA6092CEE241B0025BB6D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA6082CEE241B0025BB6D /* MainView.swift */; };
 		A74FA60B2CEE6C590025BB6D /* AppointmentBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA60A2CEE6C4B0025BB6D /* AppointmentBookingViewModel.swift */; };
 		A74FA60D2CEE6E270025BB6D /* AppointmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA60C2CEE6E1E0025BB6D /* AppointmentService.swift */; };
-		A74FA6112CEE84390025BB6D /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA6102CEE84300025BB6D /* JSONDecoder.swift */; };
+		A74FA6112CEE84390025BB6D /* JSON-DateCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA6102CEE84300025BB6D /* JSON-DateCoder.swift */; };
 		A751DC282CECB6C80047B274 /* OpeningHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751DC272CECB6BC0047B274 /* OpeningHours.swift */; };
 		A751DC2A2CECB8F30047B274 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751DC292CECB8EC0047B274 /* Time.swift */; };
 		A751DC2C2CECBBEC0047B274 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751DC2B2CECBBE50047B274 /* TimeSlot.swift */; };
@@ -85,7 +85,7 @@
 		A74FA6082CEE241B0025BB6D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A74FA60A2CEE6C4B0025BB6D /* AppointmentBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookingViewModel.swift; sourceTree = "<group>"; };
 		A74FA60C2CEE6E1E0025BB6D /* AppointmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentService.swift; sourceTree = "<group>"; };
-		A74FA6102CEE84300025BB6D /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
+		A74FA6102CEE84300025BB6D /* JSON-DateCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON-DateCoder.swift"; sourceTree = "<group>"; };
 		A751DC272CECB6BC0047B274 /* OpeningHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHours.swift; sourceTree = "<group>"; };
 		A751DC292CECB8EC0047B274 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		A751DC2B2CECBBE50047B274 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 		A77D46F62CBE8F3D005FC0D5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A74FA6102CEE84300025BB6D /* JSONDecoder.swift */,
+				A74FA6102CEE84300025BB6D /* JSON-DateCoder.swift */,
 				A7668F2B2CC2A491007E1AAF /* HexColor.swift */,
 			);
 			path = Extensions;
@@ -486,7 +486,7 @@
 				A7F83E992CF0D0D800D35CA6 /* FormTextView.swift in Sources */,
 				A7A4D1AD2CE407030021D2DF /* HomeViewModel.swift in Sources */,
 				A7DE60A52CE0E3EA001CB1E6 /* AppointmentBookingView.swift in Sources */,
-				A74FA6112CEE84390025BB6D /* JSONDecoder.swift in Sources */,
+				A74FA6112CEE84390025BB6D /* JSON-DateCoder.swift in Sources */,
 				A7D1A55D2CEFE70D000025F5 /* Appointment.swift in Sources */,
 				A705CB722CE6BB8500D27EC5 /* Employee.swift in Sources */,
 				A77D46E02CBE812E005FC0D5 /* RegistrationView.swift in Sources */,

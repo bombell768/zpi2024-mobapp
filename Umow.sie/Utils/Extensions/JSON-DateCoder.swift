@@ -17,3 +17,14 @@ extension JSONDecoder {
         return decoder
     }
 }
+
+extension JSONEncoder {
+    static var withFormattedDates: JSONEncoder {
+        let encoder = JSONEncoder()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone(abbreviation: "GMT")
+        encoder.dateEncodingStrategy = .formatted(formatter)
+        return encoder
+    }
+}

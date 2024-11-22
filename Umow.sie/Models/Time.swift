@@ -31,7 +31,11 @@ struct Time: Codable, Equatable, Hashable {
         self.second = second
     }
     
-    func formatted() -> String {
+    func formattedToSeconds() -> String {
+        return String(format: "%02d:%02d:%02d", hour, minute, second)
+    }
+    
+    func formattedToMinutes() -> String {
         return String(format: "%02d:%02d", hour, minute)
     }
 }
@@ -53,7 +57,7 @@ extension Time {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(self.formatted())
+        try container.encode(self.formattedToSeconds())
     }
 }
 

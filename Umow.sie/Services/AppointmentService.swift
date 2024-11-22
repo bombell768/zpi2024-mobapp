@@ -18,6 +18,7 @@ protocol AppointmentServiceProtocol {
     func getAvailabilityDates(salonId: Int, employeeID: Int, completion: @escaping (Result<[Date], Error>) -> Void)
     func getOpeningHours(salonId: Int, completion: @escaping (Result<[OpeningHours], Error>) -> Void)
     func getTimeSlots(employeeId: Int, completion: @escaping (Result<[TimeSlot], Error>) -> Void)
+    func saveAppointment(salonId: Int, employeeId: Int, customerId: Int, serviceIds: [Int], date: Date, timeStart: Time, completion: @escaping (Result<String, Error>) -> Void)
 }
 
 class AppointmentService: AppointmentServiceProtocol {
@@ -157,5 +158,46 @@ class AppointmentService: AppointmentServiceProtocol {
             }
         }.resume()
         
+    }
+    
+    func saveAppointment(salonId: Int, employeeId: Int, customerId: Int, serviceIds: [Int], date: Date, timeStart: Time, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let url = URL(string: APIEndpoints.saveAppointment)!
+        
+        let body = Appointment(id: salonId, employeeId: employeeId, customerId: customerId, servicesIds: serviceIds, date: date, time: timeStart, status: nil)
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder.withFormattedDates
+        request.httpBody = try? encoder.encode(body)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+                return
+            }
+            
+            switch httpResponse.statusCode {
+            case 201:
+                print("ok")
+                completion(.success("Appointment successfully saved"))
+            case 400:
+                print("nie ok")
+                completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid input or could not save appointment"])))
+            default:
+                let errorMessage = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                print("inny kod statusu: \(httpResponse.statusCode)")
+                completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
+            }
+ 
+                           
+        }.resume()
     }
 }

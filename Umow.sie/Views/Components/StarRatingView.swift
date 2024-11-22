@@ -13,7 +13,7 @@ struct StarRatingView: View {
     var filledStar = "star.fill"
     var halfFilledStar = "star.leadinghalf.filled"
     var emptyStar = "star"
-    var starSize: CGFloat = 50
+    var starSize: CGFloat = 40
 
     @State private var isDragging = false
 

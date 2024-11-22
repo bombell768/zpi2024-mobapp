@@ -14,6 +14,15 @@ struct Appointment: Codable {
     var servicesIds: [Int]
     var date: Date
     var time: Time
+    var status: String?
     
-
+    enum CodingKeys: String, CodingKey {
+        case id = "salonID"
+        case employeeId = "employeeID"
+        case customerId = "customerID"
+        case servicesIds = "serviceIDList"
+        case date = "visitDate"
+        case time = "visitStartTime"
+        case status = "visitStatus"
+    }
 }

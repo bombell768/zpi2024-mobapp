@@ -95,6 +95,21 @@ import Foundation
         }
     }
     
+    func saveAppointment(salonId: Int, employeeId: Int, customerId: Int, serviceIds: [Int], date: Date, timeStart: Time) {
+        print(date)
+        appointmentService.saveAppointment(salonId: salonId, employeeId: employeeId, customerId: customerId, serviceIds: serviceIds, date: date, timeStart: timeStart) { result in
+            DispatchQueue.main.async {
+                switch result  {
+                case .success(let response):
+                    print(response)
+                    print("Wizyta zapisana pomyślnie.")
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+    
     
     func createDateRange(from dates: [Date]) -> ClosedRange<Date>? {
         guard let earliestDate = dates.min(),

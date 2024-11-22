@@ -108,7 +108,7 @@ struct AppointmentBookingView: View {
                         ForEach(viewModel.employeeTimeSlots.filter { timeSlot in
                             Calendar.current.isDate(timeSlot.date, inSameDayAs: viewModel.dateSelection)
                         }, id: \.self) { timeSlot in
-                            ChoiceView(text: timeSlot.time.formatted(), isSelected: timeSlot == viewModel.selectedTimeSlot)
+                            ChoiceView(text: timeSlot.time.formattedToMinutes(), isSelected: timeSlot == viewModel.selectedTimeSlot)
                                 .onTapGesture {
                                     viewModel.selectedTimeSlot = timeSlot
                                 }
@@ -126,13 +126,13 @@ struct AppointmentBookingView: View {
                     
                     Text("Pracownik: \(viewModel.employeeSelection.name)")
                     
-                    Text("\(viewModel.dateSelection.formatted(date: .complete, time: .omitted))  \(viewModel.selectedTimeSlot.time.formatted()) - \(viewModel.selectedTimeSlot.time.formatted())")
+                    Text("\(viewModel.dateSelection.formatted(date: .complete, time: .omitted))  \(viewModel.selectedTimeSlot.time.formattedToMinutes()) - \(viewModel.selectedTimeSlot.time.formattedToMinutes())")
                      
                 }
                 
                 VStack{
                     Button {
-                        print("Book appointment...")
+                        viewModel.saveAppointment(salonId: salon.id, employeeId: viewModel.employeeSelection.id, customerId: 1, serviceIds: [service.id], date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)
                     } label: {
                         HStack {
                             Text("Umów")

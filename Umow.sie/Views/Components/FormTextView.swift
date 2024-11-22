@@ -21,7 +21,7 @@ struct FormTextView: View {
                 .padding(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color(.systemGray5), lineWidth: 1)
+                        .stroke(Color(.systemGray5), lineWidth: 2)
                 )
                 .padding(.top, 10)
         }
