@@ -49,7 +49,7 @@ struct LoginView: View {
                     }
                     .padding(.horizontal)
                     .padding(.top, 10)
-                    .foregroundColor(Color(hex: 0x0B68D40))
+                    .foregroundColor(Color.ui.vanilla)
                     
                     
                     Button {
@@ -62,10 +62,10 @@ struct LoginView: View {
                                 .fontWeight(.bold)
                             Image(systemName: "arrow.right")
                         }
-                        .foregroundColor(Color(hex: 0x0DADADA))
+                        .foregroundColor(.black.opacity(0.9))
                         .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                     }
-                    .background(Color(hex: 0x0B68D40))
+                    .background(Color.ui.vanilla)
                     .cornerRadius(10)
                     .padding(.top, 20)
                     
@@ -81,7 +81,7 @@ struct LoginView: View {
                                 .fontWeight(.bold)
                         }
                         .font(.system(size: 14))
-                        .foregroundColor(Color(hex: 0x0B68D40))
+                        .foregroundColor(Color.ui.vanilla)
                     }
                 }
                 .navigationDestination(isPresented: $vm.isLoggedIn){

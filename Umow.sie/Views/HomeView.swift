@@ -53,7 +53,6 @@ struct HomeView: View {
                 HStack {
                     Text("Dla nas liczy się styl")
                         .font(.title)
-                        .foregroundColor(.white)
                         .fontWeight(.bold)
                     Spacer()
                 }
@@ -66,12 +65,12 @@ struct HomeView: View {
                        
                     } label: {
                         Text("Sprawdź opinie...")
-                            .fontWeight(.bold)
+                            .fontWeight(.semibold)
                     }
                     .font(.system(size: 14))
                 }
                 .padding(.horizontal)
-                .foregroundColor(Color(hex: 0x0B68D40))
+                .foregroundStyle(Color.ui.black)
 
                 
                 Spacer()
@@ -92,7 +91,7 @@ struct HomeView: View {
                                 
                             }
                         }
-                        .tint(.yellow)
+                        .tint(Color.ui.black)
                         
                         
                     }

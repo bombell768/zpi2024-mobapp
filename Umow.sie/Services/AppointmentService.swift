@@ -171,6 +171,16 @@ class AppointmentService: AppointmentServiceProtocol {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let encoder = JSONEncoder.withFormattedDates
         request.httpBody = try? encoder.encode(body)
+        if let httpBody = request.httpBody {
+            if let bodyString = String(data: httpBody, encoding: .utf8) {
+                print("Body zapytania:")
+                print(bodyString)
+            } else {
+                print("Nie udało się zdekodować danych body.")
+            }
+        } else {
+            print("Zapytanie nie zawiera danych body.")
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             

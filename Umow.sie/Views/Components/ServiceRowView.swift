@@ -37,16 +37,16 @@ struct ServiceRowView: View {
                     Text("Wybierz")
                         .fontWeight(.bold)
                 }
-                .foregroundColor(Color(hex: 0x0DADADA))
+                .foregroundColor(.black.opacity(0.9))
                 .frame(width: 100, height: 48)
             }
-            .background(Color(hex: 0x0B68D40))
+            .background(Color.ui.vanilla)
             .cornerRadius(10)
 
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(Color.gray)
+        .background(Color.ui.cultured)
         .cornerRadius(20)
         
     }

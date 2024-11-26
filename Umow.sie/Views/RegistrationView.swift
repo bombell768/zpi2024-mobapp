@@ -82,11 +82,11 @@ struct RegistrationView: View {
                         .fontWeight(.bold)
                     Image(systemName: "arrow.right")
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.black.opacity(0.9))
                 .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                 
             }
-            .background(Color(hex: 0x0B68D40))
+            .background(Color.ui.vanilla)
             .cornerRadius(10)
             .padding(.top, 30)
             
@@ -101,7 +101,7 @@ struct RegistrationView: View {
                         .fontWeight(.bold)
                 }
                 .font(.system(size: 14))
-                .foregroundColor(Color(hex: 0x0B68D40))
+                .foregroundColor(Color.ui.vanilla)
             }
         }
     }

@@ -37,10 +37,10 @@ struct ForgotPasswordView: View {
                     Text("Zresetuj hasło")
                         .fontWeight(.bold)
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.black.opacity(0.9))
                 .frame(width: UIScreen.main.bounds.width - 32, height: 48)
             }
-            .background(Color(hex: 0x0B68D40))
+            .background(Color.ui.vanilla)
             .cornerRadius(10)
             .padding(.top, 20)
             

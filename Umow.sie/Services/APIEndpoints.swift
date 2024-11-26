@@ -6,7 +6,10 @@
 //
 
 struct APIEndpoints {
-    static let baseURL = "http://192.168.1.11:8080/api/"
+    static let baseURL2 = "http://192.168.1.11:8080/api/"
+    
+    static let baseURL = "https://zpi2024-be.onrender.com/api/"
+    
     static let loginClient = baseURL + "customer/login"
     static let registerClient = baseURL + "customer/register"
     static let loginEmployee = baseURL + "employee/login"

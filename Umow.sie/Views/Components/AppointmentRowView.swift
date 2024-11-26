@@ -44,7 +44,7 @@ struct AppointmentRowView: View {
                             Text("\(salonName)")
                             Text("\(salonAddress)")
                         }
-                        .foregroundStyle(.yellow)
+                        .foregroundStyle(Color.ui.vanilla)
                     }
                     
                     
@@ -70,10 +70,10 @@ struct AppointmentRowView: View {
                             Text("Odwołaj")
                                 .fontWeight(.bold)
                         }
-                        .foregroundColor(Color(hex: 0x0DADADA))
+                        .foregroundColor(.black.opacity(0.9))
                         .frame(width: 150, height: 48)
                     }
-                    .background(Color(hex: 0x0B68D40))
+                    .background(Color.ui.vanilla)
                     .cornerRadius(10)
                     
                     
@@ -84,10 +84,10 @@ struct AppointmentRowView: View {
                             Text("Zmień")
                                 .fontWeight(.bold)
                         }
-                        .foregroundColor(Color(hex: 0x0DADADA))
+                        .foregroundColor(.black.opacity(0.9))
                         .frame(width: 150, height: 48)
                     }
-                    .background(Color(hex: 0x0B68D40))
+                    .background(Color.ui.vanilla)
                     .cornerRadius(10)
                 }
                 .padding(.top)
@@ -100,7 +100,7 @@ struct AppointmentRowView: View {
         .frame(maxWidth: .infinity)
         .padding()
         .padding(.leading, 10)
-        .background(Color.gray)
+        .background(Color.ui.cultured)
         .cornerRadius(20)
     }
 }

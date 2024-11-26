@@ -29,6 +29,8 @@ struct MapView: View {
             .task {
                 convertAddress(location: location)
             }
+            .toolbarVisibility(.hidden, for: .tabBar)
+            
 
     }
     

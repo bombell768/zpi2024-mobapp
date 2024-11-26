@@ -35,7 +35,7 @@ struct AppointmentsHistoryView: View {
                         .foregroundColor(.black.opacity(0.9))
                         .padding()
                     }
-                    .background(.yellow)
+                    .background(Color.ui.vanilla)
                     .cornerRadius(40)
                     
                     Button {
@@ -48,7 +48,7 @@ struct AppointmentsHistoryView: View {
                         .foregroundColor(.white)
                         .padding()
                     }
-                    .background(.gray.opacity(0.9))
+                    .background(Color.ui.cultured.opacity(0.9))
                     .cornerRadius(40)
                     
                     Button {
@@ -61,7 +61,7 @@ struct AppointmentsHistoryView: View {
                         .foregroundColor(.white)
                         .padding()
                     }
-                    .background(.gray.opacity(0.9))
+                    .background(Color.ui.cultured.opacity(0.9))
                     .cornerRadius(40)
                 }
                 .padding(.bottom)

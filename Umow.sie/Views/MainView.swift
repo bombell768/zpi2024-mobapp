@@ -31,7 +31,7 @@ struct MainView: View {
                 }
                 .tag(2)
         }
-        .tint(.yellow)
+        .tint(Color.ui.vanilla)
     }
 }
 

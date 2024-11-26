@@ -14,11 +14,11 @@ struct SalonDetailView: View {
     
     var body: some View {
         ScrollView {
-            Image("toolbarlogo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300)
-                .cornerRadius(5)
+//            Image("toolbarlogo")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 300)
+//                .cornerRadius(5)
             
             VStack(alignment: .leading) {
                 NavigationLink(
@@ -87,7 +87,7 @@ struct SalonDetailView: View {
                 
             }
         }
-        .toolbarBackground(.hidden, for: .navigationBar)
+    //    .toolbarBackground(.hidden, for: .navigationBar)
         
                 
                 .onAppear {

@@ -142,7 +142,7 @@ struct AppointmentBookingView: View {
                         .frame(width: 150, height: 48)
                         
                     }
-                    .background(.yellow)
+                    .background(Color.ui.vanilla)
                     .cornerRadius(10)
                     .padding(.top, 10)
                 }
