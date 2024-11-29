@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppointmentRowView: View {
     
-    let serviceName: String
+    let serviceNames: [String]
     let salonName: String
     let salonAddress: String
     let employeeName: String
@@ -22,9 +22,10 @@ struct AppointmentRowView: View {
         HStack(alignment: .center) {
             
             VStack(alignment: .leading, spacing: 6) {
-                Text(serviceName)
-                    .font(.title2)
-
+                ForEach(serviceNames, id: \.self) {serviceName in
+                    Text(serviceName)
+                        .font(.title2)
+                }
                 
                 HStack(spacing: 10) {
                     Image(systemName: "person.fill")
@@ -59,7 +60,7 @@ struct AppointmentRowView: View {
                 
                 HStack(spacing: 10) {
                     Image(systemName: "clock")
-                    Text("\(time.hour):\(time.minute)")
+                    Text("\(time.formattedToMinutes())")
                 }
                 
                 HStack(spacing: 30) {
@@ -106,5 +107,5 @@ struct AppointmentRowView: View {
 }
 
 #Preview {
-    AppointmentRowView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: .constant(false))
+    AppointmentRowView(serviceNames: ["Strzyżenie damskie", "Koloryzacja", "Modelowanie"], salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: .constant(false))
 }

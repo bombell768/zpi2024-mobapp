@@ -39,8 +39,7 @@ struct Salon: Identifiable {
     }
     
     func getAddress() -> String {
-        return self.street + self.buildingNumber + ", " + self.postalCode +
-        self.city
+        return self.street + " " + self.buildingNumber + ", " + self.postalCode + " " +  self.city
     }
 }
 
