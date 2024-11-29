@@ -34,6 +34,9 @@
 		A75508322CF9CBB000599F12 /* AppointmentsHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75508312CF9CB9F00599F12 /* AppointmentsHistoryViewModel.swift */; };
 		A75508342CF9DC7A00599F12 /* AppointmentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75508332CF9DC7600599F12 /* AppointmentDTO.swift */; };
 		A75508362CF9EBF600599F12 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75508352CF9EBEF00599F12 /* Appointment.swift */; };
+		A75508382CFA48AD00599F12 /* RateRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75508372CFA48AD00599F12 /* RateRowView.swift */; };
+		A755083A2CFA6A7E00599F12 /* SalonRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75508392CFA6A7E00599F12 /* SalonRatingView.swift */; };
+		A755083C2CFA6E7200599F12 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A755083B2CFA6E6C00599F12 /* Rating.swift */; };
 		A7668F2C2CC2A49D007E1AAF /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7668F2B2CC2A491007E1AAF /* HexColor.swift */; };
 		A77D46DC2CBE812E005FC0D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */; };
 		A77D46DD2CBE812E005FC0D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46D92CBE812E005FC0D5 /* Assets.xcassets */; };
@@ -105,6 +108,9 @@
 		A75508312CF9CB9F00599F12 /* AppointmentsHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsHistoryViewModel.swift; sourceTree = "<group>"; };
 		A75508332CF9DC7600599F12 /* AppointmentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentDTO.swift; sourceTree = "<group>"; };
 		A75508352CF9EBEF00599F12 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		A75508372CFA48AD00599F12 /* RateRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateRowView.swift; sourceTree = "<group>"; };
+		A75508392CFA6A7E00599F12 /* SalonRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonRatingView.swift; sourceTree = "<group>"; };
+		A755083B2CFA6E6C00599F12 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		A7668F2B2CC2A491007E1AAF /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A77D46D42CBE812E005FC0D5 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -255,6 +261,7 @@
 				A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */,
 				A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */,
 				A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */,
+				A75508392CFA6A7E00599F12 /* SalonRatingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -272,6 +279,7 @@
 				A7165F972CDA2CFC00DB73FA /* Salon.swift */,
 				A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */,
 				A7165F9D2CDA360700DB73FA /* Service.swift */,
+				A755083B2CFA6E6C00599F12 /* Rating.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -296,6 +304,7 @@
 				A751DC2D2CECC2F70047B274 /* AppointmentRowView.swift */,
 				A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */,
 				A7F83E982CF0D0D800D35CA6 /* FormTextView.swift */,
+				A75508372CFA48AD00599F12 /* RateRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -504,7 +513,9 @@
 				A77D46DF2CBE812E005FC0D5 /* LoginView.swift in Sources */,
 				A74FA60B2CEE6C590025BB6D /* AppointmentBookingViewModel.swift in Sources */,
 				A74FA6072CEE1DDC0025BB6D /* AppointmentsHistoryView.swift in Sources */,
+				A755083C2CFA6E7200599F12 /* Rating.swift in Sources */,
 				A75207C52CC51BB500520CD7 /* Client.swift in Sources */,
+				A755083A2CFA6A7E00599F12 /* SalonRatingView.swift in Sources */,
 				A7F421DE2CF0BF300055EA96 /* AddRatingView.swift in Sources */,
 				A7864CE62CF3A326007B5556 /* Color.swift in Sources */,
 				A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */,
@@ -517,6 +528,7 @@
 				A75508302CF9C72F00599F12 /* AppointmentHistoryService.swift in Sources */,
 				A74FA6112CEE84390025BB6D /* JSON-DateCoder.swift in Sources */,
 				A7D1A55D2CEFE70D000025F5 /* AppointmentToSave.swift in Sources */,
+				A75508382CFA48AD00599F12 /* RateRowView.swift in Sources */,
 				A705CB722CE6BB8500D27EC5 /* Employee.swift in Sources */,
 				A75508322CF9CBB000599F12 /* AppointmentsHistoryViewModel.swift in Sources */,
 				A75508342CF9DC7A00599F12 /* AppointmentDTO.swift in Sources */,

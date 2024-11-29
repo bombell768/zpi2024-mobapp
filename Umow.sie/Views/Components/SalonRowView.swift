@@ -28,26 +28,29 @@ struct SalonRowView: View {
             Spacer()
 
  
-            HStack(alignment: .center) {
-                Image(systemName: "star.fill")
-                    .resizable()
-                    .frame(width: 18, height: 18)
-                    .foregroundColor(.yellow)
-                if let rating = salon.averageRating {
-                    Text(String(format: "%.2f", rating))
-                        .padding(.top, 1)
-                        .fontWeight(.semibold)
-                } else {
-                    Text(String(format: "%.2f", 4.5))
-                        .padding(.top, 1)
-                        .fontWeight(.semibold)
-//                    Text("Ładowanie..")
-//                        .font(.caption)
-//                        .foregroundColor(.gray)
+            NavigationLink(destination: SalonRatingView(salonName: salon.name)) {
+                HStack(alignment: .center) {
+                    Image(systemName: "star.fill")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                        .foregroundColor(.yellow)
+                    if let rating = salon.averageRating {
+                        Text(String(format: "%.2f", rating))
+                            .padding(.top, 1)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                    } else {
+                        Text(String(format: "%.2f", 4.5))
+                            .padding(.top, 1)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+    //                    Text("Ładowanie..")
+    //                        .font(.caption)
+    //                        .foregroundColor(.gray)
+                    }
                 }
-                
-                
             }
+            
 
             .padding(.trailing, 6)
  

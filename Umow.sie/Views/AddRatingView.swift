@@ -121,9 +121,6 @@ struct AddRatingView: View {
             }
             
         }
-    
-        
-        
         .tint(.yellow)
     }
 }
