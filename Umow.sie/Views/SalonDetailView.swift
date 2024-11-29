@@ -77,24 +77,82 @@ struct SalonDetailView: View {
                             .bold()
                             .padding(.top)
                         ForEach(category.services) { service in
-                            ServiceRowView(salon: salon, service: service)
+                            ServiceRowView(salon: salon, service: service, viewModel: viewModel)
                         }
                     }
                     
                 }
                 .padding(.horizontal)
- 
-                
             }
         }
     //    .toolbarBackground(.hidden, for: .navigationBar)
-        
-                
-                .onAppear {
-                    viewModel.fetchServicesAndCategories(salonId: salon.id)
-                }
-            }
+        .onAppear {
+            viewModel.fetchServicesAndCategories(salonId: salon.id)
+//            viewModel.selectedServices.removeAll()
         }
+        
+        if(!viewModel.selectedServices.isEmpty) {
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading) {
+                        Text("Wybrane usługi:")
+                            .font(.headline)
+                        
+                        
+                        ForEach(viewModel.selectedServices) { service in
+                            Text("\(service.name)")
+                                .font(.body)
+                        }
+                    }
+                   
+                    
+                    Spacer()
+                    
+
+                    Button(action: {
+                        viewModel.selectedServices.removeAll()
+                    }) {
+                        Text("Wyczyść")
+                            .foregroundColor(Color.ui.vanilla)
+                            .fontWeight(.bold)
+
+                            .cornerRadius(10)
+                    }
+
+                }
+                
+                HStack {
+                    Text("Razem: \(String(format: "%.f", viewModel.getTotalPrice())) zł")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+                    Text("Całkowity czas: \(viewModel.getTotalDuration())")
+                        .font(.headline)
+                }
+      
+                
+                
+                NavigationLink {
+                    AppointmentBookingView(salon: salon, servicesIndices: viewModel.getServicesIndices(), services: viewModel.selectedServices)
+                } label: {
+                    Text("Wybierz termin")
+                        .foregroundColor(.black.opacity(0.9))
+                        .fontWeight(.bold)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(viewModel.selectedServices.isEmpty ? Color.gray : Color.ui.vanilla)
+                        .cornerRadius(10)
+                }
+                .disabled(viewModel.selectedServices.isEmpty)
+            }
+            .padding()
+            .background(Color(UIColor.systemBackground).shadow(radius: 5))
+        }
+        
+    }
+        
+}
 
 
 #Preview {

@@ -9,7 +9,12 @@ import SwiftUI
 
 struct ServiceRowView: View {
     var salon: Salon
-    @State var service: Service
+    var service: Service
+    var viewModel: SalonDetailViewModel
+    
+    var isSelected: Bool {
+        viewModel.isServiceSelected(service)
+    }
     
     var body: some View {
         HStack(alignment: .center) {
@@ -19,7 +24,6 @@ struct ServiceRowView: View {
                 Text(service.description)
                     .font(.caption)
                 Text("\(service.duration * 15) min")
- 
             }
             
             Spacer()
@@ -29,31 +33,31 @@ struct ServiceRowView: View {
                 .font(.headline)
                 .padding(.trailing, 5)
             
-            
-            NavigationLink {
-                AppointmentBookingView(salon: salon, service: service)
-            } label: {
+            Button(action: {
+                viewModel.toggleServiceSelection(service)
+            }) {
                 HStack {
-                    Text("Wybierz")
+                    Text(isSelected ? "Odznacz" : "Wybierz")
                         .fontWeight(.bold)
                 }
                 .foregroundColor(.black.opacity(0.9))
                 .frame(width: 100, height: 48)
             }
-            .background(Color.ui.vanilla)
+            .background(isSelected ? Color.red.opacity(0.9) : Color.ui.vanilla)
             .cornerRadius(10)
-
+            .disabled(!isSelected && viewModel.selectedServices.count >= 3)
         }
         .frame(maxWidth: .infinity)
         .padding()
         .background(Color.ui.cultured)
         .cornerRadius(20)
-        
     }
 }
+
 
 #Preview {
     ServiceRowView(
         salon: Salon(),
-        service: Service(id: 1, name: "Cięcie", duration: 2, price: 70, description: "Zwykłe cięcie"))
+        service: Service(id: 1, name: "Cięcie", duration: 2, price: 70, description: "Zwykłe cięcie"),
+        viewModel: SalonDetailViewModel())
 }

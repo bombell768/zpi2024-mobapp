@@ -85,7 +85,7 @@ struct LoginView: View {
                     }
                 }
                 .navigationDestination(isPresented: $vm.isLoggedIn){
-                    HomeView()
+                    MainView()
                         .navigationBarBackButtonHidden(true)
                 }
             }

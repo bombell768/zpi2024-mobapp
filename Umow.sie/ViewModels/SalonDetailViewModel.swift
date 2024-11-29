@@ -10,6 +10,8 @@ import Foundation
 @Observable class SalonDetailViewModel {
     
     var serviceCategories: [ServiceCategory] = []
+    var selectedServices: [Service] = []
+    
     var errorMessage: String?
     
     private var salonService: SalonServiceProtocol
@@ -33,5 +35,41 @@ import Foundation
         }
     }
     
+    func toggleServiceSelection(_ service: Service) {
+        if selectedServices.contains(where: { $0.id == service.id }) {
+            selectedServices.removeAll(where: { $0.id == service.id })
+        } else if selectedServices.count < 3 {
+            selectedServices.append(service)
+        }
+    }
     
+    func isServiceSelected(_ service: Service) -> Bool {
+        selectedServices.contains(where: { $0.id == service.id })
+    }
+    
+    func getServicesIndices() -> [Int] {
+        var servicesIndices: [Int] = []
+        for service in selectedServices {
+            servicesIndices.append(service.id)
+        }
+        print("servicesIndices: \(servicesIndices)")
+        return servicesIndices
+    }
+    
+    func getTotalPrice() -> Double {
+        return selectedServices.reduce(0) { $0 + $1.price }
+    }
+    
+    func getTotalDuration() -> String {
+        let totalMinutes = selectedServices.reduce(0) { $0 + $1.duration } * 15
+
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+
+        if hours > 0 {
+            return "\(hours) h \(minutes) min"
+        } else {
+            return "\(minutes) min"
+        }
+    }
 }

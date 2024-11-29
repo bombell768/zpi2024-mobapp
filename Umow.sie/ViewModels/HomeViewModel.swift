@@ -12,6 +12,8 @@ import Observation
     var salons: [Salon] = []
     var cities: [String] = ["Wszystkie"]
     var citySelection: String = "Wszystkie"
+    var currentPhotoIndex: Int = 0
+    
     var errorMessage: String?
     
     private var salonService: SalonServiceProtocol
@@ -29,6 +31,7 @@ import Observation
                     self.salons = salons
                     self.getCities()
                     self.citySelection = self.cities[0]
+                    self.fetchSalonRatings()
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                 }
@@ -37,9 +40,34 @@ import Observation
     }
     
     func getCities() {
-        let uniqueCities = Set(salons.map { $0.city})
-        cities = cities + Array(uniqueCities).sorted()
+        let uniqueCities = Set(salons.map { $0.city })
+        let newCities = uniqueCities.filter { !cities.contains($0) }
+        cities += newCities.sorted()
     }
     
+    func fetchSalonRatings() {
+        let dispatchGroup = DispatchGroup()
+        
+        for (index, salon) in salons.enumerated() {
+            dispatchGroup.enter()
+            
+            salonService.fetchAverageSalonRating(salonId: salon.id) {result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let averageRating):
+                        self.salons[index].averageRating = averageRating
+                    case .failure(let error):
+                        print("Failed to fetch rating for salon \(salon.id): \(error.localizedDescription)")
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            print("All salon ratings fetched")
+        }
+    }
+
     
 }

@@ -25,52 +25,80 @@ struct HomeView: View {
                 Image("toolbarlogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 300)
+                    .frame(width: 320)
                     .cornerRadius(5)
+                    .padding(.top, 12)
 
-                ScrollView (.horizontal) {
-                    HStack {
-                        ForEach(HomeImages.allCases, id: \.self) { image in
+//                ScrollView (.horizontal) {
+//                    HStack {
+//                        ForEach(HomeImages.allCases, id: \.self) { image in
+//                            Image(image.rawValue)
+//                                .resizable()
+//                                .scaledToFill()
+////                                .frame(width: 300, height: 200)
+//                                .cornerRadius(10)
+//                                .containerRelativeFrame(.horizontal, count: 1, spacing: 1)
+//                                .scrollTransition { content, phase in
+//                                    content
+//                                        .opacity(phase.isIdentity ? 1.0 : 0.5)
+//                                        .scaleEffect(x: phase.isIdentity ? 1.0 : 0.3, y: phase.isIdentity ? 1.0 : 0.5)
+//                                        .offset(x: phase.isIdentity ? 0 : 50)
+//                                }
+//                        }
+//                    }
+//                    .scrollTargetLayout()
+//                }
+//                .contentMargins(12, for: .scrollContent)
+//                .scrollTargetBehavior(.paging)
+                
+                VStack {
+                    TabView(selection: $viewModel.currentPhotoIndex) {
+                        ForEach(Array(HomeImages.allCases.enumerated()), id: \.offset) { index, image in
                             Image(image.rawValue)
                                 .resizable()
-                                .scaledToFit()
-//                                .frame(width: 300, height: 200)
-                                .cornerRadius(10)
-                                .containerRelativeFrame(.horizontal, count: 1, spacing: 1)
-                                .scrollTransition { content, phase in
-                                    content
-                                        .opacity(phase.isIdentity ? 1.0 : 0.5)
-                                        .scaleEffect(x: phase.isIdentity ? 1.0 : 0.3, y: phase.isIdentity ? 1.0 : 0.5)
-                                        .offset(x: phase.isIdentity ? 0 : 50)
-                                }
+                                .scaledToFill()
+                                .tag(index)
                         }
                     }
-                    .scrollTargetLayout()
-                }
-                .contentMargins(12, for: .scrollContent)
-                .scrollTargetBehavior(.paging)
-                
-                HStack {
-                    Text("Dla nas liczy się styl")
-                        .font(.title)
-                        .fontWeight(.bold)
-                    Spacer()
-                }
-                .padding(.leading)
-                
-                HStack {
-                    Spacer()
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .frame(height: 250)
+                    .cornerRadius(10)
                     
-                    NavigationLink{
-                       
-                    } label: {
-                        Text("Sprawdź opinie...")
-                            .fontWeight(.semibold)
-                    }
-                    .font(.system(size: 14))
+                    HStack(spacing: 8) {
+                       ForEach(HomeImages.allCases.indices, id: \.self) { index in
+                           Circle()
+                               .fill(index == viewModel.currentPhotoIndex ? Color.ui.vanilla : Color.ui.cultured)
+                               .frame(width: 8, height: 8)
+                               .scaleEffect(index == viewModel.currentPhotoIndex ? 1.2 : 1.0)
+                               .animation(.spring(), value: viewModel.currentPhotoIndex)
+                       }
+                   }
+                   .padding(.top, 10)
                 }
-                .padding(.horizontal)
-                .foregroundStyle(Color.ui.black)
+                .padding()
+               
+                
+//                HStack {
+//                    Text("Dla nas liczy się styl")
+//                        .font(.title)
+//                        .fontWeight(.bold)
+//                    Spacer()
+//                }
+//                .padding(.leading)
+                
+//                HStack {
+//                    Spacer()
+//                    
+//                    NavigationLink{
+//                       
+//                    } label: {
+//                        Text("Sprawdź opinie...")
+//                            .fontWeight(.semibold)
+//                    }
+//                    .font(.system(size: 14))
+//                }
+//                .padding(.horizontal)
+//                .foregroundStyle(Color.ui.black)
 
                 
                 Spacer()
@@ -91,7 +119,7 @@ struct HomeView: View {
                                 
                             }
                         }
-                        .tint(Color.ui.black)
+                        .tint(Color.ui.vanilla)
                         
                         
                     }

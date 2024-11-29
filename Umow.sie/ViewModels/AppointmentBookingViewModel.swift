@@ -19,6 +19,8 @@ import Foundation
     var openingHours: [OpeningHours] = []
     var employeeTimeSlots: [TimeSlot] = []
     var occupiedTimeSlots: [TimeSlot] = []
+    var showAlert: Bool = false
+    var isAppointmentBooked: Bool = false
     
     var errorMessage: String?
     var isLoadingOpeningHours: Bool = false

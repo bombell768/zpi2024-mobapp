@@ -15,6 +15,7 @@ struct Salon: Identifiable {
     var street: String
     var buildingNumber: String
     var postalCode: String
+    var averageRating: Double? 
     
     init(id: Int, name: String, phoneNumber: String, city: String, street: String, buildingNumber: String, postalCode: String) {
         self.id = id
@@ -24,6 +25,7 @@ struct Salon: Identifiable {
         self.street = street
         self.buildingNumber = buildingNumber
         self.postalCode = postalCode
+        self.averageRating = 0.0
     }
     
     init () {
