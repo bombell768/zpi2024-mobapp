@@ -26,3 +26,19 @@ struct RatingDTO: Codable, Identifiable {
 }
 
 
+struct RatingBodyDTO: Codable {
+    let id: Int
+    var rating: Double
+    var description: String
+    var employeeId: Int
+    var appointmentId: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "ratingID"
+        case rating = "ratingValue"
+        case description = "ratingOpinion"
+        case employeeId = "employeeID"
+        case appointmentId = "visitID"
+    }
+}
+

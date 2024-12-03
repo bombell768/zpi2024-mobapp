@@ -9,8 +9,6 @@ import SwiftUI
 
 struct AppointmentsHistoryView: View {
     
-    @State var isRatingShown: Bool = false
-    
     @State var viewModel = AppointmentsHistoryViewModel()
     
     var body: some View {
@@ -72,25 +70,16 @@ struct AppointmentsHistoryView: View {
                 .padding(.bottom)
                 
                 
-//                VStack (spacing: 15) {
-//                    AppointmentRowView(serviceNames: ["Strzyżenie damskie"], salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: $isRatingShown)
-//                    AppointmentRowView(serviceNames: ["Strzyżenie damskie"], salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: $isRatingShown)
-//
-//                    AppointmentRowView(serviceNames: ["Strzyżenie damskie"], salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0), isRating: $isRatingShown)
-//
-//                }
-//                .padding()
-                
                 VStack(spacing: 15) {
                     ForEach(viewModel.filteredAppointments) { appointment in
                         AppointmentRowView(
                             serviceNames: appointment.services.map { $0.name },
-                            salonName: appointment.salon.name,
-                            salonAddress: appointment.salon.getAddress(),
-                            employeeName: appointment.employee.name,
+                            salon: appointment.salon,
+                            employee: appointment.employee,
                             date: appointment.date,
                             time: appointment.time,
-                            isRating: $isRatingShown
+                            status: appointment.status,
+                            appointmentId: appointment.id
                         )
                     }
                 }
@@ -100,9 +89,7 @@ struct AppointmentsHistoryView: View {
             }
 
         }
-        .sheet(isPresented: $isRatingShown) {
-            AddRatingView(serviceName: "Strzyżenie damskie", salonName: "Atelier Paris", salonAddress: "Marszalkowska 34, Warszawa", employeeName: "Ania", date: Date(), time: Time(hour: 12, minute: 45, second: 0))
-        }
+        
         .onAppear {
             viewModel.fetchSalons()
             viewModel.fetchAppointments(customerId: 1)

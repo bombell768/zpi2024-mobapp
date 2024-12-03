@@ -165,7 +165,15 @@ struct AppointmentDetails {
        } else {
            self.filteredAppointments = appointments
        }
-   }
+        
+        self.filteredAppointments.sort {
+            if $0.date != $1.date {
+                return $0.date < $1.date
+            } else {
+                return $0.time < $1.time
+            }
+        }
+    }
     
     func areAllFetched() -> Void {
         if(areAppointmentsFetched && areServicesInAppoitmentFetched && areSalonsFetched && areEmployeesFetched && areServicesFetched) {

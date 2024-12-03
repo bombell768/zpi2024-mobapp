@@ -185,4 +185,18 @@ import Foundation
      
     }
     
+    func addRating(rating: Double, description: String, employeeId: Int, appointmentId: Int) {
+        salonRatingService.addRating(ratingValue: rating, description: description, employeeId: employeeId, appointmentId: appointmentId) {result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let rating):
+                    print(rating)
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+
+    }
+    
 }
