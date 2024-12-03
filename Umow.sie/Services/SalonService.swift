@@ -97,6 +97,7 @@ class SalonService: SalonServiceProtocol {
             
             do {
                 let decodedResponse = try JSONDecoder().decode(SalonRatingResponse.self, from: data)
+                print(decodedResponse.averageRating)
                 completion(.success(decodedResponse.averageRating))
             } catch {
                 completion(.failure(error))

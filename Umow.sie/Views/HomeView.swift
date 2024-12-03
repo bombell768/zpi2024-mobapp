@@ -138,8 +138,20 @@ struct HomeView: View {
             }
             
         }
-        .onAppear {
+        .onAppear() {
             viewModel.fetchSalons()
+        }
+        .overlay(
+            Group {
+                if viewModel.isLoading {
+                    ProgressView("Loading...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.black)
+                }
+            }
+        )
+        .onChange(of: viewModel.isLoading) {
+            viewModel.getSalons()
         }
     }
 }

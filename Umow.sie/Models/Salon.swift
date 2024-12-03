@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Salon: Identifiable {
+struct Salon: Identifiable, Equatable {
     let id: Int
     var name: String
     var phoneNumber: String

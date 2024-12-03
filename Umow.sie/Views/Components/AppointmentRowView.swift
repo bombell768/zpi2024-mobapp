@@ -82,7 +82,7 @@ struct AppointmentRowView: View {
                         
                     } label: {
                         HStack {
-                            Text("Zmień")
+                            Text("Zmień termin")
                                 .fontWeight(.bold)
                         }
                         .foregroundColor(.black.opacity(0.9))

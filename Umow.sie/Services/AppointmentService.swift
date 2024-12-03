@@ -164,7 +164,7 @@ class AppointmentService: AppointmentServiceProtocol {
         
         let url = URL(string: APIEndpoints.saveAppointment)!
         
-        let body = AppointmentToSave(salonId: salonId, employeeId: employeeId, customerId: customerId, servicesIds: serviceIds, date: date, time: timeStart, status: nil)
+        let body = AppointmentToSave(salonId: salonId, employeeId: employeeId, customerId: customerId, servicesIds: serviceIds, date: date, time: timeStart, status: AppointmentStatus.reserved.rawValue)
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
