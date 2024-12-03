@@ -50,18 +50,16 @@ struct AppointmentDetails {
     
     func getEmployees(employeesIds: [Int]) {
         appointmentHistoryService.getAllEmployeesByIds(employeesIds: employeesIds) {result in
-            
-                switch result {
-                case .success(let employees):
-                    self.employees = employees
-                    self.areEmployeesFetched = true
-                    self.areAllFetched()
-                    print("1 \(self.areAllDataFetched)")
+            switch result {
+            case .success(let employees):
+                self.employees = employees
+                self.areEmployeesFetched = true
+                self.areAllFetched()
+                print("1 \(self.areAllDataFetched)")
 //                    print(self.employees)
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                }
-            
+            case .failure(let error):
+                self.errorMessage = error.localizedDescription
+            }
         }
     }
     

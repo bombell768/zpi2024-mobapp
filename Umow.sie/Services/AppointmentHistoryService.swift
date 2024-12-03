@@ -58,10 +58,10 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
             do {
                 let decoder = JSONDecoder.withFormattedDates
                 let employees = try decoder.decode([Employee].self, from: data)
-                for employee in employees {
-                    print(employee)
-                }
-                               
+//                for employee in employees {
+//                    print(employee)
+//                }
+//                               
                 completion(.success(employees))
                 
             } catch {

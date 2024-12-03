@@ -32,7 +32,7 @@ struct SalonRowView: View {
                 
                 if let rating = salon.averageRating {
                     if(rating > 0) {
-                        NavigationLink(destination: SalonRatingView(salonName: salon.name)) {
+                        NavigationLink(destination: SalonRatingView(salon: salon)) {
                             HStack(alignment: .center) {
                                 Image(systemName: "star.fill")
                                     .resizable()
