@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Rating: Identifiable {
+struct Rating: Identifiable, Equatable {
     let id: Int
     var rating: Double
     var description: String

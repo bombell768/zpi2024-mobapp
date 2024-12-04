@@ -71,7 +71,7 @@ struct AppointmentsHistoryView: View {
                 
                 
                 VStack(spacing: 15) {
-                    ForEach(viewModel.filteredAppointments) { appointment in
+                    ForEach(viewModel.filteredAppointments, id: \.id) { appointment in
                         AppointmentRowView(appointment: appointment, viewModel: viewModel)
                     }
                 }
@@ -81,8 +81,6 @@ struct AppointmentsHistoryView: View {
             }
 
         }
-
-        
         .onAppear {
             viewModel.onAppear(customerId: 1)
         }

@@ -38,6 +38,10 @@ struct AppointmentDetails {
     
     var appointments: [Appointment] = []
     
+    var isCancelWarningVisible: Bool = false
+    
+    var reloadTrigger: Bool = false
+    
     var filteredAppointments: [Appointment] = []
     var selectedStatus: AppointmentStatus? = .reserved
     
@@ -169,9 +173,7 @@ struct AppointmentDetails {
             filteredAppointments = appointments.filter { $0.status == .done }
         case .cancelledCustomer, .cancelledEmployee:
             filteredAppointments = appointments.filter { $0.status == .cancelledCustomer || $0.status == .cancelledEmployee }
-        case .unknown:
-            filteredAppointments = []
-        case .none:
+        case .unknown, .none:
             filteredAppointments = []
         }
         
@@ -182,6 +184,7 @@ struct AppointmentDetails {
                 return $0.time < $1.time
             }
         }
+
     }
     
     func areAllFetched() -> Void {
@@ -293,6 +296,22 @@ struct AppointmentDetails {
         fetchAppointments(customerId: customerId)
         getServicesForAppointments(customerId: customerId)
         fetchRatingsForClient(clientId: customerId)
+    }
+    
+    func cancelAppointment(appointmentId: Int) {
+        appointmentHistoryService.cancelAppointment(appointmentId: appointmentId){result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.filteredAppointments.removeAll(where: { $0.id == appointmentId })
+                    self.appointments.removeAll(where: { $0.id == appointmentId })
+                    print("Udało się odwołać wizytę")
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+
     }
 }
 

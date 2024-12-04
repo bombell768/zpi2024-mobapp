@@ -14,6 +14,7 @@ protocol AppointmentHistoryServiceProtocol {
     func getServicesByIds(servicesIds: [Int], completion: @escaping (Result<[Service], Error>) -> Void)
     func getAllratingsForClient(clientId: Int, completion: @escaping (Result<[RatingBodyDTO], Error>) -> Void)
     func addRating(ratingValue: Double, description: String, employeeId: Int, appointmentId: Int, completion: @escaping (Result<RatingBodyDTO, Error>) -> Void)
+    func cancelAppointment(appointmentId: Int, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
@@ -275,4 +276,35 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
                            
         }.resume()
     }
+    
+    func cancelAppointment(appointmentId: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+
+        let urlString = APIEndpoints.cancelAppointment + String(appointmentId) 
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if 204 == httpResponse.statusCode {
+                    completion(.success(()))
+                } else {
+                    let errorMessage = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                    completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
+                }
+            } else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+            }
+        }.resume()
+    }
+
 }

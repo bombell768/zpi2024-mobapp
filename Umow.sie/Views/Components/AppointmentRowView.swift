@@ -10,7 +10,7 @@ import SwiftUI
 struct AppointmentRowView: View {
     
     var appointment: Appointment
-    var viewModel: AppointmentsHistoryViewModel
+    @State var viewModel: AppointmentsHistoryViewModel
     
     @State var isRatingShown: Bool = false
     
@@ -74,6 +74,17 @@ struct AppointmentRowView: View {
         .sheet(isPresented: $isRatingShown) {
             AddRatingView(appointment: appointment, viewModel: viewModel)
         }
+        .alert(isPresented: $viewModel.isCancelWarningVisible) {
+            Alert(
+                title: Text("Jesteś pewny?"),
+                message: Text("Czy na pewno chcesz odwołać wizytę?"),
+                primaryButton: .destructive(Text("Tak - Odwołuję wizytę")) {
+                    viewModel.cancelAppointment(appointmentId: appointment.id)
+                },
+                secondaryButton: .cancel(Text("Nie")) {
+                    viewModel.isCancelWarningVisible = false
+                }            )
+}
     }
     
     @ViewBuilder
@@ -81,15 +92,16 @@ struct AppointmentRowView: View {
         switch status {
         case .reserved:
             HStack(spacing: 30) {
-                ManageAppointmentButton(title: "Odwołaj") {
-                    
-                }
-                
                 NavigationLink {
                     
                 } label: {
                     ManageAppointmentButton(title: "Zmień termin") {}
                 }
+                
+                ManageAppointmentButton(title: "Odwołaj") {
+                    viewModel.isCancelWarningVisible = true
+                }
+                
             }
             
         case .done:

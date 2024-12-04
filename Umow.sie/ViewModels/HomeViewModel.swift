@@ -48,7 +48,7 @@ import Observation
 
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
-                    self.isLoading = false
+                    self.isLoading.toggle()
                 }
             }
         }
@@ -68,7 +68,7 @@ import Observation
         if !isLoading {
             salons = fetchedSalons
         }
-        dataLoaded = true
+//        dataLoaded = true
 //        print(self.salons)
     }
     
@@ -94,7 +94,7 @@ import Observation
                             self.avgCount += 1
 //                            print("avgCount: \(self.avgCount)")
                             if self.areAllAvgsFetched() {
-                                self.isLoading = false
+                                self.isLoading.toggle()
                             }
 //                            print(salon_)
 

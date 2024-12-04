@@ -9,7 +9,14 @@ import Foundation
 
 @Observable class Appointment: Identifiable, Equatable {
     static func == (lhs: Appointment, rhs: Appointment) -> Bool {
-        return true
+        return lhs.id == rhs.id &&
+               lhs.date == rhs.date &&
+               lhs.time == rhs.time &&
+               lhs.status == rhs.status &&
+               lhs.salon == rhs.salon &&
+               lhs.employee == rhs.employee &&
+               lhs.services == rhs.services &&
+               lhs.isRated == rhs.isRated
     }
     
     let id: Int

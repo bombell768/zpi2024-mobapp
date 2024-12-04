@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SalonRowView: View {
-    @State var salon: Salon
+    @Bindable var salon: Salon
     
     var body: some View {
         HStack(alignment: .center) {
