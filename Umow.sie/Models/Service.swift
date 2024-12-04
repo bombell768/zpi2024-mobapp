@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Service: Identifiable {
+struct Service: Identifiable, Equatable {
     let id: Int
     var name: String
     var duration: Int

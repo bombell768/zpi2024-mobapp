@@ -72,15 +72,7 @@ struct AppointmentsHistoryView: View {
                 
                 VStack(spacing: 15) {
                     ForEach(viewModel.filteredAppointments) { appointment in
-                        AppointmentRowView(
-                            serviceNames: appointment.services.map { $0.name },
-                            salon: appointment.salon,
-                            employee: appointment.employee,
-                            date: appointment.date,
-                            time: appointment.time,
-                            status: appointment.status,
-                            appointmentId: appointment.id
-                        )
+                        AppointmentRowView(appointment: appointment, viewModel: viewModel)
                     }
                 }
                 .padding()
@@ -89,14 +81,17 @@ struct AppointmentsHistoryView: View {
             }
 
         }
+
         
         .onAppear {
-            viewModel.fetchSalons()
-            viewModel.fetchAppointments(customerId: 1)
-            viewModel.getServicesForAppointments(customerId: 1)
+            viewModel.onAppear(customerId: 1)
         }
         .onChange(of: viewModel.areAllDataFetched) {
-            viewModel.getAppointments()
+            if viewModel.areAllDataFetched {
+                viewModel.getAppointments()
+            }
+            
+ 
             
         }
         

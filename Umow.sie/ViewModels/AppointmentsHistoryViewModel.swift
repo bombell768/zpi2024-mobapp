@@ -17,12 +17,13 @@ struct AppointmentDetails {
 }
 
 
-@Observable class AppointmentsHistoryViewModel {
+@Observable class AppointmentsHistoryViewModel: Identifiable {
     var employees: [Employee] = []
     var salons: [Salon] = []
     var fetchedAppointments: [AppointmentDTO] = []
     var servicesForAppointments: [ServicesInAppointment] = []
     var services: [Service] = []
+    var clientRatings: [RatingBodyDTO] = []
     
     var employeesIds: [Int] = []
     var servicesIds: [Int] = []
@@ -33,6 +34,7 @@ struct AppointmentDetails {
     var areEmployeesFetched: Bool = false
     var areAllDataFetched: Bool = false
     var areServicesFetched: Bool = false
+    var areRatingsFetched: Bool = false
     
     var appointments: [Appointment] = []
     
@@ -160,11 +162,18 @@ struct AppointmentDetails {
     }
     
     func filterAppointments() {
-       if let status = selectedStatus {
-           self.filteredAppointments = appointments.filter { $0.status == status }
-       } else {
-           self.filteredAppointments = appointments
-       }
+        switch self.selectedStatus {
+        case .reserved:
+            filteredAppointments = appointments.filter { $0.status == .reserved }
+        case .done:
+            filteredAppointments = appointments.filter { $0.status == .done }
+        case .cancelledCustomer, .cancelledEmployee:
+            filteredAppointments = appointments.filter { $0.status == .cancelledCustomer || $0.status == .cancelledEmployee }
+        case .unknown:
+            filteredAppointments = []
+        case .none:
+            filteredAppointments = []
+        }
         
         self.filteredAppointments.sort {
             if $0.date != $1.date {
@@ -176,7 +185,7 @@ struct AppointmentDetails {
     }
     
     func areAllFetched() -> Void {
-        if(areAppointmentsFetched && areServicesInAppoitmentFetched && areSalonsFetched && areEmployeesFetched && areServicesFetched) {
+        if(areAppointmentsFetched && areServicesInAppoitmentFetched && areSalonsFetched && areEmployeesFetched && areServicesFetched && areRatingsFetched) {
             areAllDataFetched = true
         }
         
@@ -208,7 +217,7 @@ struct AppointmentDetails {
                         servicesForAppointment.append(service)
                     }
                 }
-    
+                
                 self.appointments.append(
                     Appointment(
                         id: appointment.id,
@@ -217,16 +226,73 @@ struct AppointmentDetails {
                         status: appointment.status,
                         salon: salons.first(where: {$0.id == appointment.salonId})!,
                         employee: employees.first(where: {$0.id == appointment.employeeId})!,
-                        services: servicesForAppointment
+                        services: servicesForAppointment,
+                        isRated: false
                     ))
                 
             }
         }
-        
-//        for appointment in appointments {
-//            print(appointment)
-//        }
+
+        updateAppointmentsWithRatings()
      
         filterAppointments()
     }
+    
+    func updateAppointmentsWithRatings() {
+        for i in 0..<appointments.count {
+            let appointment = appointments[i]
+            
+            if clientRatings.contains(where: { $0.appointmentId == appointment.id }) {
+                appointments[i].isRated = true
+            }
+        }
+        
+    }
+    
+    func fetchRatingsForClient(clientId: Int) {
+        appointmentHistoryService.getAllratingsForClient(clientId: clientId) {result in
+                switch result {
+                case .success(let ratings):
+                    self.clientRatings = ratings
+                    print(self.clientRatings)
+                    self.areRatingsFetched = true
+                    self.areAllFetched()
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            
+        }
+    }
+    
+    func addRating(rating: Double, description: String, employeeId: Int, appointmentId: Int) {
+        appointmentHistoryService.addRating(ratingValue: rating, description: description, employeeId: employeeId, appointmentId: appointmentId) {result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let rating):
+                    self.clientRatings.append(rating)
+                    print(rating)
+                    self.markAppointmentAsRated(appointmentId: appointmentId)
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+
+    }
+    
+    func markAppointmentAsRated(appointmentId: Int) {
+        if let index = filteredAppointments.firstIndex(where: { $0.id == appointmentId }) {
+            filteredAppointments[index].isRated = true
+        }
+    }
+
+    
+    
+    func onAppear(customerId: Int) {
+        fetchSalons()
+        fetchAppointments(customerId: customerId)
+        getServicesForAppointments(customerId: customerId)
+        fetchRatingsForClient(clientId: customerId)
+    }
 }
+

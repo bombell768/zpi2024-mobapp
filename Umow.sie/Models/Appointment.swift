@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Appointment: Identifiable {
+@Observable class Appointment: Identifiable, Equatable {
+    static func == (lhs: Appointment, rhs: Appointment) -> Bool {
+        return true
+    }
+    
     let id: Int
     var date: Date
     var time: Time
@@ -15,10 +19,22 @@ struct Appointment: Identifiable {
     var salon: Salon
     var employee: Employee
     var services: [Service]
+    var isRated: Bool
+    
+    init(id: Int, date: Date, time: Time, status: AppointmentStatus, salon: Salon, employee: Employee, services: [Service], isRated: Bool) {
+        self.id = id
+        self.date = date
+        self.time = time
+        self.status = status
+        self.salon = salon
+        self.employee = employee
+        self.services = services
+        self.isRated = isRated
+    }
 }
 
 
-enum AppointmentStatus: String, Codable {
+enum AppointmentStatus: String, Codable, Equatable {
     case reserved = "RESERVED"
     case cancelledEmployee = "CANCELLED_EMPLOYEE"
     case cancelledCustomer = "CANCELLED_CUSTOMER"

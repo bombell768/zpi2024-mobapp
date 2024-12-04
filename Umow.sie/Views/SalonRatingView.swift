@@ -49,7 +49,7 @@ struct SalonRatingView: View {
           
         }
         .onAppear {
-            viewModel.fetchRatings(salonID: salon.id)
+            viewModel.fetchRatingsForSalon(salonID: salon.id)
             viewModel.getServicesForRatings(salonId: salon.id)
         }
         .onChange(of: viewModel.areAllDataFetched) {

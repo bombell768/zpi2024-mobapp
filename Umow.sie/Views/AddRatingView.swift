@@ -11,17 +11,12 @@ struct AddRatingView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    let serviceNames: [String]
-    let salon: Salon
-    let employee: Employee
-    let date: Date
-    let time: Time
-    let appointmentId: Int
+    var appointment: Appointment
     
     @State private var rating = 3.0
     @State private var review: String = ""
     
-    var viewModel = SalonRatingViewModel()
+    var viewModel: AppointmentsHistoryViewModel
     
     var body: some View {
         NavigationStack {
@@ -29,29 +24,29 @@ struct AddRatingView: View {
                 HStack(alignment: .center) {
                     
                     VStack(alignment: .leading, spacing: 6) {
-                        ForEach(serviceNames, id: \.self) {serviceName in
+                        ForEach(appointment.services.map{ $0.name }, id: \.self) {serviceName in
                             Text(serviceName)
                                 .font(.title2)
                         }
                         
                         HStack(spacing: 10) {
                             Image(systemName: "person.fill")
-                            Text("\(employee.name)")
+                            Text("\(appointment.employee.name)")
                         }
                         
                         HStack(alignment: .top, spacing: 10) {
                             Image(systemName: "mappin.and.ellipse")
-                            Text("\(salon.name)")
+                            Text("\(appointment.salon.name)")
                         }
                          
                         HStack(spacing: 10) {
                             Image(systemName: "calendar")
-                            Text("\(date.formatted(date: .complete, time: .omitted))")
+                            Text("\(appointment.date.formatted(date: .complete, time: .omitted))")
                         }
                         
                         HStack(spacing: 10) {
                             Image(systemName: "clock")
-                            Text(time.formattedToMinutes())
+                            Text(appointment.time.formattedToMinutes())
                         }
                     }
                     Spacer()
@@ -112,7 +107,8 @@ struct AddRatingView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
                     Button {
-                        viewModel.addRating(rating: rating, description: review, employeeId: employee.id, appointmentId: appointmentId)
+                        viewModel.addRating(rating: rating, description: review, employeeId: appointment.employee.id, appointmentId: appointment.id)
+                        viewModel.filterAppointments()
                         dismiss()
                     } label: {
                         Text("Dodaj ocenę")
@@ -129,10 +125,16 @@ struct AddRatingView: View {
 }
 
 #Preview {
-    AddRatingView(serviceNames: ["Strzyżenie damskie"],
-                  salon: Salon(id: 1, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"),
-                  employee: Employee(),
-                  date: Date(),
-                  time: Time(hour: 12, minute: 45, second: 0),
-                  appointmentId: 1)
+    AddRatingView(appointment:
+                    Appointment(
+                        id: 1,
+                        date: Date(),
+                        time: Time(hour: 12, minute: 45, second: 0),
+                        status: .done,
+                        salon: Salon(id: 1, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"),
+                        employee: Employee(),
+                        services: [],
+                        isRated: false),
+                  viewModel: AppointmentsHistoryViewModel())
+
 }
