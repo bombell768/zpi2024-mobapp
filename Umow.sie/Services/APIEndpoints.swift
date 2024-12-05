@@ -32,4 +32,5 @@ struct APIEndpoints {
     static let getServicesforRatings = baseURL + "crud/service-visit/forSalon/"
     static let postRating = baseURL + "crud/rating"
     static let cancelAppointment = baseURL + "crud/appointment-making/cancel-customer/"
+    static let rescheduleAppointment = baseURL + "crud/appointment-making/reschedule-visit/"
 }

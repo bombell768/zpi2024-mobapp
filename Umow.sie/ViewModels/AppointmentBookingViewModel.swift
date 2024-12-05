@@ -21,6 +21,8 @@ import Foundation
     var occupiedTimeSlots: [TimeSlot] = []
     var showAlert: Bool = false
     var isAppointmentBooked: Bool = false
+    var isAppointmentRescheduled: Bool = false
+    var backFromAppointmentRescheduling: Bool = false
     
     var errorMessage: String?
     var isLoadingOpeningHours: Bool = false
@@ -29,7 +31,7 @@ import Foundation
     
     private var appointmentService: AppointmentServiceProtocol
     
-    init(appointmentService: AppointmentServiceProtocol = AppointmentService()) {
+    init(appointmentService: AppointmentServiceProtocol = AppointmentBookingService()) {
         self.appointmentService = appointmentService
     }
     
@@ -105,6 +107,20 @@ import Foundation
                 case .success(let response):
                     print(response)
                     print("Wizyta zapisana pomyślnie.")
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func rescheduleAppointment(appointmentId: Int, userId: Int, userRole: String, newDate: Date, newTime: Time) {
+        appointmentService.rescheduleAppointment(appointmentId: appointmentId, userId: userId, userRole: userRole, date: newDate, time: newTime) { result in
+            DispatchQueue.main.async {
+                switch result  {
+                case .success:
+                    self.isAppointmentRescheduled = true
+                    print("Wizyta przeniesiona pomyślnie.")
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                 }

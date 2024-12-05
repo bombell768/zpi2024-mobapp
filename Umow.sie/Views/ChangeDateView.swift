@@ -12,8 +12,6 @@ struct ChangeDateView: View {
     var title: String
     var appointment: Appointment
     @State var viewModel = AppointmentBookingViewModel()
-    @State var dateSelection: Date = Date()
-    @State var dateRange: ClosedRange<Date> = Date()...Date()
     
     var body: some View {
         NavigationStack {
@@ -117,7 +115,7 @@ struct ChangeDateView: View {
                     
                     VStack{
                         Button {
-   
+                            viewModel.rescheduleAppointment(appointmentId: appointment.id, userId: 1, userRole: "C", newDate: viewModel.dateSelection, newTime: viewModel.selectedTimeSlot.time)
                         } label: {
                             HStack {
                                 Text("Umów")
@@ -138,6 +136,10 @@ struct ChangeDateView: View {
                 .padding()
             }
             .navigationTitle(title)
+            .navigationDestination(isPresented: $viewModel.backFromAppointmentRescheduling) {
+                AppointmentsHistoryView()
+                    .navigationBarBackButtonHidden(true)
+            }
             .onAppear {
                 viewModel.getAvailabilityDates(salonId: appointment.salon.id, employeeId: appointment.employee.id)
                 viewModel.getOpeningHours(salonId: appointment.salon.id)
@@ -148,6 +150,15 @@ struct ChangeDateView: View {
                     viewModel.generateTimeSlots(for: appointment.employee)
                 }
                 
+            }
+            .alert(isPresented: $viewModel.isAppointmentRescheduled) {
+                Alert(
+                    title: Text("Wizyta umówiona"),
+                    message: Text("Twoja wizyta została pomyślnie umówiona w nowym terminie. Sprawdź szczegóły w zakładce \"Wizyty\""),
+                    dismissButton: .default(Text("OK"), action: {
+                        viewModel.backFromAppointmentRescheduling = true
+                    })
+                )
             }
         }
     }

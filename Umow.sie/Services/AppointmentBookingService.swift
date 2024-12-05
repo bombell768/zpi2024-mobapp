@@ -12,6 +12,20 @@ struct EmployeeRequestBody: Codable {
     let serviceIds: [Int]
 }
 
+struct RescheduleDTO: Codable {
+    let userId: Int
+    let userRole: String
+    let newDate: Date
+    let newTime: Time
+    
+    enum CodingKeys: String, CodingKey {
+        case userId = "userID"
+        case userRole
+        case newDate = "rescheduleDate"
+        case newTime = "rescheduleTime"
+    }
+}
+
 
 protocol AppointmentServiceProtocol {
     func getEmployees(salonId: Int, serviceIds: [Int], completion: @escaping (Result<[Employee], Error>) -> Void)
@@ -19,9 +33,10 @@ protocol AppointmentServiceProtocol {
     func getOpeningHours(salonId: Int, completion: @escaping (Result<[OpeningHours], Error>) -> Void)
     func getTimeSlots(employeeId: Int, completion: @escaping (Result<[TimeSlot], Error>) -> Void)
     func saveAppointment(salonId: Int, employeeId: Int, customerId: Int, serviceIds: [Int], date: Date, timeStart: Time, completion: @escaping (Result<String, Error>) -> Void)
+    func rescheduleAppointment(appointmentId: Int, userId: Int, userRole: String, date: Date, time: Time, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
-class AppointmentService: AppointmentServiceProtocol {
+class AppointmentBookingService: AppointmentServiceProtocol {
     
     func getEmployees(salonId: Int, serviceIds: [Int], completion: @escaping (Result<[Employee], Error>) -> Void) {
         
@@ -209,6 +224,42 @@ class AppointmentService: AppointmentServiceProtocol {
             }
  
                            
+        }.resume()
+    }
+    
+    
+    func rescheduleAppointment(appointmentId: Int, userId: Int, userRole: String, date: Date, time: Time, completion: @escaping (Result<Void, Error>) -> Void) {
+
+        let urlString = APIEndpoints.rescheduleAppointment + String(appointmentId)
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        let body = RescheduleDTO(userId: userId, userRole: userRole, newDate: date, newTime: time)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder.withFormattedDates
+        request.httpBody = try? encoder.encode(body)
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if 204 == httpResponse.statusCode {
+                    completion(.success(()))
+                } else {
+                    let errorMessage = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                    completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
+                }
+            } else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+            }
         }.resume()
     }
 }
