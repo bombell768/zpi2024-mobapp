@@ -52,6 +52,7 @@
 		A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46F82CBE8F57005FC0D5 /* KeyboardHelper.swift */; };
 		A77D46FB2CBE8FA8005FC0D5 /* HideKeyboardOnGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46FA2CBE8F9B005FC0D5 /* HideKeyboardOnGesture.swift */; };
 		A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46FC2CBE91E7005FC0D5 /* KeyboardManager.swift */; };
+		A77DD5DD2D01207E001B1B37 /* ChangeDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DD5DC2D01207E001B1B37 /* ChangeDateView.swift */; };
 		A7864CE62CF3A326007B5556 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7864CE52CF3A323007B5556 /* Color.swift */; };
 		A7A4D1AD2CE407030021D2DF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A4D1AC2CE407030021D2DF /* HomeViewModel.swift */; };
 		A7A4D1AF2CE409D60021D2DF /* SalonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A4D1AE2CE409CC0021D2DF /* SalonService.swift */; };
@@ -129,6 +130,7 @@
 		A77D46F82CBE8F57005FC0D5 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		A77D46FA2CBE8F9B005FC0D5 /* HideKeyboardOnGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardOnGesture.swift; sourceTree = "<group>"; };
 		A77D46FC2CBE91E7005FC0D5 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		A77DD5DC2D01207E001B1B37 /* ChangeDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDateView.swift; sourceTree = "<group>"; };
 		A785E5402CB5361900C1F087 /* Umow.sie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umow.sie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A785E5502CB5361A00C1F087 /* Umow.sieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Umow.sieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A785E55A2CB5361A00C1F087 /* Umow.sieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Umow.sieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,6 +273,7 @@
 				A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */,
 				A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */,
 				A75508392CFA6A7E00599F12 /* SalonRatingView.swift */,
+				A77DD5DC2D01207E001B1B37 /* ChangeDateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				A7165F952CDA2BE800DB73FA /* SalonDetailView.swift in Sources */,
 				A7165F9C2CDA35F200DB73FA /* ServiceRowView.swift in Sources */,
 				A77D46E12CBE812E005FC0D5 /* ContentView.swift in Sources */,
+				A77DD5DD2D01207E001B1B37 /* ChangeDateView.swift in Sources */,
 				A75508362CF9EBF600599F12 /* Appointment.swift in Sources */,
 				A77D46F52CBE8ACD005FC0D5 /* ForgotPasswordView.swift in Sources */,
 				A7F421E02CF0C2D30055EA96 /* StarRatingView.swift in Sources */,

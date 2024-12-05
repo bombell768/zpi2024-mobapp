@@ -38,6 +38,23 @@ import Foundation
         self.services = services
         self.isRated = isRated
     }
+    
+    func totalDuration() -> String {
+            let totalMinutes = services.reduce(0) { $0 + $1.duration } * 15
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+
+        if hours > 0 {
+            return "\(hours) h \(minutes) min"
+        } else {
+            return "\(minutes) min"
+        }
+    }
+        
+    func totalPrice() -> String {
+        let totalAmount = services.reduce(0.0) { $0 + $1.price }
+        return String(format: "%.f zł", totalAmount)
+    }
 }
 
 

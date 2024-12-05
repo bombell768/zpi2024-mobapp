@@ -24,7 +24,7 @@ struct Employee: Codable, Identifiable, Hashable, Equatable {
     var postalCode: String
     
     init() {
-        id = 0
+        id = 1
         name = "Nie wybrano"
         surname = ""
         phoneNumber = ""

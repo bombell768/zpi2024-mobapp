@@ -93,21 +93,36 @@ struct AppointmentRowView: View {
         case .reserved:
             HStack(spacing: 30) {
                 NavigationLink {
-                    
+                    ChangeDateView(title: "Zmień termin", appointment: appointment)
                 } label: {
-                    ManageAppointmentButton(title: "Zmień termin") {}
+                    HStack {
+                        Text("Zmień termin")
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(.black.opacity(0.9))
+                    .frame(width: 150, height: 48)
+                .background(Color.ui.vanilla)
+                .cornerRadius(10)
                 }
-                
+
                 ManageAppointmentButton(title: "Odwołaj") {
                     viewModel.isCancelWarningVisible = true
                 }
-                
             }
             
         case .done:
             HStack(spacing: 30) {
-                ManageAppointmentButton(title: "Umów ponownie") {
-                   
+                NavigationLink {
+                    ChangeDateView(title: "Umów ponownie", appointment: appointment)
+                } label: {
+                    HStack {
+                        Text("Umów ponownie")
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(.black.opacity(0.9))
+                    .frame(width: 150, height: 48)
+                .background(Color.ui.vanilla)
+                .cornerRadius(10)
                 }
                 
                 if !appointment.isRated {
@@ -116,7 +131,7 @@ struct AppointmentRowView: View {
                     }
                 }
                 else {
-                    Text("Wizyta już oceniona")
+                    Text("Wizyta została oceniona")
                         .fontWeight(.semibold)
                         .frame(width: 150, height: 48)
                         .multilineTextAlignment(.center)
@@ -130,8 +145,17 @@ struct AppointmentRowView: View {
             
         case .cancelledEmployee, .cancelledCustomer:
             HStack {
-                ManageAppointmentButton(title: "Umów ponownie") {
-                   
+                NavigationLink {
+                    ChangeDateView(title: "Umów ponownie", appointment: appointment)
+                } label: {
+                    HStack {
+                        Text("Umów ponownie")
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(.black.opacity(0.9))
+                    .frame(width: 150, height: 48)
+                .background(Color.ui.vanilla)
+                .cornerRadius(10)
                 }
             }
             
@@ -146,7 +170,7 @@ struct AppointmentRowView: View {
         id: 1,
         date: Date(),
         time: Time(hour: 12, minute: 45, second: 0),
-        status: .done,
+        status: .reserved,
         salon: Salon(id: 1, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"),
         employee: Employee(),
         services: [],
