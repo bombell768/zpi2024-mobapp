@@ -12,7 +12,7 @@ enum AuthenticationError: Error {
     case custom(errorMessage: String)
 }
 
-struct LoginRequestBody: Codable {
+struct LoginDTO: Codable {
     let email: String
     let password: String
 }
@@ -24,83 +24,111 @@ struct LoginResponse: Codable {
 }
 class AuthService {
     
-    func login(username: String, password: String, completion: @escaping (Result<String, AuthenticationError>) -> Void) {
+    func loginClient(email: String, password: String, completion: @escaping (Result<TokenDTO, Error>) -> Void) {
         
-        guard let url = URL(string: APIEndpoints.loginClient) else {
-            completion(.failure(.custom(errorMessage: "Invalid URL")))
+        let urlString =  APIEndpoints.loginClient
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
         
-        let body = LoginRequestBody(email: username, password: password)
+        let body = LoginDTO(email: email, password: password)
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(body)
         
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completion(.failure(.custom(errorMessage: "No data")))
+        if let httpBody = request.httpBody {
+            if let bodyString = String(data: httpBody, encoding: .utf8) {
+                print("Body zapytania:")
+                print(bodyString)
+            } else {
+                print("Nie udało się zdekodować danych body.")
+            }
+        } else {
+            print("Zapytanie nie zawiera danych body.")
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
                 return
             }
 
-            // token teraz
-            guard let responseBody = String(data: data, encoding: .utf8) else {
-                print("Unable to convert response body to string")
+            guard let data = data else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
                 return
             }
             
-//            guard let loginResponse = try? JSONDecoder().decode(LoginResponse.self, from: data) else {
-//                completion(.failure(.invalidCredentials))
-//                return
-//            }
-//            
-//            guard let token = loginResponse.token else {
-//                    completion(.failure(.invalidCredentials))
-//                    return
-//            }
-                           
-            completion(.success(responseBody))
+            
+            do {
+                let token = try JSONDecoder().decode(TokenDTO.self, from: data)
+                print("token: \(token)")
+                completion(.success(token))
+                
+            } catch {
+                completion(.failure(error))
+            }
+ 
                            
         }.resume()
     }
     
-    func register(client: Client, completion: @escaping (Result<String, AuthenticationError>) -> Void) {
+    func registerClient(client: Client, completion: @escaping (Result<Void, Error>) -> Void) {
         
-        guard let url = URL(string: APIEndpoints.registerClient) else {
-            completion(.failure(.custom(errorMessage: "Invalid URL")))
+        let urlString =  APIEndpoints.registerClient
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
         
+        let body = client
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(client)
+        request.httpBody = try? JSONEncoder().encode(body)
         
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completion(.failure(.custom(errorMessage: "No data")))
+        if let httpBody = request.httpBody {
+            if let bodyString = String(data: httpBody, encoding: .utf8) {
+                print("Body zapytania:")
+                print(bodyString)
+            } else {
+                print("Nie udało się zdekodować danych body.")
+            }
+        } else {
+            print("Zapytanie nie zawiera danych body.")
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
                 return
             }
             
-            // token teraz
-            guard let responseBody = String(data: data, encoding: .utf8) else {
-                print("Unable to convert response body to string")
-                return
+            switch httpResponse.statusCode {
+            case 200:
+                completion(.success(()))
+            case 400:
+                let message = "Bad Request: Check client data or request format."
+                completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: message])))
+            case 409:
+                let message = "Conflict: Email already exists."
+                completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: message])))
+            default: 
+                let errorMessage = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
             }
-            
-            //            guard let loginResponse = try? JSONDecoder().decode(LoginResponse.self, from: data) else {
-            //                completion(.failure(.invalidCredentials))
-            //                return
-            //            }
-            //
-            //            guard let token = loginResponse.token else {
-            //                    completion(.failure(.invalidCredentials))
-            //                    return
-            //            }
-            
-            completion(.success(responseBody))
-            
         }.resume()
     }
     

@@ -17,7 +17,7 @@ struct Umow_sieApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            EntryView()
                 .preferredColorScheme(.dark)
                 //.hideKeyboardOnGesture()
         }

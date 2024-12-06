@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		A705CB702CE5528400D27EC5 /* SalonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705CB6F2CE5528400D27EC5 /* SalonDetailViewModel.swift */; };
 		A705CB722CE6BB8500D27EC5 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705CB712CE6BB7B00D27EC5 /* Employee.swift */; };
+		A70F4C562D01F6D100F837D8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F4C552D01F6D100F837D8 /* ProfileView.swift */; };
+		A70F4C582D0238CA00F837D8 /* StampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F4C572D0238CA00F837D8 /* StampView.swift */; };
+		A70F4C5A2D025DF200F837D8 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F4C592D025DF200F837D8 /* EntryView.swift */; };
+		A70F4C5C2D02658600F837D8 /* TokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F4C5B2D02658000F837D8 /* TokenDTO.swift */; };
 		A7165F952CDA2BE800DB73FA /* SalonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */; };
 		A7165F982CDA2D0100DB73FA /* Salon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F972CDA2CFC00DB73FA /* Salon.swift */; };
 		A7165F9A2CDA2F8800DB73FA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F992CDA2F8800DB73FA /* MapView.swift */; };
@@ -87,6 +91,10 @@
 /* Begin PBXFileReference section */
 		A705CB6F2CE5528400D27EC5 /* SalonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonDetailViewModel.swift; sourceTree = "<group>"; };
 		A705CB712CE6BB7B00D27EC5 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		A70F4C552D01F6D100F837D8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A70F4C572D0238CA00F837D8 /* StampView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampView.swift; sourceTree = "<group>"; };
+		A70F4C592D025DF200F837D8 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		A70F4C5B2D02658000F837D8 /* TokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDTO.swift; sourceTree = "<group>"; };
 		A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonDetailView.swift; sourceTree = "<group>"; };
 		A7165F972CDA2CFC00DB73FA /* Salon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salon.swift; sourceTree = "<group>"; };
 		A7165F992CDA2F8800DB73FA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -190,6 +198,7 @@
 		A75191FB2CF62CED00EF1681 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				A70F4C5B2D02658000F837D8 /* TokenDTO.swift */,
 				A75191FC2CF62CF700EF1681 /* SalonRatingResponse.swift */,
 				A7D1A55C2CEFE705000025F5 /* AppointmentToSave.swift */,
 				A75508332CF9DC7600599F12 /* AppointmentDTO.swift */,
@@ -263,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				A77D46F22CBE82F4005FC0D5 /* Components */,
+				A70F4C592D025DF200F837D8 /* EntryView.swift */,
 				A74FA6082CEE241B0025BB6D /* MainView.swift */,
 				A77D46D62CBE812E005FC0D5 /* LoginView.swift */,
 				A77D46D72CBE812E005FC0D5 /* RegistrationView.swift */,
@@ -274,6 +284,7 @@
 				A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */,
 				A75508392CFA6A7E00599F12 /* SalonRatingView.swift */,
 				A77DD5DC2D01207E001B1B37 /* ChangeDateView.swift */,
+				A70F4C552D01F6D100F837D8 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,6 +328,7 @@
 				A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */,
 				A7F83E982CF0D0D800D35CA6 /* FormTextView.swift */,
 				A75508372CFA48AD00599F12 /* RateRowView.swift */,
+				A70F4C572D0238CA00F837D8 /* StampView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -528,7 +540,9 @@
 				A755083C2CFA6E7200599F12 /* RatingDTO.swift in Sources */,
 				A75207C52CC51BB500520CD7 /* Client.swift in Sources */,
 				A755083A2CFA6A7E00599F12 /* SalonRatingView.swift in Sources */,
+				A70F4C5A2D025DF200F837D8 /* EntryView.swift in Sources */,
 				A7F421DE2CF0BF300055EA96 /* AddRatingView.swift in Sources */,
+				A70F4C562D01F6D100F837D8 /* ProfileView.swift in Sources */,
 				A7864CE62CF3A326007B5556 /* Color.swift in Sources */,
 				A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */,
 				A7668F2C2CC2A49D007E1AAF /* HexColor.swift in Sources */,
@@ -548,6 +562,7 @@
 				A75508322CF9CBB000599F12 /* AppointmentsHistoryViewModel.swift in Sources */,
 				A75508342CF9DC7A00599F12 /* AppointmentDTO.swift in Sources */,
 				A77D46E02CBE812E005FC0D5 /* RegistrationView.swift in Sources */,
+				A70F4C5C2D02658600F837D8 /* TokenDTO.swift in Sources */,
 				A75207C72CC5650000520CD7 /* AuthService.swift in Sources */,
 				A75207CB2CC56DAF00520CD7 /* LoginViewModel.swift in Sources */,
 				A7A4D1AF2CE409D60021D2DF /* SalonService.swift in Sources */,
@@ -568,6 +583,7 @@
 				A77D46FD2CBE91F4005FC0D5 /* KeyboardManager.swift in Sources */,
 				A751DC282CECB6C80047B274 /* OpeningHours.swift in Sources */,
 				A7165F982CDA2D0100DB73FA /* Salon.swift in Sources */,
+				A70F4C582D0238CA00F837D8 /* StampView.swift in Sources */,
 				A7DE60A92CE0ED11001CB1E6 /* ChoiceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

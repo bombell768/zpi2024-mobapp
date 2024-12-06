@@ -10,10 +10,10 @@ struct APIEndpoints {
     
     static let baseURL2 = "https://zpi2024-be.onrender.com/api/"
     
-    static let loginClient = baseURL + "customer/login"
-    static let registerClient = baseURL + "customer/register"
-    static let loginEmployee = baseURL + "employee/login"
-    static let registerEmployee = baseURL + "employee/register"
+    static let loginClient = baseURL + "auth/customer/login"
+    static let registerClient = baseURL + "auth/customer/register"
+    static let loginEmployee = baseURL + "auth/employee/login"
+    static let registerEmployee = baseURL + "auth/employee/register"
     static let getAllSalons = baseURL + "crud/salons"
     static let getServicesAndCategories = baseURL + "crud/appointment-making/services-and-categories/"
     static let getEmployees = baseURL + "crud/appointment-making/employees"

@@ -18,23 +18,46 @@ import SwiftUI
     var confirmPassword = ""
     var serviceSelection = 2
     
+    var errorMessage: String? = nil
+    var isRegistrationSuccessful: Bool = false
+    var isLoading: Bool = false
+    
+    private let authService: AuthService
+    
+    init(authService: AuthService = AuthService()) {
+        self.authService = authService
+    }
+
     func register() {
-        let client = Client(id: 0, name: firstName, surname: sureName, phoneNumber: phoneNumber, email: email, password: password, preferredService: serviceSelection)
+        guard password == confirmPassword else {
+            errorMessage = "Passwords do not match."
+            return
+        }
         
-        if password == confirmPassword {
-            print("Signing up with username: \(email), password: \(password)")
-            AuthService().register(client: client) { result in
+        let client = Client(
+            id: 0,
+            name: firstName,
+            surname: sureName,
+            phoneNumber: phoneNumber,
+            email: email,
+            password: password,
+            preferredService: serviceSelection
+        )
+        
+        isLoading = true
+        errorMessage = nil
+        
+        authService.registerClient(client: client) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
                 switch result {
-                case .success(let body):
-                    print("Body: \(body)")
+                case .success:
+                    self?.isRegistrationSuccessful = true
                 case .failure(let error):
-                    print(error)
+                    self?.errorMessage = error.localizedDescription
+                    print(self?.errorMessage)
                 }
             }
         }
-        else {
-            print("Passwords do not match.")
-        }
-        
     }
 }

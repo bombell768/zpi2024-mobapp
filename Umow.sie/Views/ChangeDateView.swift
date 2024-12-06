@@ -113,7 +113,7 @@ struct ChangeDateView: View {
                     .background(Color.ui.cultured)
                     .cornerRadius(20)
                     
-                    VStack{
+                    VStack {
                         Button {
                             viewModel.rescheduleAppointment(appointmentId: appointment.id, userId: 1, userRole: "C", newDate: viewModel.dateSelection, newTime: viewModel.selectedTimeSlot.time)
                         } label: {
