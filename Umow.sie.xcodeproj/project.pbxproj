@@ -47,6 +47,7 @@
 		A77B57F92CFF12C000F30332 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B57F82CFF12C000F30332 /* Rating.swift */; };
 		A77C7BAC2D03393200B609E7 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BAB2D03392C00B609E7 /* ProfileService.swift */; };
 		A77C7BAE2D033AAF00B609E7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BAD2D033AAF00B609E7 /* ProfileViewModel.swift */; };
+		A77C7BB02D03483000B609E7 /* EditDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BAF2D03483000B609E7 /* EditDataView.swift */; };
 		A77D46DC2CBE812E005FC0D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */; };
 		A77D46DD2CBE812E005FC0D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46D92CBE812E005FC0D5 /* Assets.xcassets */; };
 		A77D46DE2CBE812E005FC0D5 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46D42CBE812E005FC0D5 /* InputView.swift */; };
@@ -131,6 +132,7 @@
 		A77B57F82CFF12C000F30332 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		A77C7BAB2D03392C00B609E7 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		A77C7BAD2D033AAF00B609E7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		A77C7BAF2D03483000B609E7 /* EditDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDataView.swift; sourceTree = "<group>"; };
 		A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A77D46D42CBE812E005FC0D5 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		A77D46D62CBE812E005FC0D5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				A7F83E982CF0D0D800D35CA6 /* FormTextView.swift */,
 				A75508372CFA48AD00599F12 /* RateRowView.swift */,
 				A70F4C572D0238CA00F837D8 /* StampView.swift */,
+				A77C7BAF2D03483000B609E7 /* EditDataView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 			files = (
 				A7A921F82CCA58AE006D8006 /* SalonRowView.swift in Sources */,
 				A74FA6092CEE241B0025BB6D /* MainView.swift in Sources */,
+				A77C7BB02D03483000B609E7 /* EditDataView.swift in Sources */,
 				A751DC2C2CECBBEC0047B274 /* TimeSlot.swift in Sources */,
 				A7165F9E2CDA360C00DB73FA /* Service.swift in Sources */,
 				A705CB702CE5528400D27EC5 /* SalonDetailViewModel.swift in Sources */,

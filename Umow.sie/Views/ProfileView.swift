@@ -56,6 +56,11 @@ struct ProfileView: View {
                         Spacer()
                         Image(systemName: "pencil")
                             .font(.system(size: 22))
+                            .foregroundStyle(Color.ui.vanilla)
+                            .onTapGesture {
+                                viewModel.isEditingEmail.toggle()
+                            }
+
                     }
                     
                     HStack {
@@ -64,6 +69,10 @@ struct ProfileView: View {
                         Spacer()
                         Image(systemName: "pencil")
                             .font(.system(size: 22))
+                            .foregroundStyle(Color.ui.vanilla)
+                            .onTapGesture {
+                                viewModel.isEditingPhoneNumber.toggle()
+                            }
                     }
                     
 //                    HStack {
@@ -106,7 +115,27 @@ struct ProfileView: View {
             viewModel.getNumberOfSeals(clientId: clientID ?? 0)
             viewModel.getClientById(clientId: clientID ?? 0)
         }
+        
+        .sheet(isPresented: $viewModel.isEditingEmail) {
+            EditDataView(
+                viewTitle: "Zmiana adresu email",
+                inputTitle: "Nowy adres email",
+                onSave: { newEmail in
+                    viewModel.updateClientEmail(newEmail: newEmail)
+                }
+            )
+                .presentationBackground(Color.black)
+        }
 
+        .sheet(isPresented: $viewModel.isEditingPhoneNumber) {
+            EditDataView(
+                viewTitle: "Zmiana numeru telefonu",
+                inputTitle: "Nowy numer telefonu",
+                onSave: { newPhoneNumber in
+                    viewModel.updateClientPhoneNumber(newPhoneNumber: newPhoneNumber)
+                })
+                .presentationBackground(Color.black)
+        }
     }
 }
 

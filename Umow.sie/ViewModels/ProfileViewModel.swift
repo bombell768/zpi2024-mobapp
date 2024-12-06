@@ -12,6 +12,9 @@ import Foundation
     var numberOfSeals: Int = 0
     var client: Client = Client()
     
+    var isEditingEmail: Bool = false
+    var isEditingPhoneNumber: Bool = false
+    
     var errorMessage: String?
     private var profileService: ProfileServiceProtocol
     
@@ -48,4 +51,54 @@ import Foundation
             }
         }
     }
+    
+    func updateClientEmail(newEmail: String) {
+        guard !newEmail.isEmpty else {
+            self.errorMessage = "Email cannot be empty."
+            return
+        }
+        
+        var updatedClient = client
+        updatedClient.email = newEmail
+        
+        
+        
+        profileService.updateClient(client: updatedClient) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.client = updatedClient
+                    self.errorMessage = nil
+                    print("Email updated successfully to \(newEmail)")
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                    print("Failed to update email: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func updateClientPhoneNumber(newPhoneNumber: String) {
+            guard !newPhoneNumber.isEmpty else {
+                self.errorMessage = "Phone number cannot be empty."
+                return
+            }
+            
+            var updatedClient = client
+            updatedClient.phoneNumber = newPhoneNumber
+            
+            profileService.updateClient(client: updatedClient) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self.client = updatedClient
+                        self.errorMessage = nil
+                        print("Phone number updated successfully to \(newPhoneNumber)")
+                    case .failure(let error):
+                        self.errorMessage = error.localizedDescription
+                        print("Failed to update phone number: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
 }
