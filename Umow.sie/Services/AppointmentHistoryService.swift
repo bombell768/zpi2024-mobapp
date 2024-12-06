@@ -206,20 +206,32 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
                 return
             }
 
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+                return
+            }
+                
             guard let data = data else {
                 completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
                 return
             }
-            
-            do {
-                let ratings = try JSONDecoder().decode([RatingBodyDTO].self, from: data)
-                print("pobrane: \(ratings)")
-                completion(.success(ratings))
                 
-            } catch {
+            switch httpResponse.statusCode {
+            case 200:
+                do {
+                    let ratings = try JSONDecoder().decode([RatingBodyDTO].self, from: data)
+                    print("Pobrane opinie: \(ratings)")
+                    completion(.success(ratings))
+                } catch {
+                    completion(.failure(error))
+                }
+            case 404:
+                completion(.success([]))
+            default:
+                let errorDescription = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                let error = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
                 completion(.failure(error))
             }
-                           
         }.resume()
     }
     

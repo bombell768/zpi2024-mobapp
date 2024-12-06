@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ProfileView: View {
     
-
+    @State var viewModel: ProfileViewModel = ProfileViewModel()
+    
+    @AppStorage("clientID") private var clientID: Int?
     
     var body: some View {
         NavigationStack {
@@ -36,7 +38,7 @@ struct ProfileView: View {
                 }
 
 
-                Text("Aleksandra Matuszowiecka")
+                Text(viewModel.client.name + " " + viewModel.client.surname)
                     .font(.title)
                     .fontWeight(.bold)
                 
@@ -49,7 +51,7 @@ struct ProfileView: View {
                         .fontWeight(.bold)
                     
                     HStack {
-                        Text("Email: aleksandra.matuszowiecka@gmail.pl")
+                        Text("Email: \(viewModel.client.email)")
                             .font(.system(size: 18))
                         Spacer()
                         Image(systemName: "pencil")
@@ -57,20 +59,20 @@ struct ProfileView: View {
                     }
                     
                     HStack {
-                        Text("Numer telefonu: 513 234 983")
+                        Text("Numer telefonu: \(viewModel.client.phoneNumber)")
                             .font(.system(size: 18))
                         Spacer()
                         Image(systemName: "pencil")
                             .font(.system(size: 22))
                     }
                     
-                    HStack {
-                        Text("Preferowane usługi: Dla Kobiet")
-                            .font(.system(size: 18))
-                        Spacer()
-                        Image(systemName: "pencil")
-                            .font(.system(size: 22))
-                    }
+//                    HStack {
+//                        Text("Preferowane usługi: \(viewModel.client.preferredService)")
+//                            .font(.system(size: 18))
+//                        Spacer()
+//                        Image(systemName: "pencil")
+//                            .font(.system(size: 22))
+//                    }
                     
                     HStack {
                         Spacer()
@@ -91,7 +93,7 @@ struct ProfileView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                 
-                    StampView(earnedStamps: 4)
+                    StampView(earnedStamps: viewModel.numberOfSeals)
                 }
                 
 
@@ -100,6 +102,11 @@ struct ProfileView: View {
             .padding()
 
         }
+        .onAppear {
+            viewModel.getNumberOfSeals(clientId: clientID ?? 0)
+            viewModel.getClientById(clientId: clientID ?? 0)
+        }
+
     }
 }
 

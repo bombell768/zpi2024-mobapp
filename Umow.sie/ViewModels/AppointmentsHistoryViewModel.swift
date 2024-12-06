@@ -253,6 +253,7 @@ struct AppointmentDetails {
     }
     
     func fetchRatingsForClient(clientId: Int) {
+        print("opinie dla klienta \(clientId)")
         appointmentHistoryService.getAllratingsForClient(clientId: clientId) {result in
                 switch result {
                 case .success(let ratings):
@@ -260,8 +261,11 @@ struct AppointmentDetails {
                     print(self.clientRatings)
                     self.areRatingsFetched = true
                     self.areAllFetched()
+                    
+                    print("6 \(self.areAllDataFetched)")
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    print(self.errorMessage ?? "Unknown error")
                 }
             
         }

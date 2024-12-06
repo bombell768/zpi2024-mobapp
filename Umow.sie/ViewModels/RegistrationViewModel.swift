@@ -34,7 +34,7 @@ import SwiftUI
             return
         }
         
-        let client = Client(
+        let client = Client (
             id: 0,
             name: firstName,
             surname: sureName,
@@ -55,7 +55,7 @@ import SwiftUI
                     self?.isRegistrationSuccessful = true
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
-                    print(self?.errorMessage)
+                    print(self?.errorMessage ?? "Unknown error")
                 }
             }
         }

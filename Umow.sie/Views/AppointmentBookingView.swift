@@ -13,6 +13,8 @@ struct AppointmentBookingView: View {
     var servicesIndices: [Int]
     var services: [Service]
     
+    @AppStorage("clientID") private var clientID: Int?
+    
     @State var viewModel = AppointmentBookingViewModel()
     
  
@@ -150,7 +152,7 @@ struct AppointmentBookingView: View {
                     
                     VStack{
                         Button {
-                            viewModel.saveAppointment(salonId: salon.id, employeeId: viewModel.employeeSelection.id, customerId: 1, serviceIds: servicesIndices, date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)
+                            viewModel.saveAppointment(salonId: salon.id, employeeId: viewModel.employeeSelection.id, customerId: clientID ?? 0, serviceIds: servicesIndices, date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)
                             viewModel.showAlert = true
                         } label: {
                             HStack {

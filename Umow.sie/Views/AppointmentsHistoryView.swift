@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AppointmentsHistoryView: View {
     
+    @AppStorage("clientID") private var clientID: Int?
+    
     @State var viewModel = AppointmentsHistoryViewModel()
     
     var body: some View {
@@ -82,7 +84,7 @@ struct AppointmentsHistoryView: View {
 
         }
         .onAppear {
-            viewModel.onAppear(customerId: 1)
+            viewModel.onAppear(customerId: clientID ?? 0)
         }
         .onChange(of: viewModel.areAllDataFetched) {
             if viewModel.areAllDataFetched {

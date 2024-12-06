@@ -45,6 +45,8 @@
 		A77B57F32CFF08EE00F30332 /* SalonRatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B57F22CFF08E300F30332 /* SalonRatingService.swift */; };
 		A77B57F52CFF0A3000F30332 /* SalonRatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B57F42CFF0A3000F30332 /* SalonRatingViewModel.swift */; };
 		A77B57F92CFF12C000F30332 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B57F82CFF12C000F30332 /* Rating.swift */; };
+		A77C7BAC2D03393200B609E7 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BAB2D03392C00B609E7 /* ProfileService.swift */; };
+		A77C7BAE2D033AAF00B609E7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BAD2D033AAF00B609E7 /* ProfileViewModel.swift */; };
 		A77D46DC2CBE812E005FC0D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */; };
 		A77D46DD2CBE812E005FC0D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46D92CBE812E005FC0D5 /* Assets.xcassets */; };
 		A77D46DE2CBE812E005FC0D5 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46D42CBE812E005FC0D5 /* InputView.swift */; };
@@ -127,6 +129,8 @@
 		A77B57F22CFF08E300F30332 /* SalonRatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonRatingService.swift; sourceTree = "<group>"; };
 		A77B57F42CFF0A3000F30332 /* SalonRatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonRatingViewModel.swift; sourceTree = "<group>"; };
 		A77B57F82CFF12C000F30332 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		A77C7BAB2D03392C00B609E7 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		A77C7BAD2D033AAF00B609E7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A77D46D42CBE812E005FC0D5 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		A77D46D62CBE812E005FC0D5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				A74FA60C2CEE6E1E0025BB6D /* AppointmentBookingService.swift */,
 				A755082F2CF9C71400599F12 /* AppointmentHistoryService.swift */,
 				A77B57F22CFF08E300F30332 /* SalonRatingService.swift */,
+				A77C7BAB2D03392C00B609E7 /* ProfileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 				A74FA60A2CEE6C4B0025BB6D /* AppointmentBookingViewModel.swift */,
 				A75508312CF9CB9F00599F12 /* AppointmentsHistoryViewModel.swift */,
 				A77B57F42CFF0A3000F30332 /* SalonRatingViewModel.swift */,
+				A77C7BAD2D033AAF00B609E7 /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -537,6 +543,7 @@
 				A77D46DF2CBE812E005FC0D5 /* LoginView.swift in Sources */,
 				A74FA60B2CEE6C590025BB6D /* AppointmentBookingViewModel.swift in Sources */,
 				A74FA6072CEE1DDC0025BB6D /* AppointmentsHistoryView.swift in Sources */,
+				A77C7BAE2D033AAF00B609E7 /* ProfileViewModel.swift in Sources */,
 				A755083C2CFA6E7200599F12 /* RatingDTO.swift in Sources */,
 				A75207C52CC51BB500520CD7 /* Client.swift in Sources */,
 				A755083A2CFA6A7E00599F12 /* SalonRatingView.swift in Sources */,
@@ -546,6 +553,7 @@
 				A7864CE62CF3A326007B5556 /* Color.swift in Sources */,
 				A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */,
 				A7668F2C2CC2A49D007E1AAF /* HexColor.swift in Sources */,
+				A77C7BAC2D03393200B609E7 /* ProfileService.swift in Sources */,
 				A77B57F32CFF08EE00F30332 /* SalonRatingService.swift in Sources */,
 				A7165F9A2CDA2F8800DB73FA /* MapView.swift in Sources */,
 				A77D46F92CBE8F63005FC0D5 /* KeyboardHelper.swift in Sources */,

@@ -16,6 +16,26 @@ struct Client: Codable, Equatable {
     var password: String
     var preferredService: Int
     
+    init() {
+        self.id = 0
+        self.name = ""
+        self.surname = ""
+        self.phoneNumber = ""
+        self.email = ""
+        self.password = ""
+        self.preferredService = 0
+    }
+    
+    init(id: Int, name: String, surname: String, phoneNumber: String, email: String, password: String, preferredService: Int) {
+        self.id = id
+        self.name = name
+        self.surname = surname
+        self.phoneNumber = phoneNumber
+        self.email = email
+        self.password = password
+        self.preferredService = preferredService
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "customerID"
         case name = "customerName"
