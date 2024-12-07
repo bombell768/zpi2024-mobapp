@@ -22,14 +22,26 @@ struct MapView: View {
     var body: some View {
 
 //            Map(initialPosition: .region(region))
-        Map(position: $position, interactionModes: [.pan, .zoom]) {
-            Marker("", coordinate: markerLocation.coordinate)
-                .tint(.red)
-        }
+        ZStack(alignment: .bottom) {
+            Map(position: $position, interactionModes: [.pan, .zoom]) {
+                Marker("", coordinate: markerLocation.coordinate)
+                    .tint(.red)
+            }
             .task {
                 convertAddress(location: location)
             }
             .toolbarVisibility(.hidden, for: .tabBar)
+            
+            VStack(alignment: .center) {
+                Text(location)
+                    .font(.headline)
+            }
+            .frame(width: 300, height: 60)
+            .padding()
+            .background(Color.ui.cultured.opacity(0.8), in: RoundedRectangle(cornerRadius: 15))
+            .shadow(radius: 10)
+            .padding()
+        }
             
 
     }

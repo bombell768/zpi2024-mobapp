@@ -7,21 +7,103 @@
 
 import SwiftUI
 
-struct DataModel{
-    let iconName: String
-    var title: String
-    var destination: AnyView
+struct AppointmentsDropdownView: View {
+    let appointments: [Appointment]
+    var date: Date
+    var appointmentsCount: Int
+    var isInitiallyExpanded: Bool
+    
+    @State private var showList = false
+    
+    init(appointments: [Appointment], date: Date, appointmentsCount: Int, isInitiallyExpanded: Bool = false) {
+        self.appointments = appointments
+        self.date = date
+        self.appointmentsCount = appointmentsCount
+        self.isInitiallyExpanded = isInitiallyExpanded
+        _showList = State(initialValue: isInitiallyExpanded)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Nagłówek z datą i liczbą wizyt
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Image(systemName: "calendar")
+                            .frame(width: 30)
+                        Text(date.formatted(date: .long, time: .omitted))
+                            .font(.title2)
+                    }
+                    HStack {    
+                        NavigationLink(
+                            destination:
+                                MapView(location: appointments[0].salon.getAddress())
+                                .toolbarBackground(.hidden, for: .navigationBar)
+                                .edgesIgnoringSafeArea(.all)
+                        ) {
+                            Image(systemName: "map")
+                                .frame(width: 30)
+                            Text("\(appointments[0].salon.name)")
+                                .font(.callout)
+                        }
+                        
+                    }
+                }
+
+                
+                
+                
+                Spacer()
+                
+                Text("\(appointmentsCount) wizyty")
+                    .font(.headline)
+                
+                Image(systemName: "chevron.forward")
+                    .font(.system(size: 15))
+                    .foregroundStyle(.black)
+                    .rotationEffect(.degrees(showList ? 90 : 0))
+            }
+            .bold()
+            .foregroundStyle(.black)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.ui.vanilla, Color.red.opacity(0.9)]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+            )
+            .onTapGesture {
+                withAnimation {
+                    showList.toggle()
+                }
+            }
+            
+            if showList {
+                VStack(alignment: .leading, spacing: 10) {
+                    ForEach(appointments.indices, id: \.self) { index in
+                        AppointmentRowView(
+                            appointment: appointments[index],
+                            viewModel: AppointmentsHistoryViewModel()
+                        )
+                    }
+                }
+                .padding(.leading, 10)
+                .transition(.opacity)
+            }
+        }
+        .animation(.easeInOut, value: showList)
+        .padding(.horizontal, 10)
+    }
 }
 
-struct AppointmentsDropdownView: View {
-    let listOne: [DataModel] = [
-        DataModel(iconName: "text.bubble.fill", title: "Broadcast Lists", destination: AnyView(Text("hehe"))),
-        DataModel(iconName: "star.fill", title: "Broadcast Lists View", destination: AnyView(Text("hehe1"))),
-        DataModel(iconName: "link", title: "Started Api", destination: AnyView(Text("hehe2"))),
-        DataModel(iconName: "key.fill", title: "Started View", destination: AnyView(Text("hehe3")))
-    ]
-    
-    let appointments: [Appointment] = [
+
+#Preview {
+    AppointmentsDropdownView(appointments: [
         Appointment(
             id: 1,
             date: Date(),
@@ -29,8 +111,10 @@ struct AppointmentsDropdownView: View {
             status: .reserved,
             salon: Salon(id: 1, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"),
             employee: Employee(),
+            client: Client(),
             services: [],
             isRated: true),
+        
         Appointment(
             id: 2,
             date: Date(),
@@ -38,69 +122,10 @@ struct AppointmentsDropdownView: View {
             status: .reserved,
             salon: Salon(id: 1, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"),
             employee: Employee(),
+            client: Client(),
             services: [],
-            isRated: true)]
-    
-    @State var showList = false
-    var body: some View {
-        NavigationStack {
-            VStack{
-                ZStack(alignment: .top){
-                    HStack{
-                        Image(systemName: "calendar")
-                            .frame(width: 30)
-                        
-                        Text("15 grudnia 2024")
-                            .font(.title2)
-                        
-                        Spacer()
-                        
-                        Text("13 wizyt")
-                            .font(.headline)
-                        
-                        Image(systemName: "chevron.forward")
-                            .font(.system(size: 15))
-                            .foregroundStyle((.black.opacity(0.9)))
-                            .rotationEffect(.degrees(showList ? 90 : 0))
-                    }
-                    .bold()
-                    .foregroundStyle(.black.opacity(0.9))
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: showList ? 53 : 53)
-                    .background(Color.ui.vanilla, in: RoundedRectangle(cornerRadius: 15))
-                    .onTapGesture {
-                        withAnimation{
-                            showList.toggle()
-                        }
-                    }
-                    .zIndex(1)
-                    
-                    if showList {
-                        ForEach(appointments.indices,id: \.self){ item in
-                            HStack{
-                                AppointmentRowView(appointment: appointments[item], viewModel: AppointmentsHistoryViewModel())
-                            }
-                            //                        .opacity(showList ? 1 : 0.5)
-                            .offset(y: showList ? CGFloat(item * 290) : CGFloat(item * 20))
-                            .scaleEffect(showList ? 1 : (1 - Double(item) * 0.04))
-                            .onTapGesture {
-                                withAnimation{
-                                    showList.toggle()
-                                }
-                            }
-                            .zIndex(CGFloat(item * -1))
-                        }
-                        .offset(y: showList ? 63 : 0)
-                    }
-                }
-                .padding(.horizontal)
-                Spacer()
-            }
-        }
-    }
-}
-
-#Preview {
-    AppointmentsDropdownView()
+            isRated: true)],
+                             date: Date(),
+                             appointmentsCount: 2
+    )
 }

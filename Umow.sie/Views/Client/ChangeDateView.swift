@@ -89,7 +89,7 @@ struct ChangeDateView: View {
                             
                             HStack(spacing: 10) {
                                 Image(systemName: "hourglass.circle")
-                                Text(appointment.totalDuration())
+                                Text(appointment.totalDurationFormatted())
                             }
                             
                             if (viewModel.selectedTimeSlot.time.hour != 0) {
@@ -181,6 +181,7 @@ struct ChangeDateView: View {
                         status: .done,
                         salon: Salon(id: 1, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"),
                         employee: Employee(),
+                        client: Client(),
                         services: [],
                         isRated: true))
 }

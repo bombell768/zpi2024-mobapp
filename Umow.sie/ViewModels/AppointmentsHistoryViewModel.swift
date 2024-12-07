@@ -19,6 +19,7 @@ struct AppointmentDetails {
 
 @Observable class AppointmentsHistoryViewModel: Identifiable {
     var employees: [Employee] = []
+    var clients: [Client] = []
     var salons: [Salon] = []
     var fetchedAppointments: [AppointmentDTO] = []
     var servicesForAppointments: [ServicesInAppointment] = []
@@ -26,6 +27,7 @@ struct AppointmentDetails {
     var clientRatings: [RatingBodyDTO] = []
     
     var employeesIds: [Int] = []
+    var clientsIds: [Int] = []
     var servicesIds: [Int] = []
     
     var areAppointmentsFetched: Bool = false
@@ -35,8 +37,11 @@ struct AppointmentDetails {
     var areAllDataFetched: Bool = false
     var areServicesFetched: Bool = false
     var areRatingsFetched: Bool = false
+    var areClientsFetched: Bool = false
     
     var appointments: [Appointment] = []
+    var groupedAppointments: [Date: [Appointment]] = [:]
+    var sortedDates: [Date] = []
     
     var isCancelWarningVisible: Bool = false
     
@@ -48,6 +53,15 @@ struct AppointmentDetails {
     var errorMessage: String?
     private var appointmentHistoryService: AppointmentHistoryServiceProtocol
     private var salonService: SalonServiceProtocol
+    
+    var userRole: UserRole? {
+        get {
+            if let rawValue = UserDefaults.standard.string(forKey: "userRole") {
+                return UserRole(rawValue: rawValue)
+            }
+            return nil
+        }
+    }
     
     init(appointmentService: AppointmentHistoryServiceProtocol = AppointmentHistoryService(), salonService: SalonServiceProtocol = SalonService()) {
         self.appointmentHistoryService = appointmentService
@@ -61,10 +75,26 @@ struct AppointmentDetails {
                 self.employees = employees
                 self.areEmployeesFetched = true
                 self.areAllFetched()
-                print("1 \(self.areAllDataFetched)")
+                print("1E \(self.areAllDataFetched)")
 //                    print(self.employees)
             case .failure(let error):
                 self.errorMessage = error.localizedDescription
+            }
+        }
+    }
+    
+    func getClients(clientsIds: [Int]) {
+        appointmentHistoryService.getAllClientsByIds(clientsIds: clientsIds) {result in
+            switch result {
+            case .success(let clients):
+                self.clients = clients
+                self.areClientsFetched = true
+                self.areAllFetched()
+                print("1C \(self.areAllDataFetched)")
+//                    print(self.employees)
+            case .failure(let error):
+                self.errorMessage = error.localizedDescription
+                print(self.errorMessage ?? "Unknown error")
             }
         }
     }
@@ -87,7 +117,7 @@ struct AppointmentDetails {
     }
     
     func fetchAppointments(customerId: Int) {
-        appointmentHistoryService.getAllAppointmentsForCustomer(customerId: customerId) {result in
+        appointmentHistoryService.getAllAppointmentsForUser(userId: customerId) {result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let appointments):
@@ -95,14 +125,19 @@ struct AppointmentDetails {
                     
                     self.areAppointmentsFetched = true
                     
+                    
                     for appointment in self.fetchedAppointments {
                         if !self.employeesIds.contains(appointment.employeeId) {
                             self.employeesIds.append(appointment.employeeId)
                         }
+                        
+                        if !self.clientsIds.contains(appointment.customerId) {
+                            self.clientsIds.append(appointment.customerId)
+                        }
                     }
-
-                    
                     self.getEmployees(employeesIds: self.employeesIds)
+
+                    self.getClients(clientsIds: self.clientsIds)
                     
                     self.areAllFetched()
                     
@@ -117,7 +152,7 @@ struct AppointmentDetails {
     }
     
     func getServicesForAppointments(customerId: Int) {
-        appointmentHistoryService.getServicesInAppointments(customerId: customerId) {result in
+        appointmentHistoryService.getServicesInAppointments(userId: customerId) {result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let servicesForAppointments):
@@ -177,6 +212,10 @@ struct AppointmentDetails {
             filteredAppointments = []
         }
         
+        groupedAppointments = filteredAppointments.groupedByDate()
+            
+        sortedDates = groupedAppointments.keys.sorted()
+        
         self.filteredAppointments.sort {
             if $0.date != $1.date {
                 return $0.date < $1.date
@@ -188,7 +227,7 @@ struct AppointmentDetails {
     }
     
     func areAllFetched() -> Void {
-        if(areAppointmentsFetched && areServicesInAppoitmentFetched && areSalonsFetched && areEmployeesFetched && areServicesFetched && areRatingsFetched) {
+        if(areAppointmentsFetched && areServicesInAppoitmentFetched && areSalonsFetched && (areEmployeesFetched || areClientsFetched) && areServicesFetched && areRatingsFetched) {
             areAllDataFetched = true
         }
         
@@ -229,11 +268,15 @@ struct AppointmentDetails {
                         status: appointment.status,
                         salon: salons.first(where: {$0.id == appointment.salonId})!,
                         employee: employees.first(where: {$0.id == appointment.employeeId})!,
+                        client: clients.first(where: {$0.id == appointment.customerId})!,
                         services: servicesForAppointment,
                         isRated: false
                     ))
                 
             }
+            
+            groupedAppointments = appointments.groupedByDate()
+            sortedDates = groupedAppointments.keys.sorted()
         }
 
         updateAppointmentsWithRatings()
@@ -316,6 +359,15 @@ struct AppointmentDetails {
             }
         }
 
+    }
+
+}
+
+extension Array where Element == Appointment {
+    func groupedByDate() -> [Date: [Appointment]] {
+        Dictionary(grouping: self) { appointment in
+            Calendar.current.startOfDay(for: appointment.date)
+        }
     }
 }
 

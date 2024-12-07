@@ -13,7 +13,7 @@ struct AppointmentBookingView: View {
     var servicesIndices: [Int]
     var services: [Service]
     
-    @AppStorage("clientID") private var clientID: Int?
+    @AppStorage("userID") private var clientID: Int?
     
     @State var viewModel = AppointmentBookingViewModel()
     

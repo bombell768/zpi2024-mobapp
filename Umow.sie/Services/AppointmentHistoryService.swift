@@ -9,15 +9,26 @@ import Foundation
 
 protocol AppointmentHistoryServiceProtocol {
     func getAllEmployeesByIds(employeesIds: [Int], completion: @escaping (Result<[Employee], Error>) -> Void)
-    func getAllAppointmentsForCustomer(customerId: Int, completion: @escaping (Result<[AppointmentDTO], Error>) -> Void)
-    func getServicesInAppointments(customerId: Int, completion: @escaping (Result<[ServicesInAppointment], Error>) -> Void)
+    func getAllAppointmentsForUser(userId: Int, completion: @escaping (Result<[AppointmentDTO], Error>) -> Void)
+    func getServicesInAppointments(userId: Int, completion: @escaping (Result<[ServicesInAppointment], Error>) -> Void)
     func getServicesByIds(servicesIds: [Int], completion: @escaping (Result<[Service], Error>) -> Void)
     func getAllratingsForClient(clientId: Int, completion: @escaping (Result<[RatingBodyDTO], Error>) -> Void)
     func addRating(ratingValue: Double, description: String, employeeId: Int, appointmentId: Int, completion: @escaping (Result<RatingBodyDTO, Error>) -> Void)
     func cancelAppointment(appointmentId: Int, completion: @escaping (Result<Void, Error>) -> Void)
+    
+    func getAllClientsByIds(clientsIds: [Int], completion: @escaping (Result<[Client], Error>) -> Void)
 }
 
 class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
+    
+    var userRole: UserRole? {
+        get {
+            if let rawValue = UserDefaults.standard.string(forKey: "userRole") {
+                return UserRole(rawValue: rawValue)
+            }
+            return nil
+        }
+    }
     
     func getAllEmployeesByIds(employeesIds: [Int], completion: @escaping (Result<[Employee], Error>) -> Void) {
         
@@ -73,10 +84,73 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
             
         }.resume()
     }
+    
+    func getAllClientsByIds(clientsIds: [Int], completion: @escaping (Result<[Client], Error>) -> Void) {
         
-    func getAllAppointmentsForCustomer(customerId: Int, completion: @escaping (Result<[AppointmentDTO], Error>) -> Void) {
+        let urlString = APIEndpoints.getAllClientsByIds
         
-        let urlString = APIEndpoints.getAllAppointmentsForCustomer + String(customerId)
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        let body = clientsIds
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONEncoder().encode(body)
+        
+        if let httpBody = request.httpBody {
+            if let bodyString = String(data: httpBody, encoding: .utf8) {
+                print("Body zapytania:")
+                print(bodyString)
+            } else {
+                print("Nie udało się zdekodować danych body.")
+            }
+        } else {
+            print("Zapytanie nie zawiera danych body.")
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder.withFormattedDates
+                let clients = try decoder.decode([Client].self, from: data)
+//                for employee in employees {
+//                    print(employee)
+//                }
+//
+                completion(.success(clients))
+                
+            } catch {
+                completion(.failure(error))
+            }
+            
+        }.resume()
+    }
+        
+    func getAllAppointmentsForUser(userId: Int, completion: @escaping (Result<[AppointmentDTO], Error>) -> Void) {
+        let urlString: String
+        
+        switch userRole {
+        case .client:
+            urlString = APIEndpoints.getAllAppointmentsForCustomer + String(userId)
+        case .employee:
+            urlString = APIEndpoints.getAllAppointmentsForEmployee + String(userId)
+        case nil:
+            urlString = ""
+        }
         
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
@@ -110,9 +184,18 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
         }.resume()
     }
     
-    func getServicesInAppointments(customerId: Int, completion: @escaping (Result<[ServicesInAppointment], Error>) -> Void) {
+    func getServicesInAppointments(userId: Int, completion: @escaping (Result<[ServicesInAppointment], Error>) -> Void) {
         
-        let urlString = APIEndpoints.getServicesInAppointments + String(customerId)
+        let urlString: String
+        
+        switch userRole {
+        case .client:
+            urlString = APIEndpoints.getServicesInAppointments + String(userId)
+        case .employee:
+            urlString = APIEndpoints.getServicesInAppointmentsEmployee + String(userId)
+        case nil:
+            urlString = ""
+        }
         
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))

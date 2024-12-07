@@ -13,7 +13,6 @@ struct EntryView: View {
     @AppStorage("userRole") private var userRole: UserRole?
     
     var body: some View {
-        
         Group {
             if userRole == .client && isLoggedIn  {
                 MainView()
@@ -25,7 +24,6 @@ struct EntryView: View {
                 LoginView()
             }
         }
-
     }
 }
 

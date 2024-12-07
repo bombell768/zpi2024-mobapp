@@ -14,6 +14,8 @@ struct AppointmentRowView: View {
     
     @State var isRatingShown: Bool = false
     
+    @AppStorage("userRole") private var userRole: UserRole?
+    
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 6) {
@@ -22,48 +24,66 @@ struct AppointmentRowView: View {
                         .font(.title2)
                 }
                 
-                HStack(spacing: 10) {
-                    Image(systemName: "person.fill")
-                    Text("\(appointment.employee.name)")
-                }
-                    
-                HStack(alignment: .top, spacing: 10) {
-                    Image(systemName: "mappin.and.ellipse")
-                    
-                    NavigationLink(
-                        destination:
-                            MapView(location: appointment.salon.getAddress())
-                            .toolbarBackground(.hidden, for: .navigationBar)
-                            .edgesIgnoringSafeArea(.all)
-                    ) {
-                        VStack(alignment: .leading) {
-                            Text("\(appointment.salon.name)")
-                            Text("\(appointment.salon.getAddress())")
-                        }
-                        .foregroundStyle(Color.ui.vanilla)
+                if userRole == .client {
+                    HStack(spacing: 10) {
+                        Image(systemName: "person.fill")
+                        Text("\(appointment.employee.name)")
                     }
                     
-                    
+                    HStack(alignment: .top, spacing: 10) {
+                        Image(systemName: "map")
+                        
+                        NavigationLink(
+                            destination:
+                                MapView(location: appointment.salon.getAddress())
+                                .toolbarBackground(.hidden, for: .navigationBar)
+                                .edgesIgnoringSafeArea(.all)
+                        ) {
+                            VStack(alignment: .leading) {
+                                Text("\(appointment.salon.name)")
+                                Text("\(appointment.salon.getAddress())")
+                            }
+                            .foregroundStyle(Color.ui.vanilla)
+                        }
+                    }
                 }
+                else if userRole == .employee {
+                    HStack(spacing: 10) {
+                        Image(systemName: "person.fill")
+                        Text("\(appointment.client.name) \(appointment.client.surname)")
+                    }
+                }
+                
+                    
+                
                 
                 HStack(spacing: 10) {
                     Image(systemName: "polishzlotysign.circle")
                     Text(appointment.totalPrice())
                 }
                 
-                HStack(spacing: 10) {
-                    Image(systemName: "hourglass.circle")
-                    Text(appointment.totalDuration())
+                if userRole == .client {
+                    HStack(spacing: 10) {
+                        Image(systemName: "hourglass.circle")
+                        Text(appointment.totalDurationFormatted())
+                    }
+                    
+                    
+                    HStack(spacing: 10) {
+                        Image(systemName: "calendar")
+                        Text("\(appointment.date.formatted(date: .complete, time: .omitted))")
+                    }
+                    
+                    HStack(spacing: 10) {
+                        Image(systemName: "clock")
+                        Text("\(appointment.time.formattedToMinutes())")
+                    }
                 }
-                
-                HStack(spacing: 10) {
-                    Image(systemName: "calendar")
-                    Text("\(appointment.date.formatted(date: .complete, time: .omitted))")
-                }
-                
-                HStack(spacing: 10) {
-                    Image(systemName: "clock")
-                    Text("\(appointment.time.formattedToMinutes())")
+                else if userRole == .employee {
+                    HStack(spacing: 10) {
+                        Image(systemName: "clock")
+                        Text("\(appointment.time.formattedToMinutes()) - \(appointment.time.adding(minutes: appointment.totalDuration()).formattedToMinutes())")
+                    }
                 }
                 
                 renderButtons(for: appointment.status)
@@ -181,9 +201,10 @@ struct AppointmentRowView: View {
         status: .reserved,
         salon: Salon(id: 1, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"),
         employee: Employee(),
+        client: Client(),
         services: [],
         isRated: true),
-                       viewModel: AppointmentsHistoryViewModel())
+        viewModel: AppointmentsHistoryViewModel())
 }
 
 

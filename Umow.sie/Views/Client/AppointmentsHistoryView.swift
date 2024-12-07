@@ -9,7 +9,8 @@ import SwiftUI
 
 struct AppointmentsHistoryView: View {
     
-    @AppStorage("clientID") private var clientID: Int?
+    @AppStorage("userID") private var clientID: Int?
+    @AppStorage("userRole") private var userRole: UserRole?
     
     @State var viewModel = AppointmentsHistoryViewModel()
     
@@ -72,12 +73,29 @@ struct AppointmentsHistoryView: View {
                 .padding(.bottom)
                 
                 
-                VStack(spacing: 15) {
-                    ForEach(viewModel.filteredAppointments, id: \.id) { appointment in
-                        AppointmentRowView(appointment: appointment, viewModel: viewModel)
+                if userRole == .client {
+                    VStack(spacing: 15) {
+                        ForEach(viewModel.filteredAppointments, id: \.id) { appointment in
+                            AppointmentRowView(appointment: appointment, viewModel: viewModel)
+                        }
+                    }
+                    .padding()
+                }
+                
+                else if userRole == .employee {
+                    VStack(spacing: 20) {
+                        ForEach(Array(viewModel.sortedDates.enumerated()), id: \.element) { index, date in
+                            if let appointmentsForDate = viewModel.groupedAppointments[date] {
+                                AppointmentsDropdownView(
+                                    appointments: appointmentsForDate,
+                                    date: date,
+                                    appointmentsCount: appointmentsForDate.count,
+                                    isInitiallyExpanded: false
+                                )
+                            }
+                        }
                     }
                 }
-                .padding()
                 
               
             }
@@ -97,6 +115,7 @@ struct AppointmentsHistoryView: View {
         
         
     }
+
 }
 
 #Preview {

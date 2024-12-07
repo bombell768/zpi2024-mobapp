@@ -133,6 +133,7 @@ struct AddRatingView: View {
                         status: .done,
                         salon: Salon(id: 1, name: "Atelier Paris", phoneNumber: "654-231-908", city: "Wrocław", street: "ul. Pl. Grunwaldzki", buildingNumber: "9", postalCode: "00-076"),
                         employee: Employee(),
+                        client: Client(),
                         services: [],
                         isRated: false),
                   viewModel: AppointmentsHistoryViewModel())

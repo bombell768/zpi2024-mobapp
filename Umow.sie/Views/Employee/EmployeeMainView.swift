@@ -12,7 +12,7 @@ struct EmployeeMainView: View {
     
     var body: some View {
         TabView(selection: $selectedTabIndex) {
-            EmployeeAppointmentsView()
+            AppointmentsHistoryView()
                 .tabItem {
                     Label("Wizyty", systemImage: "calendar")
                 }

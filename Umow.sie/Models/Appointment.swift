@@ -15,6 +15,7 @@ import Foundation
                lhs.status == rhs.status &&
                lhs.salon == rhs.salon &&
                lhs.employee == rhs.employee &&
+               lhs.client == rhs.client &&
                lhs.services == rhs.services &&
                lhs.isRated == rhs.isRated
     }
@@ -25,22 +26,24 @@ import Foundation
     var status: AppointmentStatus
     var salon: Salon
     var employee: Employee
+    var client: Client
     var services: [Service]
     var isRated: Bool
     
-    init(id: Int, date: Date, time: Time, status: AppointmentStatus, salon: Salon, employee: Employee, services: [Service], isRated: Bool) {
+    init(id: Int, date: Date, time: Time, status: AppointmentStatus, salon: Salon, employee: Employee, client: Client, services: [Service], isRated: Bool) {
         self.id = id
         self.date = date
         self.time = time
         self.status = status
         self.salon = salon
         self.employee = employee
+        self.client = client
         self.services = services
         self.isRated = isRated
     }
     
-    func totalDuration() -> String {
-            let totalMinutes = services.reduce(0) { $0 + $1.duration } * 15
+    func totalDurationFormatted() -> String {
+        let totalMinutes = services.reduce(0) { $0 + $1.duration } * 15
         let hours = totalMinutes / 60
         let minutes = totalMinutes % 60
 
@@ -49,6 +52,12 @@ import Foundation
         } else {
             return "\(minutes) min"
         }
+    }
+    
+    func totalDuration() -> Int {
+        let totalMinutes = services.reduce(0) { $0 + $1.duration } * 15
+        print(totalMinutes)
+        return totalMinutes
     }
         
     func totalPrice() -> String {

@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct EmployeeAppointmentsView: View {
+    
+    @State var viewModel = AppointmentsHistoryViewModel()
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
-                    AppointmentsDropdownView()
+                ForEach(viewModel.sortedDates, id: \.self) { date in
+                    if let appointmentsForDate = viewModel.groupedAppointments[date] {
+                        AppointmentsDropdownView(
+                            appointments: appointmentsForDate,
+                            date: date,
+                            appointmentsCount: appointmentsForDate.count,
+                            isInitiallyExpanded: false
+                        )
+                    }
                 }
                 .padding(.top)
                 .navigationTitle("Wizyty")

@@ -11,9 +11,10 @@ struct ProfileView: View {
     
     @State var viewModel: ProfileViewModel = ProfileViewModel()
     
-    @AppStorage("clientID") private var clientID: Int?
+    @AppStorage("userID") private var userID: Int?
     @AppStorage("isLoggedIn") private var isLoggedIn: Bool?
     @AppStorage("authToken") private var authToken: String?
+    @AppStorage("userRole") private var userRole: UserRole?
     
     var body: some View {
         NavigationStack {
@@ -48,34 +49,38 @@ struct ProfileView: View {
 
                 
                 VStack(alignment:.leading, spacing: 20) {
-                    Text("Konto")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    
-                    HStack {
-                        Text("Email: \(viewModel.client.email)")
-                            .font(.system(size: 18))
-                        Spacer()
-                        Image(systemName: "pencil")
-                            .font(.system(size: 22))
-                            .foregroundStyle(Color.ui.vanilla)
-                            .onTapGesture {
-                                viewModel.isEditingEmail.toggle()
-                            }
+                    if userRole == .client {
+                        Text("Konto")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        
+                        HStack {
+                            Text("Email: \(viewModel.client.email)")
+                                .font(.system(size: 18))
+                            Spacer()
+                            Image(systemName: "pencil")
+                                .font(.system(size: 22))
+                                .foregroundStyle(Color.ui.vanilla)
+                                .onTapGesture {
+                                    viewModel.isEditingEmail.toggle()
+                                }
 
+                        }
+                        
+                        HStack {
+                            Text("Numer telefonu: \(viewModel.client.phoneNumber)")
+                                .font(.system(size: 18))
+                            Spacer()
+                            Image(systemName: "pencil")
+                                .font(.system(size: 22))
+                                .foregroundStyle(Color.ui.vanilla)
+                                .onTapGesture {
+                                    viewModel.isEditingPhoneNumber.toggle()
+                                }
+                        }
                     }
                     
-                    HStack {
-                        Text("Numer telefonu: \(viewModel.client.phoneNumber)")
-                            .font(.system(size: 18))
-                        Spacer()
-                        Image(systemName: "pencil")
-                            .font(.system(size: 22))
-                            .foregroundStyle(Color.ui.vanilla)
-                            .onTapGesture {
-                                viewModel.isEditingPhoneNumber.toggle()
-                            }
-                    }
+                    
                     
 //                    HStack {
 //                        Text("Preferowane usługi: \(viewModel.client.preferredService)")
@@ -94,17 +99,19 @@ struct ProfileView: View {
                     }
                     .padding(.top)
                 }
-                
-                Divider()
-                    .frame(height: 1)
-                    .overlay(Color.ui.vanilla)
                     
-                VStack(alignment: .leading, spacing: 36) {
-                    Text("Twoje pieczątki")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                
-                    StampView(earnedStamps: viewModel.numberOfSeals)
+                if userRole == .client {
+                    Divider()
+                        .frame(height: 1)
+                        .overlay(Color.ui.vanilla)
+                    
+                    VStack(alignment: .leading, spacing: 36) {
+                        Text("Twoje pieczątki")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        
+                        StampView(earnedStamps: viewModel.numberOfSeals)
+                    }
                 }
                 
 
@@ -114,8 +121,8 @@ struct ProfileView: View {
 
         }
         .onAppear {
-            viewModel.getNumberOfSeals(clientId: clientID ?? 0)
-            viewModel.getClientById(clientId: clientID ?? 0)
+            viewModel.getNumberOfSeals(clientId: userID ?? 0)
+            viewModel.getClientById(clientId: userID ?? 0)
         }
         
         .sheet(isPresented: $viewModel.isEditingEmail) {

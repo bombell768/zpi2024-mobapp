@@ -31,12 +31,12 @@ import Observation
         }
     }
     
-    var clientID: Int? {
+    var userId: Int? {
         get {
-            UserDefaults.standard.integer(forKey: "clientID")
+            UserDefaults.standard.integer(forKey: "userID")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "clientID")
+            UserDefaults.standard.set(newValue, forKey: "userID")
         }
     }
    
@@ -54,7 +54,7 @@ import Observation
                     print(token)
                     
                     if let userId = self.decodeTokenAndGetUserId(from: token.token) {
-                        self.clientID = userId
+                        self.userId = userId
                         print("User ID: \(userId)")
                     }
                     
