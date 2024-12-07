@@ -7,26 +7,17 @@
 
 import Foundation
 
-enum AuthenticationError: Error {
-    case invalidCredentials
-    case custom(errorMessage: String)
-}
-
-struct LoginDTO: Codable {
-    let email: String
-    let password: String
-}
-
-struct LoginResponse: Codable {
-    let token: String?
-    let message: String?
-    let success: Bool?
-}
 class AuthService {
     
-    func login(email: String, password: String, isEmployee: Bool, completion: @escaping (Result<TokenDTO, Error>) -> Void) {
+    func login(email: String, password: String, role: UserRole, completion: @escaping (Result<TokenDTO, Error>) -> Void) {
+        let urlString: String
         
-        let urlString = isEmployee ? APIEndpoints.loginEmployee : APIEndpoints.loginClient
+        switch role {
+        case .client:
+            urlString = APIEndpoints.loginClient
+        case .employee:
+            urlString = APIEndpoints.loginEmployee
+        }
         
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))

@@ -12,6 +12,8 @@ struct ProfileView: View {
     @State var viewModel: ProfileViewModel = ProfileViewModel()
     
     @AppStorage("clientID") private var clientID: Int?
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool?
+    @AppStorage("authToken") private var authToken: String?
     
     var body: some View {
         NavigationStack {
@@ -20,10 +22,9 @@ struct ProfileView: View {
                     Spacer()
                     
                     Button {
-                        UserDefaults.standard.set(false, forKey: "isClientLoggedIn")
-                        UserDefaults.standard.set(false, forKey: "isEmployeeLoggedIn")
-                        UserDefaults.standard.set(nil, forKey: "authToken")
-                        print(UserDefaults.standard.bool(forKey: "isClientLoggedIn"))
+                        isLoggedIn = false
+                        authToken = nil
+                        print(UserDefaults.standard.bool(forKey: "isLoggedIn"))
                     } label: {
                         HStack {
                             Text("Wyloguj")

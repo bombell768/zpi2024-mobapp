@@ -36,4 +36,5 @@ struct APIEndpoints {
     static let getNumberOfCompletedAppointments = baseURL + "crud/visit/doneForCustomer/"
     static let getClientById = baseURL + "crud/customer/"
     static let updateClient = baseURL + "crud/customer"
+    static let getAllAppointmentsForEmployee = baseURL + "crud/visit/withIds/forEmployee/"
 }

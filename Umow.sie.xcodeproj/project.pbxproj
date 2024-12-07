@@ -73,6 +73,8 @@
 		A7D9AD5A2CC6F1BA003CDD9A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */; };
 		A7DE60A52CE0E3EA001CB1E6 /* AppointmentBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */; };
 		A7DE60A92CE0ED11001CB1E6 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */; };
+		A7EE5FFD2D0474440011BAC4 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EE5FFC2D04743B0011BAC4 /* UserRole.swift */; };
+		A7EE5FFF2D047D5C0011BAC4 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EE5FFE2D047D5C0011BAC4 /* LoginDTO.swift */; };
 		A7F421DE2CF0BF300055EA96 /* AddRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */; };
 		A7F421E02CF0C2D30055EA96 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */; };
 		A7F83E992CF0D0D800D35CA6 /* FormTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F83E982CF0D0D800D35CA6 /* FormTextView.swift */; };
@@ -166,6 +168,8 @@
 		A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookingView.swift; sourceTree = "<group>"; };
 		A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
+		A7EE5FFC2D04743B0011BAC4 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		A7EE5FFE2D047D5C0011BAC4 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingView.swift; sourceTree = "<group>"; };
 		A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		A7F83E982CF0D0D800D35CA6 /* FormTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextView.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 		A75191FB2CF62CED00EF1681 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				A7EE5FFE2D047D5C0011BAC4 /* LoginDTO.swift */,
 				A70F4C5B2D02658000F837D8 /* TokenDTO.swift */,
 				A75191FC2CF62CF700EF1681 /* SalonRatingResponse.swift */,
 				A7D1A55C2CEFE705000025F5 /* AppointmentToSave.swift */,
@@ -340,6 +345,7 @@
 				A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */,
 				A7165F9D2CDA360700DB73FA /* Service.swift */,
 				A77B57F82CFF12C000F30332 /* Rating.swift */,
+				A7EE5FFC2D04743B0011BAC4 /* UserRole.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -602,6 +608,7 @@
 				A7D1A55D2CEFE70D000025F5 /* AppointmentToSave.swift in Sources */,
 				A75508382CFA48AD00599F12 /* RateRowView.swift in Sources */,
 				A77B57F52CFF0A3000F30332 /* SalonRatingViewModel.swift in Sources */,
+				A7EE5FFF2D047D5C0011BAC4 /* LoginDTO.swift in Sources */,
 				A705CB722CE6BB8500D27EC5 /* Employee.swift in Sources */,
 				A75508322CF9CBB000599F12 /* AppointmentsHistoryViewModel.swift in Sources */,
 				A75508342CF9DC7A00599F12 /* AppointmentDTO.swift in Sources */,
@@ -616,6 +623,7 @@
 				A7165FA02CDA36EC00DB73FA /* ServiceCategory.swift in Sources */,
 				A74FA60D2CEE6E270025BB6D /* AppointmentBookingService.swift in Sources */,
 				A7165F952CDA2BE800DB73FA /* SalonDetailView.swift in Sources */,
+				A7EE5FFD2D0474440011BAC4 /* UserRole.swift in Sources */,
 				A7165F9C2CDA35F200DB73FA /* ServiceRowView.swift in Sources */,
 				A77D46E12CBE812E005FC0D5 /* ContentView.swift in Sources */,
 				A77DD5DD2D01207E001B1B37 /* ChangeDateView.swift in Sources */,

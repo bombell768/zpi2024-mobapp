@@ -11,6 +11,8 @@ struct LoginView: View {
     
     @State private var viewModel = LoginViewModel()
     
+    @AppStorage("userRole") private var userRole: UserRole = .client
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -23,7 +25,7 @@ struct LoginView: View {
                 
                 Spacer()
                 
-                if viewModel.isUserEmployee {
+                if userRole == .employee {
                     Text("Panel pracownika")
                         .font(.title)
                         .fontWeight(.bold)
@@ -61,7 +63,7 @@ struct LoginView: View {
                 VStack(spacing: 30) {
                     Button {
                         print("Log user in...")
-                        viewModel.login(username: viewModel.username, password: viewModel.password, isEmployee: viewModel.isUserEmployee)
+                        viewModel.login(username: viewModel.username, password: viewModel.password, role: userRole)
                         
                         
                     } label: {
@@ -80,7 +82,7 @@ struct LoginView: View {
                    
                     
                     VStack(spacing: 10) {
-                        if !viewModel.isUserEmployee {
+                        if userRole == .client {
                             NavigationLink{
                                 RegistrationView()
                                     .navigationBarBackButtonHidden(true)
@@ -96,7 +98,7 @@ struct LoginView: View {
                             
                             
                             Button {
-                                viewModel.isUserEmployee = true
+                                userRole = .employee
                             } label: {
                                 HStack(spacing: 3) {
                                     Text("Jestem pracownikiem")
@@ -107,9 +109,9 @@ struct LoginView: View {
                             }
                         }
                         
-                        if viewModel.isUserEmployee {
+                        if userRole == .employee {
                             Button {
-                                viewModel.isUserEmployee = false
+                                userRole = .client
                             } label: {
                                 HStack(spacing: 3) {
                                     Text("Jestem klientem")
@@ -126,7 +128,7 @@ struct LoginView: View {
                 
                 
             }
-            .navigationDestination(isPresented: $viewModel.isClientLoggedIn){
+            .navigationDestination(isPresented: $viewModel.isLoggedIn){
                 MainView()
                     .navigationBarBackButtonHidden(true)
             }

@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct EntryView: View {
-    @AppStorage("isClientLoggedIn") private var isClientLoggedIn: Bool = false
-    @AppStorage("isEmployeeLoggedIn") private var isEmployeeLoggedIn: Bool = false
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
     @AppStorage("authToken") private var authToken: String?
+    @AppStorage("userRole") private var userRole: UserRole?
     
     var body: some View {
         
         Group {
-            if isClientLoggedIn {
+            if userRole == .client && isLoggedIn  {
                 MainView()
             }
-            else if isEmployeeLoggedIn {
+            else if userRole == .employee && isLoggedIn {
                 EmployeeMainView()
             }
             else {

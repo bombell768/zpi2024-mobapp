@@ -13,24 +13,15 @@ import Observation
     var username: String = ""
     var password: String = ""
     
-    var isClientLoggedIn: Bool {
+    var isLoggedIn: Bool {
         get {
-            UserDefaults.standard.bool(forKey: "isClientLoggedIn")
+            UserDefaults.standard.bool(forKey: "isLoggedIn")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "isClientLoggedIn")
+            UserDefaults.standard.set(newValue, forKey: "isLoggedIn")
         }
     }
-    
-    var isEmployeeLoggedIn: Bool {
-        get {
-            UserDefaults.standard.bool(forKey: "isEmployeeLoggedIn")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "isEmployeeLoggedIn")
-        }
-    }
-    
+
     var authToken: String? {
         get {
             UserDefaults.standard.string(forKey: "authToken")
@@ -48,27 +39,17 @@ import Observation
             UserDefaults.standard.set(newValue, forKey: "clientID")
         }
     }
-    
-    var isUserEmployee: Bool = false
-
-    
+   
     var errorMessage: String?
     
-    
-    func login(username: String, password: String, isEmployee: Bool) {
-        print("isEmployee: \(isEmployee)")
-        AuthService().login(email: username, password: password, isEmployee: isEmployee) {result in
+    func login(username: String, password: String, role: UserRole) {
+        print("Loguje z rolą: \(role.rawValue)")
+        AuthService().login(email: username, password: password, role: role) {result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let token):
                     self.authToken = token.token
-                    
-                    if isEmployee {
-                        self.isEmployeeLoggedIn = true
-                    }
-                    else {
-                        self.isClientLoggedIn = true
-                    }
+                    self.isLoggedIn = true
                     
                     print(token)
                     
