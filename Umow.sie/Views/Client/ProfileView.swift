@@ -20,9 +20,10 @@ struct ProfileView: View {
                     Spacer()
                     
                     Button {
-                        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                        UserDefaults.standard.set(false, forKey: "isClientLoggedIn")
+                        UserDefaults.standard.set(false, forKey: "isEmployeeLoggedIn")
                         UserDefaults.standard.set(nil, forKey: "authToken")
-                        print(UserDefaults.standard.bool(forKey: "isLoggedIn"))
+                        print(UserDefaults.standard.bool(forKey: "isClientLoggedIn"))
                     } label: {
                         HStack {
                             Text("Wyloguj")

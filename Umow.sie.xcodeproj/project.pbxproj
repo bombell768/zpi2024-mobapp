@@ -19,7 +19,7 @@
 		A7165F9C2CDA35F200DB73FA /* ServiceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F9B2CDA35F200DB73FA /* ServiceRowView.swift */; };
 		A7165F9E2CDA360C00DB73FA /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F9D2CDA360700DB73FA /* Service.swift */; };
 		A7165FA02CDA36EC00DB73FA /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */; };
-		A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72795A02CCBD75500E7DF7E /* HomeImageView.swift */; };
+		A72795A12CCBD75500E7DF7E /* AppointmentsDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72795A02CCBD75500E7DF7E /* AppointmentsDropdownView.swift */; };
 		A74FA6072CEE1DDC0025BB6D /* AppointmentsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */; };
 		A74FA6092CEE241B0025BB6D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA6082CEE241B0025BB6D /* MainView.swift */; };
 		A74FA60B2CEE6C590025BB6D /* AppointmentBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74FA60A2CEE6C4B0025BB6D /* AppointmentBookingViewModel.swift */; };
@@ -48,6 +48,10 @@
 		A77C7BAC2D03393200B609E7 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BAB2D03392C00B609E7 /* ProfileService.swift */; };
 		A77C7BAE2D033AAF00B609E7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BAD2D033AAF00B609E7 /* ProfileViewModel.swift */; };
 		A77C7BB02D03483000B609E7 /* EditDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BAF2D03483000B609E7 /* EditDataView.swift */; };
+		A77C7BB42D03BC9100B609E7 /* EmployeeAppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BB32D03BC9100B609E7 /* EmployeeAppointmentsView.swift */; };
+		A77C7BB82D03C87E00B609E7 /* EmployeeMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BB72D03C87E00B609E7 /* EmployeeMainView.swift */; };
+		A77C7BBA2D03C8D700B609E7 /* AppointmentBookingByEmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BB92D03C8D700B609E7 /* AppointmentBookingByEmployeeView.swift */; };
+		A77C7BBC2D03C93D00B609E7 /* EmployeeProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C7BBB2D03C93C00B609E7 /* EmployeeProfileView.swift */; };
 		A77D46DC2CBE812E005FC0D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */; };
 		A77D46DD2CBE812E005FC0D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D46D92CBE812E005FC0D5 /* Assets.xcassets */; };
 		A77D46DE2CBE812E005FC0D5 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D46D42CBE812E005FC0D5 /* InputView.swift */; };
@@ -104,7 +108,7 @@
 		A7165F9B2CDA35F200DB73FA /* ServiceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRowView.swift; sourceTree = "<group>"; };
 		A7165F9D2CDA360700DB73FA /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
-		A72795A02CCBD75500E7DF7E /* HomeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImageView.swift; sourceTree = "<group>"; };
+		A72795A02CCBD75500E7DF7E /* AppointmentsDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsDropdownView.swift; sourceTree = "<group>"; };
 		A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsHistoryView.swift; sourceTree = "<group>"; };
 		A74FA6082CEE241B0025BB6D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A74FA60A2CEE6C4B0025BB6D /* AppointmentBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookingViewModel.swift; sourceTree = "<group>"; };
@@ -133,6 +137,10 @@
 		A77C7BAB2D03392C00B609E7 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		A77C7BAD2D033AAF00B609E7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		A77C7BAF2D03483000B609E7 /* EditDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDataView.swift; sourceTree = "<group>"; };
+		A77C7BB32D03BC9100B609E7 /* EmployeeAppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeAppointmentsView.swift; sourceTree = "<group>"; };
+		A77C7BB72D03C87E00B609E7 /* EmployeeMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeMainView.swift; sourceTree = "<group>"; };
+		A77C7BB92D03C8D700B609E7 /* AppointmentBookingByEmployeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookingByEmployeeView.swift; sourceTree = "<group>"; };
+		A77C7BBB2D03C93C00B609E7 /* EmployeeProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeProfileView.swift; sourceTree = "<group>"; };
 		A77D46CE2CBE812E005FC0D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A77D46D42CBE812E005FC0D5 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		A77D46D62CBE812E005FC0D5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -213,6 +221,38 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		A77C7BB12D037D8800B609E7 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				A70F4C592D025DF200F837D8 /* EntryView.swift */,
+				A74FA6082CEE241B0025BB6D /* MainView.swift */,
+				A77D46D62CBE812E005FC0D5 /* LoginView.swift */,
+				A77D46D72CBE812E005FC0D5 /* RegistrationView.swift */,
+				A77D46F42CBE8ACD005FC0D5 /* ForgotPasswordView.swift */,
+				A7A921F52CCA4E72006D8006 /* HomeView.swift */,
+				A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */,
+				A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */,
+				A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */,
+				A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */,
+				A75508392CFA6A7E00599F12 /* SalonRatingView.swift */,
+				A77DD5DC2D01207E001B1B37 /* ChangeDateView.swift */,
+				A70F4C552D01F6D100F837D8 /* ProfileView.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		A77C7BB22D037DA200B609E7 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				A77C7BB72D03C87E00B609E7 /* EmployeeMainView.swift */,
+				A72795A02CCBD75500E7DF7E /* AppointmentsDropdownView.swift */,
+				A77C7BB32D03BC9100B609E7 /* EmployeeAppointmentsView.swift */,
+				A77C7BB92D03C8D700B609E7 /* AppointmentBookingByEmployeeView.swift */,
+				A77C7BBB2D03C93C00B609E7 /* EmployeeProfileView.swift */,
+			);
+			path = Employee;
+			sourceTree = "<group>";
+		};
 		A77D46E92CBE820E005FC0D5 /* Umow.sie */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,19 +320,8 @@
 			isa = PBXGroup;
 			children = (
 				A77D46F22CBE82F4005FC0D5 /* Components */,
-				A70F4C592D025DF200F837D8 /* EntryView.swift */,
-				A74FA6082CEE241B0025BB6D /* MainView.swift */,
-				A77D46D62CBE812E005FC0D5 /* LoginView.swift */,
-				A77D46D72CBE812E005FC0D5 /* RegistrationView.swift */,
-				A77D46F42CBE8ACD005FC0D5 /* ForgotPasswordView.swift */,
-				A7A921F52CCA4E72006D8006 /* HomeView.swift */,
-				A7165F942CDA2BE800DB73FA /* SalonDetailView.swift */,
-				A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */,
-				A74FA6062CEE1DDC0025BB6D /* AppointmentsHistoryView.swift */,
-				A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */,
-				A75508392CFA6A7E00599F12 /* SalonRatingView.swift */,
-				A77DD5DC2D01207E001B1B37 /* ChangeDateView.swift */,
-				A70F4C552D01F6D100F837D8 /* ProfileView.swift */,
+				A77C7BB12D037D8800B609E7 /* Client */,
+				A77C7BB22D037DA200B609E7 /* Employee */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,7 +358,6 @@
 				A7165F992CDA2F8800DB73FA /* MapView.swift */,
 				A77D46D42CBE812E005FC0D5 /* InputView.swift */,
 				A7A921F72CCA58AE006D8006 /* SalonRowView.swift */,
-				A72795A02CCBD75500E7DF7E /* HomeImageView.swift */,
 				A7165F9B2CDA35F200DB73FA /* ServiceRowView.swift */,
 				A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */,
 				A751DC2D2CECC2F70047B274 /* AppointmentRowView.swift */,
@@ -537,6 +565,7 @@
 				A7A921F82CCA58AE006D8006 /* SalonRowView.swift in Sources */,
 				A74FA6092CEE241B0025BB6D /* MainView.swift in Sources */,
 				A77C7BB02D03483000B609E7 /* EditDataView.swift in Sources */,
+				A77C7BBA2D03C8D700B609E7 /* AppointmentBookingByEmployeeView.swift in Sources */,
 				A751DC2C2CECBBEC0047B274 /* TimeSlot.swift in Sources */,
 				A7165F9E2CDA360C00DB73FA /* Service.swift in Sources */,
 				A705CB702CE5528400D27EC5 /* SalonDetailViewModel.swift in Sources */,
@@ -544,18 +573,21 @@
 				A75191FD2CF62D0000EF1681 /* SalonRatingResponse.swift in Sources */,
 				A751DC2E2CECC2F70047B274 /* AppointmentRowView.swift in Sources */,
 				A75207C92CC565EA00520CD7 /* APIEndpoints.swift in Sources */,
+				A77C7BB42D03BC9100B609E7 /* EmployeeAppointmentsView.swift in Sources */,
 				A77D46DF2CBE812E005FC0D5 /* LoginView.swift in Sources */,
 				A74FA60B2CEE6C590025BB6D /* AppointmentBookingViewModel.swift in Sources */,
 				A74FA6072CEE1DDC0025BB6D /* AppointmentsHistoryView.swift in Sources */,
 				A77C7BAE2D033AAF00B609E7 /* ProfileViewModel.swift in Sources */,
+				A77C7BBC2D03C93D00B609E7 /* EmployeeProfileView.swift in Sources */,
 				A755083C2CFA6E7200599F12 /* RatingDTO.swift in Sources */,
 				A75207C52CC51BB500520CD7 /* Client.swift in Sources */,
 				A755083A2CFA6A7E00599F12 /* SalonRatingView.swift in Sources */,
+				A77C7BB82D03C87E00B609E7 /* EmployeeMainView.swift in Sources */,
 				A70F4C5A2D025DF200F837D8 /* EntryView.swift in Sources */,
 				A7F421DE2CF0BF300055EA96 /* AddRatingView.swift in Sources */,
 				A70F4C562D01F6D100F837D8 /* ProfileView.swift in Sources */,
 				A7864CE62CF3A326007B5556 /* Color.swift in Sources */,
-				A72795A12CCBD75500E7DF7E /* HomeImageView.swift in Sources */,
+				A72795A12CCBD75500E7DF7E /* AppointmentsDropdownView.swift in Sources */,
 				A7668F2C2CC2A49D007E1AAF /* HexColor.swift in Sources */,
 				A77C7BAC2D03393200B609E7 /* ProfileService.swift in Sources */,
 				A77B57F32CFF08EE00F30332 /* SalonRatingService.swift in Sources */,

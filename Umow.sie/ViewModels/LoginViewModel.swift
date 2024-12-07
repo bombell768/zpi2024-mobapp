@@ -13,12 +13,21 @@ import Observation
     var username: String = ""
     var password: String = ""
     
-    var isLoggedIn: Bool {
+    var isClientLoggedIn: Bool {
         get {
-            UserDefaults.standard.bool(forKey: "isLoggedIn")
+            UserDefaults.standard.bool(forKey: "isClientLoggedIn")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "isLoggedIn")
+            UserDefaults.standard.set(newValue, forKey: "isClientLoggedIn")
+        }
+    }
+    
+    var isEmployeeLoggedIn: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "isEmployeeLoggedIn")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "isEmployeeLoggedIn")
         }
     }
     
@@ -39,18 +48,28 @@ import Observation
             UserDefaults.standard.set(newValue, forKey: "clientID")
         }
     }
+    
+    var isUserEmployee: Bool = false
 
     
     var errorMessage: String?
     
     
-    func login(username: String, password: String) {
-        AuthService().loginClient(email: username, password: password) {result in
+    func login(username: String, password: String, isEmployee: Bool) {
+        print("isEmployee: \(isEmployee)")
+        AuthService().login(email: username, password: password, isEmployee: isEmployee) {result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let token):
                     self.authToken = token.token
-                    self.isLoggedIn = true
+                    
+                    if isEmployee {
+                        self.isEmployeeLoggedIn = true
+                    }
+                    else {
+                        self.isClientLoggedIn = true
+                    }
+                    
                     print(token)
                     
                     if let userId = self.decodeTokenAndGetUserId(from: token.token) {
@@ -87,5 +106,7 @@ import Observation
        
        return nil
    }
+    
+    
 
 }

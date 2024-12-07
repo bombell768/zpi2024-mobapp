@@ -46,8 +46,16 @@ struct AppointmentRowView: View {
                     
                 }
                 
+                HStack(spacing: 10) {
+                    Image(systemName: "polishzlotysign.circle")
+                    Text(appointment.totalPrice())
+                }
                 
-                    
+                HStack(spacing: 10) {
+                    Image(systemName: "hourglass.circle")
+                    Text(appointment.totalDuration())
+                }
+                
                 HStack(spacing: 10) {
                     Image(systemName: "calendar")
                     Text("\(appointment.date.formatted(date: .complete, time: .omitted))")

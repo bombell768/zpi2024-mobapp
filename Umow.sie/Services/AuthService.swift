@@ -24,9 +24,9 @@ struct LoginResponse: Codable {
 }
 class AuthService {
     
-    func loginClient(email: String, password: String, completion: @escaping (Result<TokenDTO, Error>) -> Void) {
+    func login(email: String, password: String, isEmployee: Bool, completion: @escaping (Result<TokenDTO, Error>) -> Void) {
         
-        let urlString =  APIEndpoints.loginClient
+        let urlString = isEmployee ? APIEndpoints.loginEmployee : APIEndpoints.loginClient
         
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
@@ -40,40 +40,43 @@ class AuthService {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(body)
         
-        if let httpBody = request.httpBody {
-            if let bodyString = String(data: httpBody, encoding: .utf8) {
-                print("Body zapytania:")
-                print(bodyString)
-            } else {
-                print("Nie udało się zdekodować danych body.")
+        if let httpBody = request.httpBody,
+               let bodyString = String(data: httpBody, encoding: .utf8) {
+                print("Request body: \(bodyString)")
             }
-        } else {
-            print("Zapytanie nie zawiera danych body.")
-        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            
             if let error = error {
                 completion(.failure(error))
                 return
             }
 
-            guard let data = data else {
-                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
                 return
             }
             
-            
-            do {
-                let token = try JSONDecoder().decode(TokenDTO.self, from: data)
-                print("token: \(token)")
-                completion(.success(token))
+            switch httpResponse.statusCode {
+            case 200:
+                guard let data = data else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                    return
+                }
                 
-            } catch {
-                completion(.failure(error))
+                do {
+                    let tokenDTO = try JSONDecoder().decode(TokenDTO.self, from: data)
+                    completion(.success(tokenDTO))
+                } catch {
+                    completion(.failure(error))
+                }
+                
+            case 400:
+                completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Bad Request"])))
+                
+            default:
+                let errorDescription = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])))
             }
- 
-                           
         }.resume()
     }
     
@@ -131,5 +134,6 @@ class AuthService {
             }
         }.resume()
     }
+    
     
 }

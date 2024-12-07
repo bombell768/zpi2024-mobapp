@@ -24,6 +24,8 @@ import Foundation
     var isAppointmentRescheduled: Bool = false
     var backFromAppointmentRescheduling: Bool = false
     
+    var appointment: Appointment?
+    
     var errorMessage: String?
     var isLoadingOpeningHours: Bool = false
     var isLoadingDates: Bool = false
