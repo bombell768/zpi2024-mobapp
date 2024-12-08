@@ -134,7 +134,7 @@ struct SalonDetailView: View {
                 
                 
                 NavigationLink {
-                    AppointmentBookingView(salon: salon, servicesIndices: viewModel.getServicesIndices(), services: viewModel.selectedServices)
+                    AppointmentBookingView(salon: salon, servicesIndices: viewModel.getServicesIndices(), services: viewModel.selectedServices, viewModel: AppointmentBookingViewModel())
                 } label: {
                     Text("Wybierz termin")
                         .foregroundColor(.black.opacity(0.9))

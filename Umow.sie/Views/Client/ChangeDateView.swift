@@ -13,6 +13,8 @@ struct ChangeDateView: View {
     var appointment: Appointment
     @State var viewModel = AppointmentBookingViewModel()
     
+    @AppStorage("userID") private var userID: Int?
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -115,7 +117,7 @@ struct ChangeDateView: View {
                     
                     VStack {
                         Button {
-                            viewModel.rescheduleAppointment(appointmentId: appointment.id, userId: 1, userRole: "C", newDate: viewModel.dateSelection, newTime: viewModel.selectedTimeSlot.time)
+                            viewModel.rescheduleAppointment(appointmentId: appointment.id, userId: userID ?? 0, userRole: "C", newDate: viewModel.dateSelection, newTime: viewModel.selectedTimeSlot.time)
                         } label: {
                             HStack {
                                 Text("Umów")

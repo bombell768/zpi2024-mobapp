@@ -26,65 +26,51 @@ struct SalonRowView: View {
 
             
             Spacer()
-
- 
             
-                
-                if let rating = salon.averageRating {
-                    if(rating > 0) {
-                        NavigationLink(destination: SalonRatingView(salon: salon)) {
-                            HStack(alignment: .center) {
-                                Image(systemName: "star.fill")
-                                    .resizable()
-                                    .frame(width: 18, height: 18)
-                                    .foregroundColor(.yellow)
-                                Text(String(format: "%.2f", rating))
-                                    .padding(.top, 1)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(.white)
-                            }
-                            .padding(.trailing, 6)
+            if let rating = salon.averageRating {
+                if(rating > 0) {
+                    NavigationLink(destination: SalonRatingView(salon: salon)) {
+                        HStack(alignment: .center) {
+                            Image(systemName: "star.fill")
+                                .resizable()
+                                .frame(width: 18, height: 18)
+                                .foregroundColor(.yellow)
+                            Text(String(format: "%.2f", rating))
+                                .padding(.top, 1)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.white)
                         }
+                        .padding(.trailing, 6)
                     }
-                    else {
-                        Text("Brak ocen")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .padding(.trailing, 6)
-                    }
-                    
-                } else {
+                }
+                else {
                     Text("Brak ocen")
                         .font(.caption)
                         .foregroundColor(.gray)
                         .padding(.trailing, 6)
-
                 }
                 
-                
-            
+            } else {
+                Text("Brak ocen")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .padding(.trailing, 6)
 
-            
- 
-  
+            }
 
-                NavigationLink {
-                    SalonDetailView(salon: salon)
-                } label: {
-                    HStack {
-                        Text("Umów wizytę")
-                            .fontWeight(.bold)
-                            .foregroundStyle(.black.opacity(0.9))
-                    }
-                    .foregroundColor(Color.ui.black)
-                    .frame(width: 130, height: 48)
+            NavigationLink {
+                SalonDetailView(salon: salon)
+            } label: {
+                HStack {
+                    Text("Umów wizytę")
+                        .fontWeight(.bold)
+                        .foregroundStyle(.black.opacity(0.9))
                 }
-                .background(Color.ui.vanilla)
-                .cornerRadius(10)
- 
-            
-            
-
+                .foregroundColor(Color.ui.black)
+                .frame(width: 130, height: 48)
+            }
+            .background(Color.ui.vanilla)
+            .cornerRadius(10)
         }
         .frame(maxWidth: .infinity, maxHeight: 60)
         .padding()

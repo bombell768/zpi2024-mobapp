@@ -14,9 +14,10 @@ struct AppointmentBookingView: View {
     var services: [Service]
     
     @AppStorage("userID") private var clientID: Int?
+    @AppStorage("choosenClientID") private var choosenClientID: Int?
+    @AppStorage("userRole") private var userRole: UserRole?
     
     @State var viewModel = AppointmentBookingViewModel()
-    
  
 //    let employees: [String] = ["Kasia", "Jan", "Anastazja", "Patryk"]
 //    let timeSlots: [String] = ["9:15", "9:30", "9:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00"]
@@ -152,7 +153,13 @@ struct AppointmentBookingView: View {
                     
                     VStack{
                         Button {
-                            viewModel.saveAppointment(salonId: salon.id, employeeId: viewModel.employeeSelection.id, customerId: clientID ?? 0, serviceIds: servicesIndices, date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)
+                            if userRole == .client {
+                                viewModel.saveAppointment(salonId: salon.id, employeeId: viewModel.employeeSelection.id, customerId: clientID ?? 0, serviceIds: servicesIndices, date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)
+                            }
+                            else if userRole == .employee {
+                                viewModel.saveAppointment(salonId: salon.id, employeeId: viewModel.employeeSelection.id, customerId: choosenClientID ?? 0, serviceIds: servicesIndices, date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)
+                            }
+                            
                             viewModel.showAlert = true
                         } label: {
                             HStack {
@@ -166,6 +173,7 @@ struct AppointmentBookingView: View {
                         .background(Color.ui.vanilla)
                         .cornerRadius(10)
                         .padding(.top, 10)
+
                     }
                     .frame(maxWidth: .infinity)
                 }
@@ -173,7 +181,7 @@ struct AppointmentBookingView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
             .navigationDestination(isPresented: $viewModel.isAppointmentBooked) {
-                MainView()
+                EntryView()
                     .navigationBarBackButtonHidden(true)
             }
         }

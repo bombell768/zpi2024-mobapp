@@ -12,8 +12,11 @@ struct AppointmentBookingByEmployeeView: View {
     @State private var salons: [Salon] = []
     @State private var selectedSalon: Salon? = nil
     @State private var isClientConfirmed: Bool = false
+    @State private var isNavigationActive: Bool = false
     
     @State private var viewModel = AppointmentBookingViewModel()
+    
+    @AppStorage("choosenClientID") private var choosenClientID: Int?
     
     var body: some View {
         NavigationStack {
@@ -35,17 +38,15 @@ struct AppointmentBookingByEmployeeView: View {
                         
                         Button(action: {
                             viewModel.getClientByEmail(email: email)
+                            isClientConfirmed = false
                         }) {
-                            if viewModel.isCheckingEmail {
-                                ProgressView()
-                            } else {
-                                Text("Szukaj")
-                                    .frame(width: 150, height: 48)
-                                    .background(Color.ui.vanilla)
-                                    .foregroundColor(.black.opacity(0.9))
-                                    .fontWeight(.semibold)
-                                    .cornerRadius(10)
-                            }
+                            Text("Szukaj")
+                                .frame(width: 150, height: 48)
+                                .background(Color.ui.vanilla)
+                                .foregroundColor(.black.opacity(0.9))
+                                .fontWeight(.semibold)
+                                .cornerRadius(10)
+                            
                         }
                         .disabled(email.isEmpty || viewModel.isCheckingEmail)
                     }
@@ -115,7 +116,6 @@ struct AppointmentBookingByEmployeeView: View {
                                 }
                             }
                         }
-                        .scrollIndicators(.visible)
                     }
                     .padding(.horizontal)
                 }
@@ -124,7 +124,9 @@ struct AppointmentBookingByEmployeeView: View {
                 
                 
                 if selectedSalon != nil && viewModel.client != nil {
-                    Button(action: confirmSelection) {
+                    NavigationLink {
+                        SalonDetailView(salon: selectedSalon ?? Salon(), viewModel: SalonDetailViewModel())
+                    } label: {
                         Text("Przejdź dalej")
                             .font(.headline)
                             .padding()
@@ -135,13 +137,22 @@ struct AppointmentBookingByEmployeeView: View {
                     }
                     .disabled(selectedSalon == nil || viewModel.client == nil)
                     .padding(.horizontal)
+                    
                 }
             }
             .padding(.bottom)
             .navigationTitle("Umów klienta")
+            .navigationBarBackButtonHidden(true)
+//            .navigationDestination(isPresented: $isNavigationActive) {
+//                
+//            }
         }
         .onAppear {
             viewModel.fetchSalons()
+            print("isNavigationActive on start: \(isNavigationActive)")
+        }
+        .onChange(of: isNavigationActive) { oldValue, newValue in
+            print("Navigation active change: \(newValue)")
             
         }
     }
