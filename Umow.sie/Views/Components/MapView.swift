@@ -36,7 +36,7 @@ struct MapView: View {
                 Text(location)
                     .font(.headline)
             }
-            .frame(width: 300, height: 60)
+            .frame(width: 300, height: 40)
             .padding()
             .background(Color.ui.cultured.opacity(0.8), in: RoundedRectangle(cornerRadius: 15))
             .shadow(radius: 10)

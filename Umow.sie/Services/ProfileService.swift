@@ -11,6 +11,7 @@ protocol ProfileServiceProtocol {
     func getNumberOfCompletedAppointments(customerId: Int, completion: @escaping (Result<Int, Error>) -> Void)
     func getClientById(customerId: Int, completion: @escaping (Result<Client, Error>) -> Void)
     func updateClient(client: Client, completion: @escaping (Result<String, Error>) -> Void)
+    func getEmployeeById(employeeId: Int, completion: @escaping (Result<Employee, Error>) -> Void)
 }
 
 class ProfileService: ProfileServiceProtocol {
@@ -71,6 +72,38 @@ class ProfileService: ProfileServiceProtocol {
                 let client = try JSONDecoder().decode(Client.self, from: data)
                 print("Client: \(client)")
                 completion(.success(client))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    func getEmployeeById(employeeId: Int, completion: @escaping (Result<Employee, Error>) -> Void) {
+        
+        let urlString = APIEndpoints.getEmployeeById + String(employeeId)
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder.withFormattedDates
+                let employee = try decoder.decode(Employee.self, from: data)
+                print("Client: \(employee)")
+                completion(.success(employee))
             } catch {
                 completion(.failure(error))
             }

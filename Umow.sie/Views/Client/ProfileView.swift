@@ -41,9 +41,20 @@ struct ProfileView: View {
                 }
 
 
-                Text(viewModel.client.name + " " + viewModel.client.surname)
-                    .font(.title)
-                    .fontWeight(.bold)
+                if userRole == .client {
+                    Text(viewModel.client.name + " " + viewModel.client.surname)
+                        .font(.title)
+                        .fontWeight(.bold)
+                }
+                else if userRole == .employee {
+                    Text(viewModel.employee.name + " " + viewModel.employee.surname)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    
+                    Text("Jesteś zalogowany jako pracownik.")
+                        .font(.subheadline)
+                        
+                }
                 
                 
 
@@ -120,9 +131,15 @@ struct ProfileView: View {
             .padding()
 
         }
-        .onAppear {
-            viewModel.getNumberOfSeals(clientId: userID ?? 0)
-            viewModel.getClientById(clientId: userID ?? 0)
+        .onAppear {      
+            if userRole == .client {
+                viewModel.getNumberOfSeals(clientId: userID ?? 0)
+                viewModel.getClientById(clientId: userID ?? 0)
+            }
+            else if userRole == .employee {
+                viewModel.getEmployeeById(employeeId: userID ?? 0)
+            }
+            
         }
         
         .sheet(isPresented: $viewModel.isEditingEmail) {

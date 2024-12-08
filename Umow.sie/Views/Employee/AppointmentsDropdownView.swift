@@ -92,7 +92,7 @@ struct AppointmentsDropdownView: View {
                         )
                     }
                 }
-                .padding(.leading, 10)
+                
                 .transition(.opacity)
             }
         }

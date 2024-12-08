@@ -213,6 +213,10 @@ struct AppointmentDetails {
         }
         
         groupedAppointments = filteredAppointments.groupedByDate()
+        
+        for (date, appointments) in groupedAppointments {
+            groupedAppointments[date] = appointments.sorted { $0.time < $1.time }
+        }
             
         sortedDates = groupedAppointments.keys.sorted()
         

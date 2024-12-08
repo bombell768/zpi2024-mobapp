@@ -11,6 +11,7 @@ import Foundation
     
     var numberOfSeals: Int = 0
     var client: Client = Client()
+    var employee: Employee = Employee()
     
     var isEditingEmail: Bool = false
     var isEditingPhoneNumber: Bool = false
@@ -79,26 +80,41 @@ import Foundation
     }
     
     func updateClientPhoneNumber(newPhoneNumber: String) {
-            guard !newPhoneNumber.isEmpty else {
-                self.errorMessage = "Phone number cannot be empty."
-                return
-            }
-            
-            var updatedClient = client
-            updatedClient.phoneNumber = newPhoneNumber
-            
-            profileService.updateClient(client: updatedClient) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success:
-                        self.client = updatedClient
-                        self.errorMessage = nil
-                        print("Phone number updated successfully to \(newPhoneNumber)")
-                    case .failure(let error):
-                        self.errorMessage = error.localizedDescription
-                        print("Failed to update phone number: \(error.localizedDescription)")
-                    }
+        guard !newPhoneNumber.isEmpty else {
+            self.errorMessage = "Phone number cannot be empty."
+            return
+        }
+        
+        var updatedClient = client
+        updatedClient.phoneNumber = newPhoneNumber
+        
+        profileService.updateClient(client: updatedClient) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.client = updatedClient
+                    self.errorMessage = nil
+                    print("Phone number updated successfully to \(newPhoneNumber)")
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                    print("Failed to update phone number: \(error.localizedDescription)")
                 }
             }
         }
+    }
+    
+    func getEmployeeById(employeeId: Int) {
+        profileService.getEmployeeById(employeeId: employeeId) { result in
+            DispatchQueue.main.async {
+                switch result  {
+                case .success(let employee):
+                    self.employee = employee
+                    print("Pracownik w viewModel: \(self.employee)")
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                    print(self.errorMessage ?? "Unknown error")
+                }
+            }
+        }
+    }
 }

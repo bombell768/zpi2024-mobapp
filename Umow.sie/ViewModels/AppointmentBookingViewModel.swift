@@ -26,15 +26,21 @@ import Foundation
     
     var appointment: Appointment?
     
+    var client: Client? = nil
+    var isCheckingEmail: Bool = false
+    var salons: [Salon] = []
+    
     var errorMessage: String?
     var isLoadingOpeningHours: Bool = false
     var isLoadingDates: Bool = false
     var isLoadingTimeSlots: Bool = false
     
     private var appointmentService: AppointmentServiceProtocol
+    private var salonService: SalonServiceProtocol
     
-    init(appointmentService: AppointmentServiceProtocol = AppointmentBookingService()) {
+    init(appointmentService: AppointmentServiceProtocol = AppointmentBookingService(), salonService: SalonServiceProtocol = SalonService()) {
         self.appointmentService = appointmentService
+        self.salonService = salonService
     }
     
     func getEmployees(salonId: Int, serviceIds: [Int]) {
@@ -199,5 +205,40 @@ import Foundation
         
         return calendar.date(from: components)
     }
-
+    
+    func getClientByEmail(email: String) {
+        isCheckingEmail = true
+        errorMessage = nil
+        
+        appointmentService.getClientByEmail(email: email) {result in
+            DispatchQueue.main.async {
+                self.isCheckingEmail = false
+                
+                switch result {
+                case .success(let client):
+                    self.client = client
+                    self.errorMessage = nil
+//                    print(self.client)
+                case .failure(let error):
+                    self.client = nil
+                    self.errorMessage = error.localizedDescription
+                    print(self.errorMessage ?? "Unknown error")
+                }
+            }
+        }
+    }
+    
+    func fetchSalons() {
+        salonService.fetchSalons {result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let salons):
+                    self.salons = salons
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+    
 }

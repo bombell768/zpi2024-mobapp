@@ -12,21 +12,6 @@ struct EmployeeRequestBody: Codable {
     let serviceIds: [Int]
 }
 
-struct RescheduleDTO: Codable {
-    let userId: Int
-    let userRole: String
-    let newDate: Date
-    let newTime: Time
-    
-    enum CodingKeys: String, CodingKey {
-        case userId = "userID"
-        case userRole
-        case newDate = "rescheduleDate"
-        case newTime = "rescheduleTime"
-    }
-}
-
-
 protocol AppointmentServiceProtocol {
     func getEmployees(salonId: Int, serviceIds: [Int], completion: @escaping (Result<[Employee], Error>) -> Void)
     func getAvailabilityDates(salonId: Int, employeeID: Int, completion: @escaping (Result<[Date], Error>) -> Void)
@@ -34,6 +19,7 @@ protocol AppointmentServiceProtocol {
     func getTimeSlots(employeeId: Int, completion: @escaping (Result<[TimeSlot], Error>) -> Void)
     func saveAppointment(salonId: Int, employeeId: Int, customerId: Int, serviceIds: [Int], date: Date, timeStart: Time, completion: @escaping (Result<String, Error>) -> Void)
     func rescheduleAppointment(appointmentId: Int, userId: Int, userRole: String, date: Date, time: Time, completion: @escaping (Result<Void, Error>) -> Void)
+    func getClientByEmail(email: String, completion: @escaping (Result<Client, Error>) -> Void)
 }
 
 class AppointmentBookingService: AppointmentServiceProtocol {
@@ -259,6 +245,66 @@ class AppointmentBookingService: AppointmentServiceProtocol {
                 }
             } else {
                 completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+            }
+        }.resume()
+    }
+    
+    func getClientByEmail(email: String, completion: @escaping (Result<Client, Error>) -> Void) {
+        
+        let urlString = APIEndpoints.getClientByEmail
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let emailDTO = EmailDTO(email: email)
+        
+        do {
+            let jsonData = try JSONEncoder().encode(emailDTO)
+            request.httpBody = jsonData
+            let bodyString = String(data: jsonData, encoding: .utf8)
+            print("Body: \(bodyString ?? "")")
+        } catch {
+            completion(.failure(error))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+                return
+            }
+            
+            switch httpResponse.statusCode {
+            case 200:
+                if let data = data {
+                    do {
+                        let client = try JSONDecoder().decode(Client.self, from: data)
+                        completion(.success(client))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                } else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                }
+            case 404:
+                completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Client not found"])))
+            case 400:
+                completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid request"])))
+            default:
+                print("Dupa")
+                let errorDescription = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])))
             }
         }.resume()
     }
