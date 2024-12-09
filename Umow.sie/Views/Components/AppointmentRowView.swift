@@ -107,6 +107,7 @@ struct AppointmentRowView: View {
                 title: Text("Jesteś pewny?"),
                 message: Text("Czy na pewno chcesz odwołać wizytę?"),
                 primaryButton: .destructive(Text("Tak - Odwołuję wizytę")) {
+                    print("appointmentId: \(appointment.id)")
                     viewModel.cancelAppointment(appointmentId: appointment.id)
                 },
                 secondaryButton: .cancel(Text("Nie")) {

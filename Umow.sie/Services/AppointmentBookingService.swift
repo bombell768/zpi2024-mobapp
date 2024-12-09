@@ -150,7 +150,7 @@ class AppointmentBookingService: AppointmentServiceProtocol {
             do {
                 let decoder = JSONDecoder.withFormattedDates
                 let timeSlots = try decoder.decode([TimeSlot].self, from: data)
-                print("time sloty: \(timeSlots)")
+//                print("time sloty: \(timeSlots)")
                 completion(.success(timeSlots))
                 
             } catch {

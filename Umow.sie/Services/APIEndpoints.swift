@@ -44,7 +44,8 @@ struct APIEndpoints {
     static let getAllRatingsForClient = baseURL + "crud/rating/getAllByCustomerId/" //only client
     static let getAllRatingsForEmployee = baseURL + "crud/rating/allForEmployee/"   //only employee
     static let postRating = baseURL + "crud/rating"                                 //only client
-    static let cancelAppointment = baseURL + "crud/appointment-making/cancel-customer/"
+    static let cancelAppointmentByClient = baseURL + "crud/appointment-making/cancel-customer/"      //only client
+    static let cancelAppointmentByEmployee = baseURL + "crud/appointment-making/cancel-employee/"    //only employee
     
     // salon rating (only client)
     static let getAllRatingsForSalon = baseURL + "crud/rating/allForSalonWithCustomer/"

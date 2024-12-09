@@ -191,7 +191,7 @@ struct AppointmentBookingView: View {
         }
         .onChange(of: viewModel.isLoadingDates) {
             if !viewModel.isLoadingOpeningHours && !viewModel.isLoadingDates && !viewModel.isLoadingTimeSlots {
-                viewModel.generateTimeSlots(for: viewModel.currentEmployee!)
+                viewModel.generateTimeSlots(for: viewModel.currentEmployee!, selectedServices: services)
             }
             
         }

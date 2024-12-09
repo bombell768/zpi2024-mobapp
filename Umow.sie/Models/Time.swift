@@ -71,9 +71,32 @@ extension Time {
         return Time(hour: newHour % 24, minute: newMinute, second: self.second)
     }
     
+    func subtracting(minutes: Int) -> Time {
+        var totalMinutes = self.hour * 60 + self.minute - minutes
+        if totalMinutes < 0 {
+            totalMinutes += 24 * 60
+        }
+        let newHour = totalMinutes / 60
+        let newMinute = totalMinutes % 60
+        return Time(hour: newHour % 24, minute: newMinute, second: self.second)
+    }
+
+    
     static func <(lhs: Time, rhs: Time) -> Bool {
         if lhs.hour != rhs.hour { return lhs.hour < rhs.hour }
         if lhs.minute != rhs.minute { return lhs.minute < rhs.minute }
         return lhs.second < rhs.second
+    }
+    
+    static func <= (lhs: Time, rhs: Time) -> Bool {
+        return lhs < rhs || lhs == rhs
+    }
+    
+    static func >= (lhs: Time, rhs: Time) -> Bool {
+        return !(lhs < rhs)
+    }
+    
+    static func > (lhs: Time, rhs: Time) -> Bool {
+        return !(lhs <= rhs)
     }
 }

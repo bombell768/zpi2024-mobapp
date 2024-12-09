@@ -149,7 +149,7 @@ struct ChangeDateView: View {
             }
             .onChange(of: viewModel.isLoadingDates) {
                 if !viewModel.isLoadingOpeningHours && !viewModel.isLoadingDates && !viewModel.isLoadingTimeSlots {
-                    viewModel.generateTimeSlots(for: appointment.employee)
+                    viewModel.generateTimeSlots(for: appointment.employee, selectedServices: appointment.services)
                 }
                 
             }

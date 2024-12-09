@@ -374,7 +374,17 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
     
     func cancelAppointment(appointmentId: Int, completion: @escaping (Result<Void, Error>) -> Void) {
 
-        let urlString = APIEndpoints.cancelAppointment + String(appointmentId) 
+        let urlString: String
+        
+        switch userRole {
+        case .client:
+            urlString = APIEndpoints.cancelAppointmentByClient + String(appointmentId)
+        case .employee:
+            urlString = APIEndpoints.cancelAppointmentByEmployee + String(appointmentId)
+        case nil:
+            urlString = ""
+        }
+        
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return

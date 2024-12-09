@@ -146,8 +146,75 @@ import Foundation
         return earliestDate...latestDate
     }
     
-    func generateTimeSlots(for employee: Employee) -> Void {
+//    func generateTimeSlots(for employee: Employee, selectedServices: [Service]) -> Void {
+//        var timeSlots: [TimeSlot] = []
+//        
+//        let totalDuration = selectedServices.reduce(0) { $0 + $1.duration } * 15
+//        print("total duration: \(totalDuration)")
+//        
+////        print("opening hours: \(openingHours)")
+//        for openingHour in openingHours {
+////            print("opening hour: \(openingHour)")
+//            let weekday = openingHour.calendarWeekday
+//            let openingTime = openingHour.openingHour
+//            let closingTime = openingHour.closingHour
+//            
+////            print("weekday \(weekday), openingTime \(openingTime), closingTime \(closingTime)")
+//            
+////            print("daty \(dates)")
+//            let availableDatesForWeekday = dates.filter {
+//                Calendar.current.component(.weekday, from: $0) == weekday
+//            }
+//            
+////            print("weekday \(weekday), availableDatesForWeekday \(availableDatesForWeekday)")
+//            
+//            for date in availableDatesForWeekday {
+//                var currentTime = openingTime
+////                print("currentTime \(currentTime)")
+//                
+//                while currentTime < closingTime {
+////                    print("currentTime \(currentTime)")
+//                    guard let slotStartDate = combine(date: date, time: currentTime) else {
+//                        break
+//                    }
+//                    
+//                    let slotEndTime = currentTime.adding(minutes: totalDuration)
+//                    
+//                    if slotEndTime <= closingTime {
+//                        let timeSlot = TimeSlot(date: slotStartDate, time: currentTime, employeeId: employee.id)
+////                        print("timeSlot for weekday \(weekday): \(timeSlot)")
+//                        if !occupiedTimeSlots.contains(where: { occupiedSlot in
+//                            (occupiedSlot.date == timeSlot.date) &&
+//                            (occupiedSlot.time >= timeSlot.time && occupiedSlot.time < slotEndTime)
+//                        }) {
+//                            timeSlots.append(timeSlot)
+//                        }
+//                    }
+//                    
+//                    currentTime = currentTime.adding(minutes: 15)
+//                }
+//            }
+//        }
+//        for timeSlot in occupiedTimeSlots {
+//            print("occupied: \(timeSlot)")
+//        }
+//        
+//        timeSlots = timeSlots.filter { timeSlot in
+//            !occupiedTimeSlots.contains(timeSlot)}
+//        
+////        print("employee: \(timeSlots[0].employeeId)")
+////        for timeSlot in timeSlots {
+////            print("time slot: \(timeSlot.time),  date: \(timeSlot.date)")
+////        }
+//        
+//        employeeTimeSlots = timeSlots
+//    }
+    
+    func generateTimeSlots(for employee: Employee, selectedServices: [Service]) -> Void {
         var timeSlots: [TimeSlot] = []
+        
+        let totalDuration = selectedServices.reduce(0) { $0 + $1.duration } * 15
+        print("total duration: \(totalDuration)")
         
 //        print("opening hours: \(openingHours)")
         for openingHour in openingHours {
@@ -155,37 +222,60 @@ import Foundation
             let weekday = openingHour.calendarWeekday
             let openingTime = openingHour.openingHour
             let closingTime = openingHour.closingHour
+            let lastPossibleTime = closingTime.subtracting(minutes: totalDuration)
+//            print("last possible time: \(closingTime.subtracting(minutes: totalDuration))")
+//            print("weekday \(weekday), openingTime \(openingTime), closingTime \(closingTime)")
             
 //            print("daty \(dates)")
             let availableDatesForWeekday = dates.filter {
                 Calendar.current.component(.weekday, from: $0) == weekday
             }
             
-//            print(availableDatesForWeekday)
+//            print("weekday \(weekday), availableDatesForWeekday \(availableDatesForWeekday)")
             
             for date in availableDatesForWeekday {
                 var currentTime = openingTime
+//                print("currentTime \(currentTime)")
                 
-                while currentTime < closingTime {
-                    if let slotStartDate = combine(date: date, time: currentTime) {
-                        let timeSlot = TimeSlot(date: slotStartDate, time: currentTime, employeeId: employee.id)
-                        timeSlots.append(timeSlot)
+                while currentTime <= lastPossibleTime {
+                    let startTimeSlot = TimeSlot(date: date, time: currentTime, employeeId: employee.id)
+                    let endTimeSlot = TimeSlot(date: date, time: currentTime.adding(minutes: totalDuration - 15), employeeId: employee.id)
+                    var startTime = startTimeSlot.time
+                    let endTime = endTimeSlot.time
+                    var isCurrentTimePossible = true
+                    
+                    
+                    print("startTime \(startTimeSlot), endTime \(endTimeSlot))")
+                    while startTime <= endTime {
+                        if occupiedTimeSlots.contains(where: { occupiedSlot in
+                            (occupiedSlot.date == startTimeSlot.date) &&
+                            (occupiedSlot.time == startTime)
+                        }) {
+                            isCurrentTimePossible = false
+                        }
+                        startTime = startTime.adding(minutes: 15)
+                    }
+                    print("isCurrentTimePossible \(isCurrentTimePossible)")
+                    
+                    if isCurrentTimePossible {
+                        timeSlots.append(startTimeSlot)
                     }
                     
                     currentTime = currentTime.adding(minutes: 15)
                 }
             }
         }
-        for timeSlot in occupiedTimeSlots {
-            print("occupied: \(timeSlot)")
-        }
-        timeSlots = timeSlots.filter { timeSlot in
-            !occupiedTimeSlots.contains(timeSlot)}
+//        for timeSlot in occupiedTimeSlots {
+//            print("occupied: \(timeSlot)")
+//        }
         
-        print("employee: \(timeSlots[0].employeeId)")
-        for timeSlot in timeSlots {
-            print("time slot: \(timeSlot.time),  date: \(timeSlot.date)")
-        }
+//        timeSlots = timeSlots.filter { timeSlot in
+//            !occupiedTimeSlots.contains(timeSlot)}
+        
+//        print("employee: \(timeSlots[0].employeeId)")
+//        for timeSlot in timeSlots {
+//            print("time slot: \(timeSlot.time),  date: \(timeSlot.date)")
+//        }
         
         employeeTimeSlots = timeSlots
     }
