@@ -11,6 +11,7 @@ struct ChangeDateView: View {
     
     var title: String
     var appointment: Appointment
+    var context: ChangeDateContext
     @State var viewModel = AppointmentBookingViewModel()
     
     @AppStorage("userID") private var userID: Int?
@@ -20,6 +21,15 @@ struct ChangeDateView: View {
             ScrollView {
                 
                 VStack (alignment: .leading, spacing: 14) {
+                    
+                    if context == .reschedule {
+                        Text("Obecny termin")
+                            .font(.title2)
+                            .bold()
+                        
+                        Text("\(appointment.date.formatted(date: .complete, time: .omitted)), \(appointment.time.formattedToMinutes())")
+                    }
+                    
                     
                     
                     Text("Wybierz nowy termin")
@@ -117,7 +127,13 @@ struct ChangeDateView: View {
                     
                     VStack {
                         Button {
-                            viewModel.rescheduleAppointment(appointmentId: appointment.id, userId: userID ?? 0, userRole: "C", newDate: viewModel.dateSelection, newTime: viewModel.selectedTimeSlot.time)
+                            if context == .reschedule {
+                                viewModel.rescheduleAppointment(appointmentId: appointment.id, userId: userID ?? 0, userRole: "C", newDate: viewModel.dateSelection, newTime: viewModel.selectedTimeSlot.time)
+                            }
+                            else if context == .rebook {
+                                viewModel.saveAppointment(salonId: appointment.salon.id, employeeId: appointment.employee.id, customerId: appointment.client.id, serviceIds: appointment.services.map{ $0.id }, date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)
+                            }
+                            
                         } label: {
                             HStack {
                                 Text("Umów")
@@ -153,10 +169,14 @@ struct ChangeDateView: View {
                 }
                 
             }
-            .alert(isPresented: $viewModel.isAppointmentRescheduled) {
+            .alert(isPresented: $viewModel.showChangeDateViewAlert) {
                 Alert(
-                    title: Text("Wizyta umówiona"),
-                    message: Text("Twoja wizyta została pomyślnie umówiona w nowym terminie. Sprawdź szczegóły w zakładce \"Wizyty\""),
+                    title: Text(context == .reschedule ? "Wizyta przełożona" : "Wizyta umówiona"),
+                    message: Text(
+                        context == .reschedule
+                            ? "Twoja wizyta została pomyślnie umówiona w nowym terminie. Sprawdź szczegóły w zakładce \"Wizyty\""
+                            : "Twoja wizyta została umówiona ponownie w nowym terminie. Sprawdź szczegóły w zakładce \"Wizyty\""
+                    ),
                     dismissButton: .default(Text("OK"), action: {
                         viewModel.backFromAppointmentRescheduling = true
                     })
@@ -185,5 +205,6 @@ struct ChangeDateView: View {
                         employee: Employee(),
                         client: Client(),
                         services: [],
-                        isRated: true))
+                        isRated: true),
+                   context: .reschedule)
 }

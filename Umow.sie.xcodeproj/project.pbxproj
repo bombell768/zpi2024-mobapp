@@ -75,7 +75,7 @@
 		A7D9AD5A2CC6F1BA003CDD9A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */; };
 		A7DE60A52CE0E3EA001CB1E6 /* AppointmentBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */; };
 		A7DE60A92CE0ED11001CB1E6 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */; };
-		A7EE5FFD2D0474440011BAC4 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EE5FFC2D04743B0011BAC4 /* UserRole.swift */; };
+		A7EE5FFD2D0474440011BAC4 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EE5FFC2D04743B0011BAC4 /* Enums.swift */; };
 		A7EE5FFF2D047D5C0011BAC4 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EE5FFE2D047D5C0011BAC4 /* LoginDTO.swift */; };
 		A7F421DE2CF0BF300055EA96 /* AddRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */; };
 		A7F421E02CF0C2D30055EA96 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */; };
@@ -172,7 +172,7 @@
 		A7D9AD592CC6F1BA003CDD9A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		A7DE60A42CE0E3EA001CB1E6 /* AppointmentBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookingView.swift; sourceTree = "<group>"; };
 		A7DE60A82CE0ED11001CB1E6 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
-		A7EE5FFC2D04743B0011BAC4 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		A7EE5FFC2D04743B0011BAC4 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		A7EE5FFE2D047D5C0011BAC4 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		A7F421DD2CF0BF300055EA96 /* AddRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingView.swift; sourceTree = "<group>"; };
 		A7F421DF2CF0C2D30055EA96 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
@@ -351,7 +351,7 @@
 				A7165F9F2CDA36DF00DB73FA /* ServiceCategory.swift */,
 				A7165F9D2CDA360700DB73FA /* Service.swift */,
 				A77B57F82CFF12C000F30332 /* Rating.swift */,
-				A7EE5FFC2D04743B0011BAC4 /* UserRole.swift */,
+				A7EE5FFC2D04743B0011BAC4 /* Enums.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -630,7 +630,7 @@
 				A7165FA02CDA36EC00DB73FA /* ServiceCategory.swift in Sources */,
 				A74FA60D2CEE6E270025BB6D /* AppointmentBookingService.swift in Sources */,
 				A7165F952CDA2BE800DB73FA /* SalonDetailView.swift in Sources */,
-				A7EE5FFD2D0474440011BAC4 /* UserRole.swift in Sources */,
+				A7EE5FFD2D0474440011BAC4 /* Enums.swift in Sources */,
 				A7165F9C2CDA35F200DB73FA /* ServiceRowView.swift in Sources */,
 				A77D46E12CBE812E005FC0D5 /* ContentView.swift in Sources */,
 				A77DD5DD2D01207E001B1B37 /* ChangeDateView.swift in Sources */,

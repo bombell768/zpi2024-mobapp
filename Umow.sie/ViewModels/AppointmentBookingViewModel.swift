@@ -22,6 +22,8 @@ import Foundation
     var showAlert: Bool = false
     var isAppointmentBooked: Bool = false
     var isAppointmentRescheduled: Bool = false
+    var isAppointmentSaved: Bool = false
+    var showChangeDateViewAlert: Bool = false
     var backFromAppointmentRescheduling: Bool = false
     
     var appointment: Appointment?
@@ -113,6 +115,8 @@ import Foundation
             DispatchQueue.main.async {
                 switch result  {
                 case .success(let response):
+                    self.isAppointmentSaved = true
+                    self.showChangeDateViewAlert = true
                     print(response)
                     print("Wizyta zapisana pomyślnie.")
                 case .failure(let error):
@@ -127,6 +131,7 @@ import Foundation
             DispatchQueue.main.async {
                 switch result  {
                 case .success:
+                    self.showChangeDateViewAlert = true
                     self.isAppointmentRescheduled = true
                     print("Wizyta przeniesiona pomyślnie.")
                 case .failure(let error):

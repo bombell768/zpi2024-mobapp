@@ -11,3 +11,9 @@ enum UserRole: String {
     case client
     case employee
 }
+
+
+enum ChangeDateContext {
+    case reschedule
+    case rebook
+}

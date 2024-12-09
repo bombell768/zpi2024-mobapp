@@ -122,7 +122,7 @@ struct AppointmentRowView: View {
         case .reserved:
             HStack(spacing: 30) {
                 NavigationLink {
-                    ChangeDateView(title: "Zmień termin", appointment: appointment)
+                    ChangeDateView(title: "Zmień termin", appointment: appointment, context: .reschedule)
                 } label: {
                     HStack {
                         Text("Zmień termin")
@@ -142,7 +142,7 @@ struct AppointmentRowView: View {
         case .done:
             HStack(spacing: 30) {
                 NavigationLink {
-                    ChangeDateView(title: "Umów ponownie", appointment: appointment)
+                    ChangeDateView(title: "Umów ponownie", appointment: appointment, context: .rebook)
                 } label: {
                     HStack {
                         Text("Umów ponownie")
@@ -175,7 +175,7 @@ struct AppointmentRowView: View {
         case .cancelledEmployee, .cancelledCustomer:
             HStack {
                 NavigationLink {
-                    ChangeDateView(title: "Umów ponownie", appointment: appointment)
+                    ChangeDateView(title: "Umów ponownie", appointment: appointment, context: .rebook)
                 } label: {
                     HStack {
                         Text("Umów ponownie")
