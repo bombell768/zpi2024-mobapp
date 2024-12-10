@@ -12,6 +12,7 @@ struct LoginView: View {
     @State private var viewModel = LoginViewModel()
     
     @AppStorage("userRole") private var userRole: UserRole = .client
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -37,6 +38,7 @@ struct LoginView: View {
                               title: "Adres e-mail",
                               placeholder: "")
                     .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
                     
                     InputView(text: $viewModel.password,
                               title: "Hasło",
@@ -132,6 +134,28 @@ struct LoginView: View {
                 MainView()
                     .navigationBarBackButtonHidden(true)
             }
+            .overlay(
+                Group {
+                    if viewModel.isLoggingIn {
+                        ProgressView("Logowanie...")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(.black)
+                    }
+                }
+            )
+            .alert(isPresented: Binding<Bool>(
+                get: { viewModel.errorMessage != nil },
+                set: { _ in viewModel.errorMessage = nil }
+            )) {
+                Alert(
+                    title: Text("Ups..."),
+                    message: Text(viewModel.errorMessage ?? "Nieznany błąd. Skontaktuj się z administratorem."),
+                    dismissButton: .default(
+                        Text("OK")
+                    )
+                )
+            }
+
         }
  
     }

@@ -15,6 +15,7 @@ struct ChangeDateView: View {
     @State var viewModel = AppointmentBookingViewModel()
     
     @AppStorage("userID") private var userID: Int?
+    @AppStorage("userRole") private var userRole: UserRole?
     
     var body: some View {
         NavigationStack {
@@ -72,9 +73,17 @@ struct ChangeDateView: View {
                                     .font(.title2)
                             }
                             
-                            HStack(spacing: 10) {
-                                Image(systemName: "person.fill")
-                                Text("\(appointment.employee.name)")
+                            if userRole == .client {
+                                HStack(spacing: 10) {
+                                    Image(systemName: "person.fill")
+                                    Text("\(appointment.employee.name)")
+                                }
+                            }
+                            else if userRole == .employee {
+                                HStack(spacing: 10) {
+                                    Image(systemName: "person.fill")
+                                    Text("\(appointment.client.name) \(appointment.client.surname)")
+                                }
                             }
                             
                             HStack(alignment: .top, spacing: 10) {
@@ -128,7 +137,7 @@ struct ChangeDateView: View {
                     VStack {
                         Button {
                             if context == .reschedule {
-                                viewModel.rescheduleAppointment(appointmentId: appointment.id, userId: userID ?? 0, userRole: "C", newDate: viewModel.dateSelection, newTime: viewModel.selectedTimeSlot.time)
+                                viewModel.rescheduleAppointment(appointmentId: appointment.id, userId: userID ?? 0, userRole: userRole == .client ? "C" : "E", newDate: viewModel.dateSelection, newTime: viewModel.selectedTimeSlot.time)
                             }
                             else if context == .rebook {
                                 viewModel.saveAppointment(salonId: appointment.salon.id, employeeId: appointment.employee.id, customerId: appointment.client.id, serviceIds: appointment.services.map{ $0.id }, date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)

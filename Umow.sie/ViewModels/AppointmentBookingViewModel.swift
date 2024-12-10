@@ -23,6 +23,7 @@ import Foundation
     var isAppointmentBooked: Bool = false
     var isAppointmentRescheduled: Bool = false
     var isAppointmentSaved: Bool = false
+    var isAppointmentSaving: Bool = false
     var showChangeDateViewAlert: Bool = false
     var backFromAppointmentRescheduling: Bool = false
     
@@ -36,6 +37,7 @@ import Foundation
     var isLoadingOpeningHours: Bool = false
     var isLoadingDates: Bool = false
     var isLoadingTimeSlots: Bool = false
+    var areTimeSlotsLoaded: Bool = false
     
     private var appointmentService: AppointmentServiceProtocol
     private var salonService: SalonServiceProtocol
@@ -68,7 +70,7 @@ import Foundation
                     self.dates = dates
 //                    print(dates)
                     self.dateRange = self.createDateRange(from: dates) ?? Date()...Date()
-                    self.dateSelection = self.dates.first!
+//                    self.dateSelection = self.dates.first!
                     self.isLoadingDates = false
 //                    print(self.employees)
                 case .failure(let error):
@@ -102,7 +104,9 @@ import Foundation
                 case .success(let timeSlots):
                     self.occupiedTimeSlots = timeSlots
                     self.isLoadingTimeSlots = false
+                    self.areTimeSlotsLoaded = true
                 case .failure(let error):
+                    self.areTimeSlotsLoaded = true
                     self.errorMessage = error.localizedDescription
                 }
             }
@@ -111,15 +115,18 @@ import Foundation
     
     func saveAppointment(salonId: Int, employeeId: Int, customerId: Int, serviceIds: [Int], date: Date, timeStart: Time) {
         print(date)
+        isAppointmentSaving = true
         appointmentService.saveAppointment(salonId: salonId, employeeId: employeeId, customerId: customerId, serviceIds: serviceIds, date: date, timeStart: timeStart) { result in
             DispatchQueue.main.async {
                 switch result  {
                 case .success(let response):
                     self.isAppointmentSaved = true
                     self.showChangeDateViewAlert = true
+                    self.isAppointmentSaving = false
                     print(response)
                     print("Wizyta zapisana pomyślnie.")
                 case .failure(let error):
+                    self.isAppointmentSaving = false
                     self.errorMessage = error.localizedDescription
                 }
             }
@@ -144,12 +151,21 @@ import Foundation
     
     func createDateRange(from dates: [Date]) -> ClosedRange<Date>? {
         guard let earliestDate = dates.min(),
-              let latestDate = dates.max(),
-              earliestDate <= latestDate else {
-            return nil 
+              let latestDate = dates.max() else {
+            return nil
         }
-        return earliestDate...latestDate
+        
+        let today = Date()
+        
+        let adjustedEarliestDate = max(earliestDate, today)
+        
+        guard adjustedEarliestDate <= latestDate else {
+            return nil
+        }
+        
+        return adjustedEarliestDate...latestDate
     }
+
     
 //    func generateTimeSlots(for employee: Employee, selectedServices: [Service]) -> Void {
 //        var timeSlots: [TimeSlot] = []

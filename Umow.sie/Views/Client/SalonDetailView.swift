@@ -14,12 +14,7 @@ struct SalonDetailView: View {
     
     var body: some View {
         ScrollView {
-//            Image("toolbarlogo")
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 300)
-//                .cornerRadius(5)
-            
+
             VStack(alignment: .leading) {
                 NavigationLink(
                     destination:
@@ -39,22 +34,31 @@ struct SalonDetailView: View {
                     .padding(.horizontal)
                     .padding(.bottom)
                 
-                HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 12) {
                     VStack(alignment: .leading, spacing: 5) {
                         
                         
                         VStack (alignment: .leading) {
-                            Text("ADRES")
+                            Text("Godziny otwarcia")
                                 .font(.system(.headline, design: .rounded))
                             
-                            Text(salon.street + " " + salon.buildingNumber)
-                            Text(salon.postalCode + " " + salon.city)
+                            if viewModel.areAllOpeningHoursSame() {
+                               if let sameHours = viewModel.openingHours.first {
+                                   Text("Poniedziałek - Piątek: \(sameHours.formattedHours())")
+                                       .font(.system(.body, design: .rounded))
+                               }
+                            } else {
+                               ForEach(viewModel.openingHours, id: \.id) { hours in
+                                   Text("\(hours.dayName()): \(hours.formattedHours())")
+                                       .font(.system(.body, design: .rounded))
+                               }
+                            }
                         }
                     }
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     
                     VStack(alignment: .leading) {
-                        Text("TELEFON")
+                        Text("Numer telefonu")
                             .font(.system(.headline, design: .rounded))
                         
                         Text(salon.phoneNumber)
@@ -71,13 +75,24 @@ struct SalonDetailView: View {
                     .padding(.top)
                 
                 VStack(alignment: .leading) {
-                    ForEach(viewModel.serviceCategories) { category in
-                        Text("\(category.name)")
-                            .font(.title3)
-                            .bold()
-                            .padding(.top)
-                        ForEach(category.services) { service in
-                            ServiceRowView(salon: salon, service: service, viewModel: viewModel)
+                    if !viewModel.isServicesFetched {
+                        ProgressView("Ładowanie...")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(.black)
+                    }
+                    if viewModel.serviceCategories.isEmpty && viewModel.isServicesFetched {
+                        Text("Salon nie dodał jeszcze żadnych usług.")
+                            .foregroundStyle(.red)
+                    }
+                    else {
+                        ForEach(viewModel.serviceCategories) { category in
+                            Text("\(category.name)")
+                                .font(.title3)
+                                .bold()
+                                .padding(.top)
+                            ForEach(category.services) { service in
+                                ServiceRowView(salon: salon, service: service, viewModel: viewModel)
+                            }
                         }
                     }
                     
@@ -88,7 +103,7 @@ struct SalonDetailView: View {
     //    .toolbarBackground(.hidden, for: .navigationBar)
         .onAppear {
             viewModel.fetchServicesAndCategories(salonId: salon.id)
-//            viewModel.selectedServices.removeAll()
+            viewModel.getOpeningHours(salonId: salon.id)
         }
         
         if(!viewModel.selectedServices.isEmpty) {

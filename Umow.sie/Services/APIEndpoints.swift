@@ -6,9 +6,9 @@
 //
 
 struct APIEndpoints {
-    static let baseURL = "http://192.168.1.11:8080/api/"
+    static let baseURL1 = "http://192.168.1.11:8080/api/"
     
-    static let baseURL1 = "https://backend-zpi.purplesand-ca238c0b.polandcentral.azurecontainerapps.io/api/"
+    static let baseURL = "https://backend-zpi.purplesand-ca238c0b.polandcentral.azurecontainerapps.io/api/"
     
     
     // auth (client)

@@ -12,6 +12,7 @@ import Observation
 @Observable class LoginViewModel {
     var username: String = ""
     var password: String = ""
+    var isLoggingIn: Bool = false
     
     var isLoggedIn: Bool {
         get {
@@ -44,11 +45,13 @@ import Observation
     
     func login(username: String, password: String, role: UserRole) {
         print("Loguje z rolą: \(role.rawValue)")
+        isLoggingIn = true
         AuthService().login(email: username, password: password, role: role) {result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let token):
                     self.authToken = token.token
+                    self.isLoggingIn = false
                     self.isLoggedIn = true
                     
                     print(token)
@@ -59,6 +62,7 @@ import Observation
                     }
                     
                 case .failure(let error):
+                    self.isLoggingIn = false
                     self.errorMessage = error.localizedDescription
                     print(self.errorMessage ?? "Unknown error")
                 }

@@ -20,7 +20,7 @@ import SwiftUI
     
     var errorMessage: String? = nil
     var isRegistrationSuccessful: Bool = false
-    var isLoading: Bool = false
+    var isRegistrationDone: Bool = false
     
     private let authService: AuthService
     
@@ -33,29 +33,32 @@ import SwiftUI
             errorMessage = "Passwords do not match."
             return
         }
+        let phoneNumberWithPrefix = "+48 " + phoneNumber
         
         let client = Client (
             id: 0,
             name: firstName,
             surname: sureName,
-            phoneNumber: phoneNumber,
+            phoneNumber: phoneNumberWithPrefix,
             email: email,
             password: password,
             preferredService: serviceSelection
         )
         
-        isLoading = true
+        
         errorMessage = nil
         
         authService.registerClient(client: client) { [weak self] result in
             DispatchQueue.main.async {
-                self?.isLoading = false
+                self?.isRegistrationDone = false
                 switch result {
                 case .success:
                     self?.isRegistrationSuccessful = true
+                    self?.isRegistrationDone = true
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
-                    print(self?.errorMessage ?? "Unknown error")
+                    self?.isRegistrationDone = true
+                    print(self?.errorMessage ?? "Nieznany błąd")
                 }
             }
         }

@@ -31,6 +31,7 @@ class AuthService {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(body)
         
+        
         if let httpBody = request.httpBody,
                let bodyString = String(data: httpBody, encoding: .utf8) {
                 print("Request body: \(bodyString)")
@@ -62,7 +63,7 @@ class AuthService {
                 }
                 
             case 400:
-                completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Bad Request"])))
+                completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Wprowadzono niepoprawne dane do logowania. Spróbuj ponownie"])))
                 
             default:
                 let errorDescription = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
@@ -114,10 +115,10 @@ class AuthService {
             case 200:
                 completion(.success(()))
             case 400:
-                let message = "Bad Request: Check client data or request format."
+                let message = "Wprowadzono niepoprawne dane."
                 completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: message])))
             case 409:
-                let message = "Conflict: Email already exists."
+                let message = "Ten email jest już zajęty."
                 completion(.failure(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: message])))
             default: 
                 let errorMessage = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
@@ -125,6 +126,4 @@ class AuthService {
             }
         }.resume()
     }
-    
-    
 }

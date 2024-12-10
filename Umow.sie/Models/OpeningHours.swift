@@ -44,5 +44,12 @@ struct OpeningHours: Codable {
         case salon = "salonModel"
     }
     
+    func dayName() -> String {
+        let days = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
+        return days[weekday - 1]
+    }
     
+    func formattedHours() -> String {
+        "\(openingHour.formattedToMinutes()) - \(closingHour.formattedToMinutes())"
+    }
 }

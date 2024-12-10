@@ -25,7 +25,15 @@ class SalonRatingService: SalonRatingServiceProtocol {
             return
         }
 
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -75,6 +83,13 @@ class SalonRatingService: SalonRatingServiceProtocol {
 //        } else {
 //            print("Zapytanie nie zawiera danych body.")
 //        }
+
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -114,8 +129,16 @@ class SalonRatingService: SalonRatingServiceProtocol {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
+        
+        var request = URLRequest(url: url)
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
 
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -142,6 +165,8 @@ class SalonRatingService: SalonRatingServiceProtocol {
     }
     
    
-    
+    private func getToken() -> String? {
+        return UserDefaults.standard.string(forKey: "authToken")
+    }
     
 }

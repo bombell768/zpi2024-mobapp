@@ -9,8 +9,11 @@ import SwiftUI
 
 struct RegistrationView: View {
     
-    @State private var vm = RegistrationViewModel()
+    @State private var viewModel = RegistrationViewModel()
     @Environment(\.dismiss) var dismiss
+    
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
     
     var body: some View {
         VStack{
@@ -22,29 +25,31 @@ struct RegistrationView: View {
             
             VStack{
                 VStack(spacing: 15){
-                    InputView(text: $vm.firstName,
+                    InputView(text: $viewModel.firstName,
                               title: "Imię",
                               placeholder: "Jan")
                     
-                    InputView(text: $vm.sureName,
+                    InputView(text: $viewModel.sureName,
                               title: "Nazwisko",
                               placeholder: "Nowak")
                     
-                    InputView(text: $vm.email,
+                    InputView(text: $viewModel.email,
                               title: "Adres e-mail",
                               placeholder: "jan.nowak23@gmail.com")
                     .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
                     
-                    InputView(text: $vm.phoneNumber,
+                    InputView(text: $viewModel.phoneNumber,
                               title: "Numer telefonu",
                               placeholder: "528 123 456")
+                    .keyboardType(.phonePad)
                     
-                    InputView(text: $vm.password,
+                    InputView(text: $viewModel.password,
                               title: "Hasło",
                               placeholder: "Wpisz swoje hasło",
                               isSecureField: true)
                     
-                    InputView(text: $vm.confirmPassword,
+                    InputView(text: $viewModel.confirmPassword,
                               title: "Potwierdź hasło",
                               placeholder: "Wpisz swoje hasło ponownie",
                               isSecureField: true)
@@ -58,7 +63,7 @@ struct RegistrationView: View {
                     }
                         
                     
-                    Picker("Preferencje usług", selection: $vm.serviceSelection) {
+                    Picker("Preferencje usług", selection: $viewModel.serviceSelection) {
                         Text("Mężczyna").tag(0)
                         Text("Kobieta").tag(1)
                         Text("Wszystkie").tag(2)
@@ -74,8 +79,7 @@ struct RegistrationView: View {
             
             
             Button {
-                vm.register()
-                print("Sign user up...")
+                viewModel.register()
             } label: {
                 HStack {
                     Text("Zarejestruj się")
@@ -103,6 +107,26 @@ struct RegistrationView: View {
                 .font(.system(size: 14))
                 .foregroundColor(Color.ui.vanilla)
             }
+        }
+        .onChange(of: viewModel.isRegistrationDone) {
+            if viewModel.isRegistrationSuccessful {
+                alertMessage = "Rejestracja powiodła się. Zaloguj się na swoje konto."
+            } else if let error = viewModel.errorMessage {
+                alertMessage = error
+            }
+            showAlert = true
+            viewModel.isRegistrationDone = false
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Rejestracja"),
+                message: Text(alertMessage),
+                dismissButton: .default(Text("OK"), action: {
+                    if viewModel.isRegistrationSuccessful {
+                        dismiss()
+                    }
+                })
+            )
         }
     }
 }

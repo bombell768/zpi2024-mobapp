@@ -25,7 +25,15 @@ class ProfileService: ProfileServiceProtocol {
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -56,7 +64,15 @@ class ProfileService: ProfileServiceProtocol {
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -87,7 +103,15 @@ class ProfileService: ProfileServiceProtocol {
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -132,6 +156,13 @@ class ProfileService: ProfileServiceProtocol {
            return
         }
         
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -156,4 +187,9 @@ class ProfileService: ProfileServiceProtocol {
             }
         }.resume()
     }
+    
+    private func getToken() -> String? {
+        return UserDefaults.standard.string(forKey: "authToken")
+    }
+
 }

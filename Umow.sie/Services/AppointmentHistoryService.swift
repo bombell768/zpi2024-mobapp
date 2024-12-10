@@ -56,6 +56,13 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
         } else {
             print("Zapytanie nie zawiera danych body.")
         }
+
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -79,6 +86,7 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
                 completion(.success(employees))
                 
             } catch {
+                print(urlString)
                 completion(.failure(error))
             }
             
@@ -111,6 +119,13 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
         } else {
             print("Zapytanie nie zawiera danych body.")
         }
+
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -134,6 +149,7 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
                 completion(.success(clients))
                 
             } catch {
+                print(urlString)
                 completion(.failure(error))
             }
             
@@ -156,8 +172,16 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
+        
+        var request = URLRequest(url: url)
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
 
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -178,6 +202,7 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
                 completion(.success(appointments))
                 
             } catch {
+                print(urlString)
                 completion(.failure(error))
             }
                            
@@ -202,7 +227,15 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
             return
         }
 
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -243,6 +276,13 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(body)
+
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -281,8 +321,16 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
+        
+        var request = URLRequest(url: url)
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
 
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -345,6 +393,13 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
         } else {
             print("Zapytanie nie zawiera danych body.")
         }
+   
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -392,6 +447,13 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
         
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
+        
+        if let token = getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No token available"])))
+            return
+        }
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -410,6 +472,10 @@ class AppointmentHistoryService: AppointmentHistoryServiceProtocol {
                 completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
             }
         }.resume()
+    }
+    
+    private func getToken() -> String? {
+        return UserDefaults.standard.string(forKey: "authToken")
     }
 
 }

@@ -43,7 +43,6 @@ struct AppointmentDetails {
     var groupedAppointments: [Date: [Appointment]] = [:]
     var sortedDates: [Date] = []
     
-    var isCancelWarningVisible: Bool = false
     
     var reloadTrigger: Bool = false
     
@@ -130,7 +129,7 @@ struct AppointmentDetails {
                         if !self.employeesIds.contains(appointment.employeeId) {
                             self.employeesIds.append(appointment.employeeId)
                         }
-                        
+
                         if !self.clientsIds.contains(appointment.customerId) {
                             self.clientsIds.append(appointment.customerId)
                         }
@@ -146,6 +145,7 @@ struct AppointmentDetails {
 //                    print(self.appointments)
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    print(self.errorMessage ?? "Unknown error")
                 }
             }
         }
@@ -270,9 +270,9 @@ struct AppointmentDetails {
                         date: appointment.date,
                         time: appointment.time,
                         status: appointment.status,
-                        salon: salons.first(where: {$0.id == appointment.salonId})!,
-                        employee: employees.first(where: {$0.id == appointment.employeeId})!,
-                        client: clients.first(where: {$0.id == appointment.customerId})!,
+                        salon: salons.first(where: {$0.id == appointment.salonId}) ?? Salon(),
+                        employee: employees.first(where: {$0.id == appointment.employeeId}) ?? Employee(),
+                        client: clients.first(where: {$0.id == appointment.customerId}) ?? Client(),
                         services: servicesForAppointment,
                         isRated: false
                     ))
@@ -359,11 +359,43 @@ struct AppointmentDetails {
                     print("Udało się odwołać wizytę")
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    print(self.errorMessage ?? "Unknown error")
                 }
             }
         }
 
     }
+    
+    func resetState() {
+        employees = []
+        clients = []
+        salons = []
+        fetchedAppointments = []
+        servicesForAppointments = []
+        services = []
+        clientRatings = []
+        
+        employeesIds = []
+        clientsIds = []
+        servicesIds = []
+        
+        areAppointmentsFetched = false
+        areServicesInAppoitmentFetched = false
+        areSalonsFetched = false
+        areEmployeesFetched = false
+        areClientsFetched = false
+        areServicesFetched = false
+        areRatingsFetched = false
+        areAllDataFetched = false
+        
+        appointments = []
+        groupedAppointments = [:]
+        sortedDates = []
+        filteredAppointments = []
+        selectedStatus = .reserved
+        errorMessage = nil
+    }
+
 
 }
 
@@ -373,5 +405,7 @@ extension Array where Element == Appointment {
             Calendar.current.startOfDay(for: appointment.date)
         }
     }
+    
+    
 }
 

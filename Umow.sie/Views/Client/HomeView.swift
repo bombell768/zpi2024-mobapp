@@ -144,7 +144,7 @@ struct HomeView: View {
         .overlay(
             Group {
                 if viewModel.isLoading {
-                    ProgressView("Loading...")
+                    ProgressView("Ładowanie...")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.black)
                 }

@@ -26,6 +26,7 @@ struct EditDataView: View {
                     .fontWeight(.bold)
                 
                 InputView(text: $text, title: inputTitle, placeholder: "")
+                    .autocapitalization(.none)
                    
                 Spacer()
             }

@@ -40,7 +40,6 @@ import Observation
                 switch result {
                 case .success(let salons):
                     self.fetchedSalons = salons
-                    print(self.salons)
                     self.getCities()
                     self.citySelection = self.cities[0]
                     self.fetchSalonRatings()

@@ -16,6 +16,8 @@ struct AppointmentRowView: View {
     
     @AppStorage("userRole") private var userRole: UserRole?
     
+    @State private var isCancelWarningVisible: Bool = false
+    
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 6) {
@@ -102,7 +104,7 @@ struct AppointmentRowView: View {
         .sheet(isPresented: $isRatingShown) {
             AddRatingView(appointment: appointment, viewModel: viewModel)
         }
-        .alert(isPresented: $viewModel.isCancelWarningVisible) {
+        .alert(isPresented: $isCancelWarningVisible) {
             Alert(
                 title: Text("Jesteś pewny?"),
                 message: Text("Czy na pewno chcesz odwołać wizytę?"),
@@ -111,9 +113,13 @@ struct AppointmentRowView: View {
                     viewModel.cancelAppointment(appointmentId: appointment.id)
                 },
                 secondaryButton: .cancel(Text("Nie")) {
-                    viewModel.isCancelWarningVisible = false
-                }            )
-}
+                    isCancelWarningVisible = false
+                }
+            )
+        }
+        .onAppear {
+            print(appointment.id)
+        }
     }
     
     @ViewBuilder
@@ -135,7 +141,7 @@ struct AppointmentRowView: View {
                 }
 
                 ManageAppointmentButton(title: "Odwołaj") {
-                    viewModel.isCancelWarningVisible = true
+                    isCancelWarningVisible = true
                 }
             }
             
@@ -154,22 +160,25 @@ struct AppointmentRowView: View {
                 .cornerRadius(10)
                 }
                 
-                if !appointment.isRated {
-                    ManageAppointmentButton(title: "Oceń") {
-                        isRatingShown.toggle()
+                if userRole == .client {
+                    if !appointment.isRated {
+                        ManageAppointmentButton(title: "Oceń") {
+                            isRatingShown.toggle()
+                        }
                     }
+                    else {
+                        Text("Wizyta została oceniona")
+                            .fontWeight(.semibold)
+                            .frame(width: 150, height: 48)
+                            .multilineTextAlignment(.center)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.ui.vanilla, style: StrokeStyle(lineWidth: 2))
+                            )
+                    }
+
                 }
-                else {
-                    Text("Wizyta została oceniona")
-                        .fontWeight(.semibold)
-                        .frame(width: 150, height: 48)
-                        .multilineTextAlignment(.center)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.ui.vanilla, style: StrokeStyle(lineWidth: 2)) 
-                        )
-                }
-                
+                                
             }
             
         case .cancelledEmployee, .cancelledCustomer:

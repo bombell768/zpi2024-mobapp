@@ -11,13 +11,18 @@ import Foundation
     
     var serviceCategories: [ServiceCategory] = []
     var selectedServices: [Service] = []
+    var openingHours: [OpeningHours] = []
+    
+    var isServicesFetched: Bool = false
     
     var errorMessage: String?
     
     private var salonService: SalonServiceProtocol
+    private var appointmentService: AppointmentServiceProtocol
     
-    init(salonService: SalonServiceProtocol = SalonService()) {
+    init(salonService: SalonServiceProtocol = SalonService(), appointmentService: AppointmentServiceProtocol =  AppointmentBookingService()) {
         self.salonService = salonService
+        self.appointmentService = appointmentService
     }
     
 
@@ -27,7 +32,23 @@ import Foundation
                 switch result {
                 case .success(let categories):
                     self.serviceCategories = categories
+                    self.isServicesFetched = true
 //                        print(self.serviceCategories)
+                case .failure(let error):
+                    self.isServicesFetched = true
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func getOpeningHours(salonId: Int) {
+        appointmentService.getOpeningHours(salonId: salonId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let openingHours):
+                    self.openingHours = openingHours
+                    print("Opening hours:", openingHours)
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                 }
@@ -70,6 +91,13 @@ import Foundation
             return "\(hours) h \(minutes) min"
         } else {
             return "\(minutes) min"
+        }
+    }
+    
+    func areAllOpeningHoursSame() -> Bool {
+        guard let first = openingHours.first else { return false }
+        return openingHours.allSatisfy {
+            $0.openingHour == first.openingHour && $0.closingHour == first.closingHour
         }
     }
 }

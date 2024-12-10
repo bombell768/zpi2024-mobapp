@@ -12,20 +12,22 @@ struct AppointmentsHistoryView: View {
     @AppStorage("userID") private var clientID: Int?
     @AppStorage("userRole") private var userRole: UserRole?
     
-    @State var viewModel = AppointmentsHistoryViewModel()
+    @State private var viewModel = AppointmentsHistoryViewModel()
+    
+    
     
     var body: some View {
         
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading) {
-                    Text("Wizyty")
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                    
-                }
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
-                .padding()
+//                VStack(alignment: .leading) {
+//                    Text("Wizyty")
+//                        .font(.largeTitle)
+//                        .fontWeight(.semibold)
+//                    
+//                }
+//                .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
+//                .padding()
                 
                 HStack {
                     Button {
@@ -99,8 +101,21 @@ struct AppointmentsHistoryView: View {
                 
               
             }
-
+            
+            .navigationTitle("Twoje wizyty")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        viewModel.resetState()
+                        viewModel.onAppear(customerId: clientID ?? 0)
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 16, weight: .bold))
+                    }
+                }
+            }
         }
+        
         .onAppear {
             viewModel.onAppear(customerId: clientID ?? 0)
         }
@@ -108,11 +123,16 @@ struct AppointmentsHistoryView: View {
             if viewModel.areAllDataFetched {
                 viewModel.getAppointments()
             }
-            
- 
-            
         }
-        
+        .overlay(
+            Group {
+                if !viewModel.areAllDataFetched {
+                    ProgressView("Ładowanie...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.black)
+                }
+            }
+        )
         
     }
 

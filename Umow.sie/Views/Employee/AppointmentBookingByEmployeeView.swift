@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppointmentBookingByEmployeeView: View {
-    @State private var email: String = "dorota.kwiatkowska@example.com"
+    @State private var email: String = ""
     @State private var salons: [Salon] = []
     @State private var selectedSalon: Salon? = nil
     @State private var isClientConfirmed: Bool = false
@@ -66,6 +66,7 @@ struct AppointmentBookingByEmployeeView: View {
                             
                             Button("Wybierz") {
                                 isClientConfirmed = true
+                                choosenClientID = viewModel.client?.id
                             }
                             .frame(width: 100, height: 40)
                             .background(isClientConfirmed ? Color.gray : Color.ui.vanilla)

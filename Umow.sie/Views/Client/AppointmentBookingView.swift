@@ -100,27 +100,29 @@ struct AppointmentBookingView: View {
                         
                     }
                     
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        //                    HStack {
-                        //                        ForEach(timeSlots, id: \.self) { timeSlot in
-                        //                            ChoiceView(text: timeSlot, isSelected: timeSlot == viewModel.selectedTimeSlot)
-                        //                                .onTapGesture {
-                        //                                    viewModel.selectedTimeSlot = timeSlot
-                        //                                }
-                        //                        }
-                        //                    }
-                        
-                        HStack {
-                            ForEach(viewModel.employeeTimeSlots.filter { timeSlot in
-                                Calendar.current.isDate(timeSlot.date, inSameDayAs: viewModel.dateSelection)
-                            }, id: \.self) { timeSlot in
-                                ChoiceView(text: timeSlot.time.formattedToMinutes(), isSelected: timeSlot == viewModel.selectedTimeSlot)
-                                    .onTapGesture {
-                                        viewModel.selectedTimeSlot = timeSlot
-                                    }
+                    if viewModel.employeeTimeSlots.filter({ timeSlot in
+                        Calendar.current.isDate(timeSlot.date, inSameDayAs: viewModel.dateSelection) &&
+                        viewModel.areTimeSlotsLoaded
+                    }).isEmpty {
+                        Text("Brak dostępnych terminów w wybranym dniu.")
+                            .font(.system(.body, design: .rounded))
+                            .foregroundColor(.gray)
+                            .padding()
+                    } else {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(viewModel.employeeTimeSlots.filter { timeSlot in
+                                    Calendar.current.isDate(timeSlot.date, inSameDayAs: viewModel.dateSelection)
+                                }, id: \.self) { timeSlot in
+                                    ChoiceView(text: timeSlot.time.formattedToMinutes(), isSelected: timeSlot == viewModel.selectedTimeSlot)
+                                        .onTapGesture {
+                                            viewModel.selectedTimeSlot = timeSlot
+                                        }
+                                }
                             }
                         }
                     }
+
                     
                     
                     VStack(alignment: .leading, spacing: 6) {
@@ -128,26 +130,66 @@ struct AppointmentBookingView: View {
                             .font(.title2)
                             .bold()
                         
-                        VStack (alignment: .leading){
-                            Text("Usługi:")
-                                .font(.headline)
-                            
-                            
-                            ForEach(services) { service in
-                                Text("\(service.name)")
-                                    .font(.body)
+                        HStack(alignment: .center) {
+                            VStack(alignment: .leading, spacing: 6) {
+                                ForEach(services) {service in
+                                    Text(service.name)
+                                        .font(.title2)
+                                }
+                                
+                                if userRole == .client {
+                                    HStack(spacing: 10) {
+                                        Image(systemName: "person.fill")
+                                        Text("\(viewModel.employeeSelection.name)")
+                                    }
+                                }
+                                else if userRole == .employee {
+                                    VStack(alignment: .leading) {
+                                        Text("Pracownik: \(viewModel.employeeSelection.name)")
+
+                                    }
+                                }
+                               
+                                
+                                HStack(alignment: .top, spacing: 10) {
+                                    Image(systemName: "mappin.and.ellipse")
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text("\(salon.name)")
+                                        Text("\(salon.getAddress())")
+                                    }
+                                }
+                                
+                                HStack(spacing: 10) {
+                                    Image(systemName: "polishzlotysign.circle")
+                                    Text(getTotalPrice())
+                                }
+                                
+                                HStack(spacing: 10) {
+                                    Image(systemName: "hourglass.circle")
+                                    Text(getTotalDuration())
+                                }
+                                
+                                if (viewModel.selectedTimeSlot.time.hour != 0) {
+                                    HStack(spacing: 10) {
+                                        Image(systemName: "calendar")
+                                        Text("\(viewModel.dateSelection.formatted(date: .complete, time: .omitted))")
+                                    }
+                                    
+                                    HStack(spacing: 10) {
+                                        Image(systemName: "clock")
+                                        Text("\(viewModel.selectedTimeSlot.time.formattedToMinutes()) - \(self.getEndTime())")
+                                    }
+                                }
                             }
+                            
+                            Spacer()
                         }
-                        
-                        
-                        Text("Pracownik: \(viewModel.employeeSelection.name)")
-                       
-                        
-                        
-                        if(viewModel.selectedTimeSlot.time.hour != 0){
-                            Text("\(viewModel.dateSelection.formatted(date: .complete, time: .omitted))  \(viewModel.selectedTimeSlot.time.formattedToMinutes()) - \(self.getEndTime())")
-                              
-                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .padding(.leading, 6)
+                        .background(Color.ui.cultured)
+                        .cornerRadius(20)
                         
                     }
                     
@@ -160,7 +202,8 @@ struct AppointmentBookingView: View {
                                 viewModel.saveAppointment(salonId: salon.id, employeeId: viewModel.employeeSelection.id, customerId: choosenClientID ?? 0, serviceIds: servicesIndices, date: viewModel.dateSelection, timeStart: viewModel.selectedTimeSlot.time)
                             }
                             
-                            viewModel.showAlert = true
+
+                            
                         } label: {
                             HStack {
                                 Text("Umów")
@@ -195,15 +238,41 @@ struct AppointmentBookingView: View {
             }
             
         }
-        .alert(isPresented: $viewModel.showAlert) {
-            Alert(
-                title: Text("Wizyta umówiona"),
-                message: Text("Twoja wizyta została pomyślnie umówiona. Sprawdź szczegóły w zakładce \"Wizyty\""),
-                dismissButton: .default(Text("OK"), action: {
-                    viewModel.isAppointmentBooked = true
-                })
-            )
+        .onChange(of: viewModel.dateSelection, { oldValue, newValue in
+            print(viewModel.dateSelection)
+        })
+        .overlay(
+            Group {
+                if viewModel.isAppointmentSaving {
+                    ProgressView("Zapisywanie...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.black)
+                }
+            }
+        )
+        .onChange(of: viewModel.isAppointmentSaving) {
+            if !viewModel.isAppointmentSaving {
+                viewModel.showAlert = true
+            }
         }
+        .alert(isPresented: $viewModel.showAlert) {
+            if viewModel.isAppointmentSaved {
+                return Alert(
+                    title: Text("Wizyta umówiona"),
+                    message: Text("Twoja wizyta została pomyślnie umówiona. Sprawdź szczegóły w zakładce \"Wizyty\"."),
+                    dismissButton: .default(Text("OK"), action: {
+                        viewModel.isAppointmentBooked = true
+                    })
+                )
+            } else {
+                return Alert(
+                    title: Text("Coś poszło nie tak :("),
+                    message: Text("Nie udało się umówić wizyty. Sprawdź czy w wybranym czasie nie masz umówionych innych wizyt i spróbuj ponownie."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
+        }
+
         
     }
     private func getEndTime() -> String {
@@ -211,6 +280,23 @@ struct AppointmentBookingView: View {
         
         let endTime = viewModel.selectedTimeSlot.time.adding(minutes: totalMinutes)
         return endTime.formattedToMinutes()
+    }
+    
+    private func getTotalPrice() -> String {
+        let totalAmount = services.reduce(0) { $0 + $1.price }
+        return String(format: "%.f zł", totalAmount)
+    }
+    
+    private func getTotalDuration() -> String {
+        let totalMinutes = services.reduce(0) { $0 + $1.duration } * 15
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+
+        if hours > 0 {
+            return "\(hours) h \(minutes) min"
+        } else {
+            return "\(minutes) min"
+        }
     }
 }
 
