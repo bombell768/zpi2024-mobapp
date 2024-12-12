@@ -9,10 +9,10 @@ Celem aplikacji jest umożliwienie klientom salonów fryzjerskich umawiania wizy
 ## Funckje aplikacji
 
 ### Logowanie i rejestracja 
-<img src="https://github.com/user-attachments/assets/4204fbc6-a5c4-460f-99f1-78edd44bf975" height="450" />
-<img src="https://github.com/user-attachments/assets/283888dc-c493-486d-8bfb-96ad9d801138" height="450" />
-<img src="https://github.com/user-attachments/assets/8816036d-7ff9-471b-8171-5aff2edda6a7" height="450" />
-<img src="https://github.com/user-attachments/assets/0c419db8-48ce-4339-ade2-583974ec1363" height="450" />
+<img src="https://github.com/user-attachments/assets/4204fbc6-a5c4-460f-99f1-78edd44bf975" height="420" />
+<img src="https://github.com/user-attachments/assets/283888dc-c493-486d-8bfb-96ad9d801138" height="420" />
+<img src="https://github.com/user-attachments/assets/8816036d-7ff9-471b-8171-5aff2edda6a7" height="420" />
+<img src="https://github.com/user-attachments/assets/0c419db8-48ce-4339-ade2-583974ec1363" height="420" />
 <br/><br/>
 
 * Logowanie dla klienta
