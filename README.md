@@ -33,6 +33,7 @@ Celem aplikacji jest umożliwienie klientom salonów fryzjerskich umawiania wizy
 <br/><br/>
 
 * Wybór salonu
+* Podgląd mapy
 * Wybór do trzech usług
 * Wybór pracownika, daty i godziny
 * Podsumowanie
