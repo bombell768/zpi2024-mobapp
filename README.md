@@ -25,11 +25,11 @@ Celem aplikacji jest umożliwienie klientom salonów fryzjerskich umawiania wizy
 
 <img src="https://github.com/user-attachments/assets/e13e7534-265c-483e-bca3-767dddc82a36" height="420" />
 <img src="https://github.com/user-attachments/assets/24adf1b4-a228-4234-ad89-79dde91a3cfa" height="420" />
+<img src="https://github.com/user-attachments/assets/48001367-9535-4749-93c2-c0502fa5315c" height="420" />
 <img src="https://github.com/user-attachments/assets/634268bc-cb63-4501-96b3-4790bd727c48" height="420" />
 <img src="https://github.com/user-attachments/assets/13ed2ae1-9fb3-4930-86b2-b8fc2a849492" height="420" />
 <img src="https://github.com/user-attachments/assets/953aec8d-102f-4f69-aaec-8cacaeb4ecfe" height="420" />
 <img src="https://github.com/user-attachments/assets/21afed2c-7436-49ee-9c8e-3bcb886b3f58" height="420" />
-<img src="https://github.com/user-attachments/assets/48001367-9535-4749-93c2-c0502fa5315c" height="420" />
 <br/><br/>
 
 * Wybór salonu
